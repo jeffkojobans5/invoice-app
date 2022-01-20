@@ -1,8 +1,15 @@
 import React from 'react';
+import Header from './components/Header'
+import { BrowserRouter , Routes , Route } from 'react-router-dom';
 
 function App() {
   return (
-    <h1> Hello </h1>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        {/* <Route path="/" element={Header} /> */}
+      </Routes>
+    </BrowserRouter>
   )
 }
 export default App;
