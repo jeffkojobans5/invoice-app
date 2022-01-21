@@ -1,15 +1,19 @@
 import React from 'react';
-import Header from './components/Header'
-import { BrowserRouter , Routes , Route } from 'react-router-dom';
+import { Routes , Route } from 'react-router-dom';
+
+import { Header } from './components/index'
+import  CreateInvoice  from './pages/CreateInvoice'
+
 
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        {/* <Route path="/" element={Header} /> */}
-      </Routes>
-    </BrowserRouter>
+  <>
+  <Header />
+  <Routes>
+    <Route path="/" element={<CreateInvoice />} />
+  </Routes> 
+  </>  
   )
 }
 export default App;
+
