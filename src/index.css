@@ -3,6 +3,11 @@
 html,
 body {
   font-family: "Poppins", sans-serif;
+  background-color: #f3f5f7;
+}
+
+input {
+  font-weight: 200 !important;
 }
 
 nav {
@@ -30,4 +35,42 @@ nav ul li a {
 
 nav ul li a:hover {
   color: yellow;
+}
+
+.input-placeholders {
+  border: 1px solid white;
+  border-radius: 3px;
+  transition: 0.3s all;
+  color: gray;
+  width: 100%;
+}
+
+.input-placeholders:hover {
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.input-placeholders:focus {
+  outline: none;
+  padding-left: 0.5rem;
+}
+
+.invoice-block {
+  border: 1px solid #ccc;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.textarea-visible {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: 0.3s all;
+  color: gray;
+  width: 70%;
+  padding: 0.3rem;
+}
+
+.textarea-visible:focus {
+  outline: none;
+  border: 0.5px solid #469e75;
 }

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Header = () => {
     return (
         <nav className="container-fluid ">
-            <div className="container">
+            <div className="container w-75">
                 <div className="row">
                     <div className="col-md-3 logo">
                         <h5 className="text-white"> Invoice App </h5>
