@@ -43,17 +43,26 @@ nav ul li a:hover {
   transition: 0.3s all;
   color: gray;
   width: 100%;
-  /* text-align: right; */
 }
 
-.input-placeholders:hover {
+.input-placeholders:hover,
+.input-placeholders-small:hover {
   border: 1px solid #ccc;
   cursor: pointer;
 }
 
 .input-placeholders:focus {
   outline: none;
-  padding-left: 0.5rem;
+  cursor: text;
+}
+
+.input-placeholders-small {
+  font-size: 0.9rem;
+  border: 1px solid white;
+  border-radius: 3px;
+  transition: 0.3s all;
+  color: gray;
+  outline: none;
 }
 
 .invoice-block {
