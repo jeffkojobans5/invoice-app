@@ -1,5 +1,6 @@
 import React from 'react';
 import { Inputs , Txtarea } from '../props/index'
+import InvoiceTable from './InvoiceTable'
 
 const InvoiceBlock = () => {
     return (
@@ -49,27 +50,80 @@ const InvoiceBlock = () => {
                     </div>
                 </div>
 
-                <div className="col-md-6 p-0">
+                <div className="col-md-6 pr-5">
                     <div className="row p-0 justify-content-end d-flex">
                         <div className="col-md-7 justify-content-end d-flex">
                                     <Inputs
                                         type="text"
-                                        className="input-placeholders-small text-end border"
+                                        className="input-placeholders-small text-end close"
                                         value="Ship To"
                                     />                            
                         </div>
                         <div className="col-md-5 justify-content-end d-flex"> 
                                  <Inputs
                                     type="text"
-                                    className="input-placeholders-small"
+                                    className="input-placeholders-small text-end border"
                                     value="Ship To"
                                 />                            
                         </div>
                     </div>
 
-                    
+                    <div className="row p-0 mt-1 justify-content-end d-flex">
+                        <div className="col-md-7 justify-content-end d-flex">
+                                    <Inputs
+                                        type="text"
+                                        className="input-placeholders-small text-end close"
+                                        value="Ship To"
+                                    />                            
+                        </div>
+                        <div className="col-md-5 justify-content-end d-flex"> 
+                                 <Inputs
+                                    type="text"
+                                    className="input-placeholders-small text-end border"
+                                    value="Ship To"
+                                />                            
+                        </div>
+                    </div>
+
+
+                    <div className="row p-0 mt-1 justify-content-end d-flex">
+                        <div className="col-md-7 justify-content-end d-flex">
+                                    <Inputs
+                                        type="text"
+                                        className="input-placeholders-small text-end close"
+                                        value="Ship To"
+                                    />                            
+                        </div>
+                        <div className="col-md-5 justify-content-end d-flex"> 
+                                 <Inputs
+                                    type="text"
+                                    className="input-placeholders-small text-end border"
+                                    value="Ship To"
+                                />                            
+                        </div>
+                    </div>
+
+
+                    <div className="row p-0 mt-1 justify-content-end d-flex">
+                        <div className="col-md-7 justify-content-end d-flex">
+                                    <Inputs
+                                        type="text"
+                                        className="input-placeholders-small text-end close"
+                                        value="Ship To"
+                                    />                            
+                        </div>
+                        <div className="col-md-5 justify-content-end d-flex"> 
+                                 <Inputs
+                                    type="text"
+                                    className="input-placeholders-small text-end border"
+                                    value="Ship To"
+                                />                            
+                        </div>
+                    </div>                    
+
                 </div>
             </div>            
+                    <InvoiceTable />
         </div>
     )
 }

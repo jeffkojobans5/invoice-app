@@ -4,10 +4,20 @@ html,
 body {
   font-family: "Poppins", sans-serif;
   background-color: #f3f5f7;
+  box-sizing: border-box !important;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+input,
+textarea {
+  outline: none;
 }
 
 input {
   font-weight: 200 !important;
+  width: 100%;
 }
 
 nav {
@@ -85,4 +95,49 @@ nav ul li a:hover {
 .textarea-visible:focus {
   outline: none;
   border: 0.5px solid #469e75;
+}
+
+.close {
+  position: relative;
+  width: 80%;
+}
+
+.desc {
+  display: flex;
+  width: 100%;
+  margin-top: 2rem;
+  padding: 0.1rem;
+  background-color: #2e3942;
+  border-radius: 5px;
+}
+
+.desc input {
+  background-color: #2e3942;
+  max-width: 100%;
+  color: white;
+  border: none;
+}
+
+.desc input:hover {
+  background-color: #39434c;
+}
+
+.item {
+  flex: 6;
+  /* padding: 0.2rem; */
+}
+
+.quantity {
+  flex: 2;
+  /* padding: 0.2rem; */
+}
+
+.rate {
+  flex: 2;
+  /* padding: 0.2rem; */
+}
+
+.amount {
+  flex: 2;
+  /* padding: 0.2rem; */
 }
