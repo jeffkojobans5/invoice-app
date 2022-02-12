@@ -103,18 +103,12 @@ nav ul li a:hover {
 }
 
 .desc {
-  display: flex;
-  width: 100%;
-  margin-top: 2rem;
-  padding: 0.1rem;
   background-color: #2e3942;
-  border-radius: 5px;
+  /* padding: 0.1rem; */
 }
 
 .desc input {
   background-color: #2e3942;
-  max-width: 100%;
-  color: white;
   border: none;
 }
 
@@ -140,4 +134,39 @@ nav ul li a:hover {
 .amount {
   flex: 2;
   /* padding: 0.2rem; */
+}
+
+.header {
+  width: 100%;
+  border-radius: 5px;
+  margin: 0;
+}
+
+.dynamicTable {
+  width: 100%;
+  border-radius: 5px;
+  margin: 0;
+}
+
+.header div {
+  padding: 0.1rem;
+}
+
+.dynamicTable div {
+  padding: 0.1rem;
+}
+
+.dynamicTable input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0.2rem;
+  transition: 0.2s all;
+}
+
+.dynamicTable input:hover {
+  border: 1px solid gray;
+}
+
+.dynamicTable input:focus {
+  border: 1px solid #469e75;
 }
