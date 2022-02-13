@@ -1,4 +1,5 @@
 import React from 'react';
+import DynamicBlock from './DynamicBlock';
 
 function InvoiceTable () {
     return (
@@ -17,27 +18,12 @@ function InvoiceTable () {
                     <input type="text" name="" id="" />
                 </div>
                 <div className="col-md-1">
-                    {/* <input type="text" name="" id="" /> */}
+                    
                 </div>
             </div>
-            <div className="dynamicTable row ">
-                <div className="col-md-5">
-                    <input type="text" name="" id="" />
-                </div>
-                <div className="col-md-2">
-                    <input type="text" name="" id="" />
-                </div>
-                <div className="col-md-2">
-                    <input type="text" name="" id="" />
-                </div>
-                <div className="col-md-2 ">
-                    <input type="text" name="" id="" />
-                </div>
-                <div className="col-md-1 ">
-                    <input type="text" name="" id="" />
-                </div>                
-            </div>
-            
+
+            <DynamicBlock />
+
         </>                
     )
 }

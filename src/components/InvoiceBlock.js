@@ -2,6 +2,8 @@ import React from 'react';
 import { Inputs , Txtarea } from '../props/index'
 import InvoiceTable from './InvoiceTable'
 
+import {BsPlusCircleFill} from 'react-icons/bs'
+
 const InvoiceBlock = () => {
     return (
         <div className="container p-2">
@@ -124,6 +126,8 @@ const InvoiceBlock = () => {
                 </div>
             </div>            
                     <InvoiceTable />
+                    <button type="button" class="btn btn-primary outline-none"> <BsPlusCircleFill /> Primary</button>
+
         </div>
     )
 }
