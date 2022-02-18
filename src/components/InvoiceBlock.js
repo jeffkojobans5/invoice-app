@@ -87,7 +87,6 @@ const InvoiceBlock = () => {
                         </div>
                     </div>
 
-
                     <div className="row p-0 mt-1 justify-content-end d-flex">
                         <div className="col-md-7 justify-content-end d-flex">
                                     <Inputs
@@ -104,7 +103,6 @@ const InvoiceBlock = () => {
                                 />                            
                         </div>
                     </div>
-
 
                     <div className="row p-0 mt-1 justify-content-end d-flex">
                         <div className="col-md-7 justify-content-end d-flex">
@@ -126,8 +124,6 @@ const InvoiceBlock = () => {
                 </div>
             </div>            
                     <InvoiceTable />
-                    <button type="button" class="btn btn-primary outline-none"> <BsPlusCircleFill /> Primary</button>
-
         </div>
     )
 }

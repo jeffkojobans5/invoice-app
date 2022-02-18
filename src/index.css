@@ -174,3 +174,18 @@ nav ul li a:hover {
 .dynamicTable input:focus {
   border: 1px solid #469e75;
 }
+
+.trash {
+  cursor: pointer;
+  visibility: hidden;
+  transition: 0.1s all;
+  color: gray;
+}
+
+.trash:hover {
+  color: brown;
+}
+
+.dynamicTable:hover .trash {
+  visibility: visible;
+}
