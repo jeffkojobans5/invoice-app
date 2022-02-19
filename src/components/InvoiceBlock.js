@@ -1,25 +1,31 @@
-import React from 'react';
+import { useContext } from 'react';
 import { Inputs , Txtarea } from '../props/index'
 import InvoiceTable from './InvoiceTable'
+import { InvoiceContext } from "../contexts/InvoiceContext"
 
-import {BsPlusCircleFill} from 'react-icons/bs'
 
 const InvoiceBlock = () => {
+    const { inputFields , updateOtherFields } = useContext(InvoiceContext);
+
     return (
         <div className="container p-2">
             <div className="row">
                 <div className="col-md-6">
                     <Txtarea 
+                        name = "sender"
                         placeholder = "Who is this invoice from? (required)"
                         className = "textarea-visible"
+                        value = { inputFields.sender }
+                        onChange = { (e)=>updateOtherFields(e) }
                     ></Txtarea>
                 </div>
                 <div className="col-md-6">
                     <Inputs 
                         type = "text"
-                        name = ""
+                        name = "invoiceName"
                         className="h3 input-placeholders text-end"
-                        value = "INVOICE"
+                        value = { inputFields.invoiceName}
+                        onChange = { (e)=>updateOtherFields(e) }
                     />
                 </div>
             </div>
@@ -31,22 +37,32 @@ const InvoiceBlock = () => {
                             <Inputs
                                 type="text"
                                 className="input-placeholders-small"
-                                value="Bill To"
+                                name = "billTo"
+                                value = { inputFields.billTo}
+                                onChange = { (e)=>updateOtherFields(e) }
                             />
                             <Txtarea 
                                 placeholder = "Who is this invoice to? (required)"
                                 className = "textarea-visible w-100"
+                                name = "receiver"
+                                value = { inputFields.receiver}
+                                onChange = { (e)=>updateOtherFields(e) }                                
                             ></Txtarea>
                         </div>
                         <div className="col-md-6">
                             <Inputs
                                     type="text"
                                     className="input-placeholders-small "
-                                    value="Ship To"
+                                    name = "shipTo"
+                                    value = { inputFields.shipTo}
+                                    onChange = { (e)=>updateOtherFields(e) }
                                 />
                                 <Txtarea 
                                     placeholder = "Optional"
                                     className = "textarea-visible w-100"
+                                    name = "optional"
+                                    value = { inputFields.optional}
+                                    onChange = { (e)=>updateOtherFields(e) }                                    
                                 ></Txtarea>                            
                         </div>
                     </div>
@@ -58,14 +74,18 @@ const InvoiceBlock = () => {
                                     <Inputs
                                         type="text"
                                         className="input-placeholders-small text-end close"
-                                        value="Ship To"
+                                        name = "date"
+                                        value = { inputFields.date}
+                                        onChange = { (e)=>updateOtherFields(e) }                                          
                                     />                            
                         </div>
                         <div className="col-md-5 justify-content-end d-flex"> 
                                  <Inputs
                                     type="text"
                                     className="input-placeholders-small text-end border"
-                                    value="Ship To"
+                                    name = "dateValue"
+                                    value = { inputFields.dateValue}
+                                    onChange = { (e)=>updateOtherFields(e) }                                      
                                 />                            
                         </div>
                     </div>
@@ -75,14 +95,18 @@ const InvoiceBlock = () => {
                                     <Inputs
                                         type="text"
                                         className="input-placeholders-small text-end close"
-                                        value="Ship To"
+                                        name = "paymentTerms"
+                                        value = { inputFields.paymentTerms}
+                                        onChange = { (e)=>updateOtherFields(e) }                                          
                                     />                            
                         </div>
                         <div className="col-md-5 justify-content-end d-flex"> 
                                  <Inputs
                                     type="text"
                                     className="input-placeholders-small text-end border"
-                                    value="Ship To"
+                                    name = "paymentTermsValue"
+                                    value = { inputFields.paymentTermsValue}
+                                    onChange = { (e)=>updateOtherFields(e) }    
                                 />                            
                         </div>
                     </div>
@@ -92,14 +116,18 @@ const InvoiceBlock = () => {
                                     <Inputs
                                         type="text"
                                         className="input-placeholders-small text-end close"
-                                        value="Ship To"
+                                        name = "dueDate"
+                                        value = { inputFields.dueDate}
+                                        onChange = { (e)=>updateOtherFields(e) }    
                                     />                            
                         </div>
                         <div className="col-md-5 justify-content-end d-flex"> 
                                  <Inputs
                                     type="text"
                                     className="input-placeholders-small text-end border"
-                                    value="Ship To"
+                                    name = "dueDateValue"
+                                    value = { inputFields.dueDateValue}
+                                    onChange = { (e)=>updateOtherFields(e) }    
                                 />                            
                         </div>
                     </div>
@@ -109,14 +137,18 @@ const InvoiceBlock = () => {
                                     <Inputs
                                         type="text"
                                         className="input-placeholders-small text-end close"
-                                        value="Ship To"
+                                        name = "PNumber"
+                                        value = { inputFields.PNumber}
+                                        onChange = { (e)=>updateOtherFields(e) }    
                                     />                            
                         </div>
                         <div className="col-md-5 justify-content-end d-flex"> 
                                  <Inputs
                                     type="text"
                                     className="input-placeholders-small text-end border"
-                                    value="Ship To"
+                                    name = "paymentTermsValue"
+                                    value = { inputFields.PNumberValue}
+                                    onChange = { (e)=>updateOtherFields(e) }    
                                 />                            
                         </div>
                     </div>                    

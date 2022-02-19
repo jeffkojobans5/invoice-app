@@ -2,7 +2,7 @@
 
 html,
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif !important;
   background-color: #f3f5f7;
   box-sizing: border-box;
   margin: 0;
@@ -188,4 +188,17 @@ nav ul li a:hover {
 
 .dynamicTable:hover .trash {
   visibility: visible;
+}
+
+.removeBorder {
+  border: 0px !important;
+  cursor: pointer;
+}
+
+.invoicing input {
+  font-size: 0.9rem;
+}
+
+.subtotal {
+  padding-right: 4.6rem;
 }

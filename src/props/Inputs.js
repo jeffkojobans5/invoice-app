@@ -1,5 +1,5 @@
 function Inputs ( props ) {
-    const {  type , name , value , placeholder , onChange , className } = props
+    const {  type , name , value , placeholder , onChange , className , disabled } = props
     return (
         <input
             type = {type} 
@@ -7,7 +7,8 @@ function Inputs ( props ) {
             value = { value }
             placeholder = { placeholder}
             className = {className}
-            onChange = {onChange}            
+            onChange = {onChange}        
+            disabled = { disabled }
         />
         
     )

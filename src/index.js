@@ -4,12 +4,15 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css'
 import { BrowserRouter } from "react-router-dom";
-
+import { InvoiceProvider } from "./contexts/InvoiceContext"
 
 ReactDOM.render(
+<InvoiceProvider>
   <BrowserRouter>
       <App />
-  </BrowserRouter> ,
+  </BrowserRouter> 
+</InvoiceProvider>    
+,
   document.getElementById('root')
 );
 
