@@ -19,7 +19,7 @@ function NotesTotal () {
                                 onChange = { (e)=>updateOtherFields(e) }
                             />
                             <Txtarea 
-                                placeholder = "Who is this invoice to? (required)"
+                                placeholder = "Notes - any relevant information not already covered"
                                 className = "textarea-visible w-100"
                                 name = "notesValue"
                                 value = { inputFields.notesValue}
@@ -33,7 +33,7 @@ function NotesTotal () {
                                 onChange = { (e)=>updateOtherFields(e) }
                             />
                             <Txtarea 
-                                placeholder = "Who is this invoice to? (required)"
+                                placeholder = "Terms and conditions - late fees, payment methods, delivery schedule"
                                 className = "textarea-visible w-100"
                                 name = "termsValue"
                                 value = { inputFields.termsValue}
@@ -42,7 +42,7 @@ function NotesTotal () {
                 </div>
 
                 <div className="col-md-6  subtotal"> 
-                            <p className="text-end "> <span class="badge bg-secondary">Total</span>  $ { inputFields.subTotal }</p>
+                            <p className="text-end "> <span class="badge bg-primary">Total</span>  $ { inputFields.subTotal }</p>
                 </div>
             </div>
         </div>

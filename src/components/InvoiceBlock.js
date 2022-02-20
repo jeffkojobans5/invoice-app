@@ -9,6 +9,7 @@ const InvoiceBlock = () => {
 
     return (
         <div className="container p-2">
+          
             <div className="row">
                 <div className="col-md-6">
                     <Txtarea 
@@ -29,6 +30,7 @@ const InvoiceBlock = () => {
                     />
                 </div>
             </div>
+
 
             <div className="row mt-2">
                 <div className="col-md-6">
