@@ -202,3 +202,8 @@ nav ul li a:hover {
 .subtotal {
   padding-right: 4.6rem;
 }
+
+.datepicker {
+  background-color: green !important;
+  color: green !important;
+}

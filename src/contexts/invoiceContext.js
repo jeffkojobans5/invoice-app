@@ -81,7 +81,7 @@ export function InvoiceProvider ( {children} ) {
               }, 0)          
 
               setInputFields({...inputFields , subTotal  })            
-
+              console.log(inputFields)
         },[ inputFields.fieldDetails ])
     
 

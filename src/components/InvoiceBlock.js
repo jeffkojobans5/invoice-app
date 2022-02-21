@@ -1,7 +1,9 @@
-import { useContext } from 'react';
+import { useContext , useState } from 'react';
 import { Inputs , Txtarea } from '../props/index'
 import InvoiceTable from './InvoiceTable'
 import { InvoiceContext } from "../contexts/InvoiceContext"
+import DayPickerInput from "react-day-picker/DayPickerInput";
+import "react-day-picker/lib/style.css";
 
 
 const InvoiceBlock = () => {
@@ -124,13 +126,14 @@ const InvoiceBlock = () => {
                                     />                            
                         </div>
                         <div className="col-md-5 justify-content-end d-flex"> 
-                                 <Inputs
+                        <DayPickerInput placeholder="DD/MM/YYYY" value={inputFields.dateValue} format="DD/MM/YYYY" className="datepicker" />                                
+                                 {/* <Inputs
                                     type="text"
                                     className="input-placeholders-small text-end border"
                                     name = "dueDateValue"
                                     value = { inputFields.dueDateValue}
                                     onChange = { (e)=>updateOtherFields(e) }    
-                                />                            
+                                />                             */}
                         </div>
                     </div>
 
