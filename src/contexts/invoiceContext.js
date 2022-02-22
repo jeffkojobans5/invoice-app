@@ -14,11 +14,11 @@ export function InvoiceProvider ( {children} ) {
                 shipTo : "Ship to",
                 optional : "",
                 date : "Date",
-                dateValue : new Date(),
+                dateValue : "",
                 paymentTerms : "Payment Terms",
                 paymentTermsValue : "",
                 dueDate : "Due Date", 
-                dueDateValue : new Date (),                 
+                dueDateValue : "",                 
                 PNumber : "P.O Number",
                 PNumberValue : "",
                 name : 'Bansah',
@@ -44,6 +44,18 @@ export function InvoiceProvider ( {children} ) {
                 return previousValue + currentValue.total
               }, 0)                  
         }
+
+        function StartDate (e) {
+            let set = e.toString()
+            let dueDate = set.slice(3,10) + "," + set.slice(10,15)
+            setInputFields({...inputFields , dateValue : dueDate})            
+        }
+
+        function DueDate (e) {
+            let set = e.toString()
+            let dueDate = set.slice(3,10) + "," + set.slice(10,15)
+            setInputFields({...inputFields , dueDateValue : dueDate})            
+        }        
 
         function updateInputs (id , e)  {
             const newInputFields = inputFields['fieldDetails'].map(i => {
@@ -81,7 +93,6 @@ export function InvoiceProvider ( {children} ) {
               }, 0)          
 
               setInputFields({...inputFields , subTotal  })            
-              console.log(inputFields)
         },[ inputFields.fieldDetails ])
     
 
@@ -89,11 +100,13 @@ export function InvoiceProvider ( {children} ) {
         <InvoiceContext.Provider 
         
         value={{ 
-            inputFields ,  
-            addNewLineField,
-            updateInputs,
-            removeInput,    
-            updateOtherFields                    
+                inputFields ,  
+                addNewLineField,
+                updateInputs,
+                removeInput,    
+                updateOtherFields,
+                StartDate,
+                DueDate                             
             }}>
             { children }
         </InvoiceContext.Provider>

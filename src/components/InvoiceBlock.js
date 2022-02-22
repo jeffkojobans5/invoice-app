@@ -7,7 +7,7 @@ import "react-day-picker/lib/style.css";
 
 
 const InvoiceBlock = () => {
-    const { inputFields , updateOtherFields } = useContext(InvoiceContext);
+    const { inputFields , updateOtherFields , StartDate , DueDate } = useContext(InvoiceContext);
 
     return (
         <div className="container p-2">
@@ -84,13 +84,11 @@ const InvoiceBlock = () => {
                                     />                            
                         </div>
                         <div className="col-md-5 justify-content-end d-flex"> 
-                                 <Inputs
-                                    type="text"
-                                    className="input-placeholders-small text-end border"
-                                    name = "dateValue"
-                                    value = { inputFields.dateValue}
-                                    onChange = { (e)=>updateOtherFields(e) }                                      
-                                />                            
+                            <DayPickerInput
+                                value={inputFields.dateValue}
+                                onDayChange={(e)=>StartDate(e)}
+                                placeholder = ""                                
+                            />                          
                         </div>
                     </div>
 
@@ -126,14 +124,12 @@ const InvoiceBlock = () => {
                                     />                            
                         </div>
                         <div className="col-md-5 justify-content-end d-flex"> 
-                        <DayPickerInput placeholder="DD/MM/YYYY" value={inputFields.dateValue} format="DD/MM/YYYY" className="datepicker" />                                
-                                 {/* <Inputs
-                                    type="text"
-                                    className="input-placeholders-small text-end border"
-                                    name = "dueDateValue"
-                                    value = { inputFields.dueDateValue}
-                                    onChange = { (e)=>updateOtherFields(e) }    
-                                />                             */}
+                            <DayPickerInput
+                                value={inputFields.dueDateValue}
+                                onDayChange={(e)=>DueDate(e)}
+                                placeholder = ""
+                                className="dates"
+                            />                                                         
                         </div>
                     </div>
 
@@ -151,7 +147,7 @@ const InvoiceBlock = () => {
                                  <Inputs
                                     type="text"
                                     className="input-placeholders-small text-end border"
-                                    name = "paymentTermsValue"
+                                    name = "PNumberValue"
                                     value = { inputFields.PNumberValue}
                                     onChange = { (e)=>updateOtherFields(e) }    
                                 />                            

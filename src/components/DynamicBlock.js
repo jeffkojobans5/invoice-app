@@ -12,8 +12,8 @@ function DynamicBlock () {
          { inputFields['fieldDetails'].map((inputField , i )=> { 
             
         return (
-        <>                
-            <div className="dynamicTable row " key={ i }>
+                     
+            <div className="dynamicTable row " key={ inputField.id }>
                 <div className="col-md-5">
                     <Inputs
                         type="text"
@@ -46,7 +46,6 @@ function DynamicBlock () {
                                 name="number"
                                 label="total"
                                 className="removeBorder text-end bg-white"
-                                disabled="true"
                                 value={inputField['total']}
                                 onChange={(e)=>updateInputs(inputField.id , e)}
                         />   
@@ -55,7 +54,7 @@ function DynamicBlock () {
                     { inputFields.fieldDetails.length > 1 ?  <FaTrashAlt className="trash" onClick={ (e)=>removeInput(inputField.id) }/> : ""  } 
                 </div>                
             </div>                  
-            </>            
+           
             )}) }
             <button type="button" className="btn btn-primary" name="fieldDetails" onClick={ ()=>addNewLineField() }> + Line Item</button>
         </>

@@ -42,7 +42,7 @@ function NotesTotal () {
                 </div>
 
                 <div className="col-md-6  subtotal"> 
-                            <p className="text-end "> <span class="badge bg-primary">Total</span>  $ { inputFields.subTotal }</p>
+                            <p className="text-end "> <span className="badge bg-primary">Total</span>  $ { inputFields.subTotal }</p>
                 </div>
             </div>
         </div>
