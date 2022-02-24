@@ -41,12 +41,169 @@ function NotesTotal () {
                             ></Txtarea>                       
                 </div>
 
-                <div className="col-md-6  subtotal"> 
-                            <p className="text-end "> <span className="badge bg-primary">Total</span>  $ { inputFields.subTotal }</p>
+                <div className="col-md-6 "> 
+                {/* SUBTOTAL */}
+                    <div className="row">
+                        <div className="col-md-6">
+                            <Inputs
+                                    type="text"
+                                    className="input-placeholders-small"
+                                    name = "terms"
+                                    value = { inputFields.terms}
+                                    onChange = { (e)=>updateOtherFields(e) }
+                                />                            
+                        </div>
+                        <div className="col-md-6 subtotal">
+                                <p className="text-end"> $ { inputFields.subTotal } </p>
+                        </div>                                      
+                    </div>     
 
+                {/* DISCOUNT */}
+                    <div className="row">
+                        <div className="col-md-3">
+                            <Inputs
+                                    type="text"
+                                    className="input-placeholders-small"
+                                    name = "terms"
+                                    value = { inputFields.terms}
+                                    onChange = { (e)=>updateOtherFields(e) }
+                                />                            
+                        </div>
+
+                        <div className="col-md-3">
+                            <select name="" id="">
+                                <option value="">  Per (%) </option>
+                                <option value=""> Fixed ($) </option>
+                            </select>                        
+                        </div>
+
+
+                        <div className="col-md-6 subtotal">
+                                <Inputs
+                                    type="text"
+                                    className="input-placeholders-small text-end"
+                                    name = "terms"
+                                    value = { inputFields.terms}
+                                    onChange = { (e)=>updateOtherFields(e) }
+                                />  
+                        </div>                                      
+                    </div>   
+
+                    {/* TAX */}
+                    <div className="row">
+                        <div className="col-md-3">
+                            <Inputs
+                                    type="text"
+                                    className="input-placeholders-small"
+                                    name = "terms"
+                                    value = { inputFields.terms}
+                                    onChange = { (e)=>updateOtherFields(e) }
+                                />                            
+                        </div>
+
+                        <div className="col-md-3">
+                            <select name="" id="">
+                                <option value="">  Per (%) </option>
+                                <option value=""> Fixed ($) </option>
+                            </select>                        
+                        </div>
+
+
+                        <div className="col-md-6 subtotal">
+                                <Inputs
+                                    type="text"
+                                    className="input-placeholders-small text-end"
+                                    name = "terms"
+                                    value = { inputFields.terms}
+                                    onChange = { (e)=>updateOtherFields(e) }
+                                />  
+                        </div>                                      
+                    </div>   
+
+                {/* SHIP */}
+                <div className="row">
+                        <div className="col-md-6">
+                            <Inputs
+                                    type="text"
+                                    className="input-placeholders-small"
+                                    name = "terms"
+                                    value = { inputFields.terms}
+                                    onChange = { (e)=>updateOtherFields(e) }
+                                />                            
+                        </div>
+                        <div className="col-md-6 subtotal">
+                            <Inputs
+                                    type="text"
+                                    className="input-placeholders-small text-end"
+                                    name = "terms"
+                                    value = { inputFields.terms}
+                                    onChange = { (e)=>updateOtherFields(e) }
+                                />                                   
+                        </div>                                      
+                    </div>               
+                          
+
+                {/* SHIP */}
+                <div className="row">
+                        <div className="col-md-6">
+                            <Inputs
+                                    type="text"
+                                    className="input-placeholders-small"
+                                    name = "terms"
+                                    value = { inputFields.terms}
+                                    onChange = { (e)=>updateOtherFields(e) }
+                                />                            
+                        </div>
+                        <div className="col-md-6 subtotal">
+                            <p className="text-end"> $ { inputFields.subTotal } </p>                                 
+                        </div>                                      
+                    </div>               
+                          
+
+                {/* SHIP */}
+                <div className="row">
+                        <div className="col-md-6">
+                            <Inputs
+                                    type="text"
+                                    className="input-placeholders-small"
+                                    name = "terms"
+                                    value = { inputFields.terms}
+                                    onChange = { (e)=>updateOtherFields(e) }
+                                />                            
+                        </div>
+                        <div className="col-md-6 subtotal">
+                            <Inputs
+                                    type="text"
+                                    className="input-placeholders-small text-end"
+                                    name = "terms"
+                                    value = { inputFields.terms}
+                                    onChange = { (e)=>updateOtherFields(e) }
+                                />                                   
+                        </div>                                      
+                    </div>               
+                          
+
+                {/* SHIP */}
+                <div className="row">
+                        <div className="col-md-6">
+                            <Inputs
+                                    type="text"
+                                    className="input-placeholders-small"
+                                    name = "terms"
+                                    value = { inputFields.terms}
+                                    onChange = { (e)=>updateOtherFields(e) }
+                                />                            
+                        </div>
+                        <div className="col-md-6 subtotal">
+                            <p className="text-end"> $ { inputFields.subTotal } </p>                          
+                        </div>                                      
+                    </div>               
+                          
+
+                            {/* <p className="text-end "> <span className="badge bg-primary">Total</span>  $ { inputFields.subTotal }</p>
                             <div className="discount">
                                 <p className="text-end "> <span className="badge bg-primary">Discount</span>  $ { inputFields.subTotal }</p>
-                            </div>
+                            </div> */}
                 </div>
             </div>
         </div>
