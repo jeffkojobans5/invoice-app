@@ -48,8 +48,8 @@ function NotesTotal () {
                             <Inputs
                                     type="text"
                                     className="input-placeholders-small"
-                                    name = "terms"
-                                    value = { inputFields.terms}
+                                    name = "subTotalValue"
+                                    value = { inputFields.subTotalValue}
                                     onChange = { (e)=>updateOtherFields(e) }
                                 />                            
                         </div>
@@ -64,8 +64,8 @@ function NotesTotal () {
                             <Inputs
                                     type="text"
                                     className="input-placeholders-small"
-                                    name = "terms"
-                                    value = { inputFields.terms}
+                                    name = "discountValue"
+                                    value = { inputFields.discountValue}
                                     onChange = { (e)=>updateOtherFields(e) }
                                 />                            
                         </div>
@@ -82,8 +82,8 @@ function NotesTotal () {
                                 <Inputs
                                     type="text"
                                     className="input-placeholders-small text-end"
-                                    name = "terms"
-                                    value = { inputFields.terms}
+                                    name = "discount"
+                                    value = { inputFields.discount}
                                     onChange = { (e)=>updateOtherFields(e) }
                                 />  
                         </div>                                      
@@ -95,8 +95,8 @@ function NotesTotal () {
                             <Inputs
                                     type="text"
                                     className="input-placeholders-small"
-                                    name = "terms"
-                                    value = { inputFields.terms}
+                                    name = "taxValue"
+                                    value = { inputFields.taxValue}
                                     onChange = { (e)=>updateOtherFields(e) }
                                 />                            
                         </div>
@@ -113,8 +113,8 @@ function NotesTotal () {
                                 <Inputs
                                     type="text"
                                     className="input-placeholders-small text-end"
-                                    name = "terms"
-                                    value = { inputFields.terms}
+                                    name = "tax"
+                                    value = { inputFields.tax}
                                     onChange = { (e)=>updateOtherFields(e) }
                                 />  
                         </div>                                      
@@ -126,8 +126,8 @@ function NotesTotal () {
                             <Inputs
                                     type="text"
                                     className="input-placeholders-small"
-                                    name = "terms"
-                                    value = { inputFields.terms}
+                                    name = "shippingValue"
+                                    value = { inputFields.shippingValue}
                                     onChange = { (e)=>updateOtherFields(e) }
                                 />                            
                         </div>
@@ -135,8 +135,8 @@ function NotesTotal () {
                             <Inputs
                                     type="text"
                                     className="input-placeholders-small text-end"
-                                    name = "terms"
-                                    value = { inputFields.terms}
+                                    name = "shipping"
+                                    value = { inputFields.shipping}
                                     onChange = { (e)=>updateOtherFields(e) }
                                 />                                   
                         </div>                                      
@@ -149,13 +149,13 @@ function NotesTotal () {
                             <Inputs
                                     type="text"
                                     className="input-placeholders-small"
-                                    name = "terms"
-                                    value = { inputFields.terms}
+                                    name = "total"
+                                    value = { inputFields.total}
                                     onChange = { (e)=>updateOtherFields(e) }
                                 />                            
                         </div>
                         <div className="col-md-6 subtotal">
-                            <p className="text-end"> $ { inputFields.subTotal } </p>                                 
+                            <p className="text-end"> $ { inputFields.totalValue } </p>                                 
                         </div>                                      
                     </div>               
                           
@@ -166,8 +166,8 @@ function NotesTotal () {
                             <Inputs
                                     type="text"
                                     className="input-placeholders-small"
-                                    name = "terms"
-                                    value = { inputFields.terms}
+                                    name = "amountPaidValue"
+                                    value = { inputFields.amountPaidValue}
                                     onChange = { (e)=>updateOtherFields(e) }
                                 />                            
                         </div>
@@ -175,8 +175,8 @@ function NotesTotal () {
                             <Inputs
                                     type="text"
                                     className="input-placeholders-small text-end"
-                                    name = "terms"
-                                    value = { inputFields.terms}
+                                    name = "amountPaid"
+                                    value = { inputFields.amountPaid}
                                     onChange = { (e)=>updateOtherFields(e) }
                                 />                                   
                         </div>                                      
@@ -189,13 +189,13 @@ function NotesTotal () {
                             <Inputs
                                     type="text"
                                     className="input-placeholders-small"
-                                    name = "terms"
-                                    value = { inputFields.terms}
+                                    name = "balanceDueValue"
+                                    value = { inputFields.balanceDueValue}
                                     onChange = { (e)=>updateOtherFields(e) }
                                 />                            
                         </div>
                         <div className="col-md-6 subtotal">
-                            <p className="text-end"> $ { inputFields.subTotal } </p>                          
+                            <p className="text-end"> $ { inputFields.balanceDue } </p>                          
                         </div>                                      
                     </div>               
                           
