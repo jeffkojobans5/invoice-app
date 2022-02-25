@@ -218,3 +218,12 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
 }
+
+.subs .row {
+  margin-top: 0.2rem;
+}
+
+.subs select {
+  color: gray;
+  outline: none;
+}

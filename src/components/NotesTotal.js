@@ -41,7 +41,7 @@ function NotesTotal () {
                             ></Txtarea>                       
                 </div>
 
-                <div className="col-md-6 "> 
+                <div className="col-md-6 subs"> 
                 {/* SUBTOTAL */}
                     <div className="row">
                         <div className="col-md-6">
@@ -54,7 +54,7 @@ function NotesTotal () {
                                 />                            
                         </div>
                         <div className="col-md-6 subtotal">
-                                <p className="text-end"> $ { inputFields.subTotal } </p>
+                                <p className="text-end m-0 me-1"> $ { inputFields.subTotal } </p>
                         </div>                                      
                     </div>     
 
@@ -155,7 +155,7 @@ function NotesTotal () {
                                 />                            
                         </div>
                         <div className="col-md-6 subtotal">
-                            <p className="text-end"> $ { inputFields.totalValue } </p>                                 
+                            <p className="text-end m-0 me-1"> $ { inputFields.totalValue } </p>                                 
                         </div>                                      
                     </div>               
                           
@@ -195,11 +195,9 @@ function NotesTotal () {
                                 />                            
                         </div>
                         <div className="col-md-6 subtotal">
-                            <p className="text-end"> $ { inputFields.balanceDue } </p>                          
+                            <p className="text-end h6 me-1"> $ { inputFields.balanceDue } </p>                          
                         </div>                                      
-                    </div>               
-                          
-
+                    </div>                                       
                             {/* <p className="text-end "> <span className="badge bg-primary">Total</span>  $ { inputFields.subTotal }</p>
                             <div className="discount">
                                 <p className="text-end "> <span className="badge bg-primary">Discount</span>  $ { inputFields.subTotal }</p>
