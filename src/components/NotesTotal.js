@@ -5,7 +5,7 @@ import { InvoiceContext } from "../contexts/InvoiceContext"
 
 function NotesTotal () {
 
-    const { inputFields , updateOtherFields  } = useContext(InvoiceContext);
+    const { inputFields , updateOtherFields , selectChange  } = useContext(InvoiceContext);
 
     return (
         <div className="notes mt-5">
@@ -71,16 +71,16 @@ function NotesTotal () {
                         </div>
 
                         <div className="col-md-3">
-                            <select name="" id="">
-                                <option value="">  Per (%) </option>
-                                <option value=""> Fixed ($) </option>
+                            <select name="discountCal" id="" value={inputFields.discountCal} onChange={ (e)=> selectChange(e) }>
+                                <option value="percentage">  Per (%) </option>
+                                <option value="fixed"> Fixed ($) </option>
                             </select>                        
                         </div>
 
 
                         <div className="col-md-6 subtotal">
                                 <Inputs
-                                    type="text"
+                                    type="number"
                                     className="input-placeholders-small text-end"
                                     name = "discount"
                                     value = { inputFields.discount}
@@ -102,16 +102,16 @@ function NotesTotal () {
                         </div>
 
                         <div className="col-md-3">
-                            <select name="" id="">
-                                <option value="">  Per (%) </option>
-                                <option value=""> Fixed ($) </option>
+                            <select name="taxCal" id="" value={inputFields.taxCal} onChange={ (e)=> selectChange(e) }>
+                                <option value="percentage">  Per (%) </option>
+                                <option value="fixed"> Fixed ($) </option>
                             </select>                        
                         </div>
 
 
                         <div className="col-md-6 subtotal">
                                 <Inputs
-                                    type="text"
+                                    type="number"
                                     className="input-placeholders-small text-end"
                                     name = "tax"
                                     value = { inputFields.tax}
@@ -133,7 +133,7 @@ function NotesTotal () {
                         </div>
                         <div className="col-md-6 subtotal">
                             <Inputs
-                                    type="text"
+                                    type="number"
                                     className="input-placeholders-small text-end"
                                     name = "shipping"
                                     value = { inputFields.shipping}
@@ -173,7 +173,7 @@ function NotesTotal () {
                         </div>
                         <div className="col-md-6 subtotal">
                             <Inputs
-                                    type="text"
+                                    type="number"
                                     className="input-placeholders-small text-end"
                                     name = "amountPaid"
                                     value = { inputFields.amountPaid}

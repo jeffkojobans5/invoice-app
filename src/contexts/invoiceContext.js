@@ -34,8 +34,10 @@ export function InvoiceProvider ( {children} ) {
                 subTotal : 0,
                 taxValue : "Tax",
                 tax : 0,
+                taxCal : 'percentage',
                 discountValue : "Discount",
                 discount: 0,
+                discountCal : 'percentage',
                 amountPaidValue : "Amount Paid",       
                 amountPaid : 0,
                 shippingValue: "Shipping",
@@ -100,6 +102,10 @@ export function InvoiceProvider ( {children} ) {
             setInputFields({...inputFields , fieldDetails : [...newInputFields]   })            
         }
 
+        function selectChange (e) {
+            setInputFields({...inputFields , [e.target.name] : e.target.value })            
+        }
+
         useEffect(()=>{
             let subTotal = inputFields['fieldDetails'].reduce(function (previousValue, currentValue) {
                 return previousValue + currentValue.total
@@ -108,6 +114,15 @@ export function InvoiceProvider ( {children} ) {
               setInputFields({...inputFields , subTotal  })            
         },[ inputFields.fieldDetails ])
     
+
+        useEffect(()=>{
+            let total ;
+            if(inputFields.discountCal === "percentage" && inputFields.taxCal === "percentage"){
+                total = ((inputFields.subTotal - (inputFields.subTotal * (inputFields.discount / 100))) + (+inputFields.tax ))  + (+inputFields.shipping)
+            }
+            setInputFields({...inputFields , totalValue : total })            
+            // setInputFields({...inputFields , balanceDue : inputFields.subTotal - inputFields.amountPaid })            
+        },[inputFields.fieldDetails , inputFields.tax , inputFields.discount , inputFields.shipping])
 
     return (
         <InvoiceContext.Provider 
@@ -119,7 +134,8 @@ export function InvoiceProvider ( {children} ) {
                 removeInput,    
                 updateOtherFields,
                 StartDate,
-                DueDate                             
+                DueDate,
+                selectChange                                           
             }}>
             { children }
         </InvoiceContext.Provider>
