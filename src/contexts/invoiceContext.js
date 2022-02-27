@@ -7,7 +7,7 @@ export function InvoiceProvider ( {children} ) {
 
         const [inputFields , setInputFields] = useState(
             {   
-                invoiceName: "INVOICES", 
+                invoiceName: "INVOICE", 
                 sender : "",
                 billTo: "Bill To",
                 receiver : "",
@@ -116,17 +116,42 @@ export function InvoiceProvider ( {children} ) {
     
 
         useEffect(()=>{
-            let total ;
-            if(inputFields.discountCal === "percentage" && inputFields.taxCal === "percentage"){
-                total = ((inputFields.subTotal - (inputFields.subTotal * (inputFields.discount / 100))) + (+inputFields.tax ))  + (+inputFields.shipping)
-            }
-            setInputFields({...inputFields , totalValue : total })            
-            // setInputFields({...inputFields , balanceDue : inputFields.subTotal - inputFields.amountPaid })            
-        },[inputFields.fieldDetails , inputFields.tax , inputFields.discount , inputFields.shipping])
 
+            let total ;
+
+            if(inputFields.discountCal === "percentage" && inputFields.taxCal === "percentage"){
+                total = ((inputFields.subTotal - (inputFields.subTotal * (inputFields.discount / 100))) * (((+inputFields.tax + 100) / 100) ))  + (+inputFields.shipping)
+                // total = total.toFixed(2)
+            }
+
+            if(inputFields.discountCal === "percentage" && inputFields.taxCal === "fixed"){
+                total = ((inputFields.subTotal - (inputFields.subTotal * (inputFields.discount / 100)))) + (+inputFields.tax)  + (+inputFields.shipping)
+                // total = total.toFixed(2)            
+            }
+
+            if(inputFields.discountCal === "fixed" && inputFields.taxCal === "percentage"){
+                total = ((inputFields.subTotal - inputFields.discount) * (((+inputFields.tax + 100) / 100) ))  + (+inputFields.shipping)
+                // total = total.toFixed(2)            
+            }            
+
+            if(inputFields.discountCal === "fixed" && inputFields.taxCal === "fixed"){
+                total = (+inputFields.subTotal) + (+inputFields.discount) + (+inputFields.shipping)
+                // total = total.toFixed(2)            
+            }                   
+
+            setInputFields({...inputFields , totalValue : total}) 
+
+        },[ inputFields.fieldDetails , inputFields.tax , inputFields.discount , inputFields.shipping , inputFields.taxCal , inputFields.discountCal ])
+
+
+        useEffect(()=>{
+            let total = inputFields.totalValue - inputFields.amountPaid ;
+
+            setInputFields({...inputFields , balanceDue : total})       
+
+        },[ inputFields.totalValue , inputFields.amountPaid ])
     return (
-        <InvoiceContext.Provider 
-        
+        <InvoiceContext.Provider         
         value={{ 
                 inputFields ,  
                 addNewLineField,
