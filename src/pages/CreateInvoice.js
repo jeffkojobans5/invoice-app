@@ -1,5 +1,5 @@
-import React from 'react';
 import { InvoiceBlock } from '../components/index';
+import { SideBar } from '../components/index';
 
 const CreateInvoice = () => {
     return (
@@ -9,7 +9,7 @@ const CreateInvoice = () => {
                 <InvoiceBlock />     
             </div>
             <div className="col-md-3 ">
-                <p> heelo </p>
+                <SideBar />
             </div>
         </div>
     </div>

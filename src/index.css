@@ -11,8 +11,9 @@ body {
 }
 
 input,
-textarea {
-  outline: none;
+textarea,
+select {
+  outline: none !important;
 }
 
 input {
@@ -226,4 +227,9 @@ input[type="number"] {
 .subs select {
   color: gray;
   outline: none;
+}
+
+.sideBar button {
+  border: none;
+  background-color: green;
 }
