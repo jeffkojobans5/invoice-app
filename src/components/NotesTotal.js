@@ -54,7 +54,7 @@ function NotesTotal () {
                                 />                            
                         </div>
                         <div className="col-md-6 subtotal">
-                                <p className="text-end m-0 me-1"> $ { inputFields.subTotal } </p>
+                                <p className="text-end m-0 me-1"> { inputFields.currencySign } { inputFields.subTotal } </p>
                         </div>                                      
                     </div>     
 
@@ -73,7 +73,7 @@ function NotesTotal () {
                         <div className="col-md-3">
                             <select name="discountCal" id="" value={inputFields.discountCal} onChange={ (e)=> selectChange(e) }>
                                 <option value="percentage">  Per (%) </option>
-                                <option value="fixed"> Fixed ($) </option>
+                                <option value="fixed"> Fixed ({ inputFields.currencySign }) </option>
                             </select>                        
                         </div>
 
@@ -104,7 +104,7 @@ function NotesTotal () {
                         <div className="col-md-3">
                             <select name="taxCal" id="" value={inputFields.taxCal} onChange={ (e)=> selectChange(e) }>
                                 <option value="percentage">  Per (%) </option>
-                                <option value="fixed"> Fixed ($) </option>
+                                <option value="fixed"> Fixed ({ inputFields.currencySign }) </option>
                             </select>                        
                         </div>
 
@@ -155,7 +155,7 @@ function NotesTotal () {
                                 />                            
                         </div>
                         <div className="col-md-6 subtotal">
-                            <p className="text-end m-0 me-1"> $ { inputFields.totalValue } </p>                                 
+                            <p className="text-end m-0 me-1"> { inputFields.currencySign } { inputFields.totalValue } </p>                                 
                         </div>                                      
                     </div>               
                           
@@ -195,12 +195,12 @@ function NotesTotal () {
                                 />                            
                         </div>
                         <div className="col-md-6 subtotal">
-                            <p className="text-end h6 me-1"> $ { inputFields.balanceDue } </p>                          
+                            <p className="text-end h6 me-1"> { inputFields.currencySign } { inputFields.balanceDue } </p>                          
                         </div>                                      
                     </div>                                       
-                            {/* <p className="text-end "> <span className="badge bg-primary">Total</span>  $ { inputFields.subTotal }</p>
+                            {/* <p className="text-end "> <span className="badge bg-primary">Total</span>  { inputFields.currencySign } { inputFields.subTotal }</p>
                             <div className="discount">
-                                <p className="text-end "> <span className="badge bg-primary">Discount</span>  $ { inputFields.subTotal }</p>
+                                <p className="text-end "> <span className="badge bg-primary">Discount</span>  { inputFields.currencySign } { inputFields.subTotal }</p>
                             </div> */}
                 </div>
             </div>

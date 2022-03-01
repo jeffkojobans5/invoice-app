@@ -1,9 +1,11 @@
 import { createContext , useEffect, useState  } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
+import axios from 'axios';
 export const InvoiceContext = createContext();
 
 export function InvoiceProvider ( {children} ) {
+
+        const [ loading , setLoading] = useState(false);
 
         const [inputFields , setInputFields] = useState(
             {   
@@ -45,7 +47,12 @@ export function InvoiceProvider ( {children} ) {
                 total: "Total",
                 totalValue : 0,      
                 balanceDueValue: "Balance Due",
-                balanceDue: 0,                 
+                balanceDue: 0,       
+                currencySign : "$",
+                currencyName: "US Dollar",     
+                currencyCountry: "Ghana",     
+                countryFlag : "🇬🇭 ",
+                allCountries: [],
                 fieldDetails :  [{ id: uuidv4(), description : '' , quantity : 1 , rate : 0 , total : 0 }] ,
             }
         )
@@ -150,6 +157,27 @@ export function InvoiceProvider ( {children} ) {
             setInputFields({...inputFields , balanceDue : total})       
 
         },[ inputFields.totalValue , inputFields.amountPaid ])
+
+        function getCurrency () {
+            axios.get(`https://restcountries.com/v3.1/name/${inputFields.currencyCountry}`).then((response)=>{
+                // console.log(response.data);
+            }).catch((error)=>{
+
+            })
+
+            axios.get(`https://restcountries.com/v2/all`).then((response)=>{
+                console.log(response.data);
+                setLoading(true)
+                setInputFields({...inputFields , allCountries : response.data })
+            }).catch((error)=>{
+                console.log(error)
+            })            
+        }
+
+        useEffect(()=>{
+            getCurrency();
+        },[])
+
     return (
         <InvoiceContext.Provider         
         value={{ 
@@ -160,7 +188,8 @@ export function InvoiceProvider ( {children} ) {
                 updateOtherFields,
                 StartDate,
                 DueDate,
-                selectChange                                           
+                selectChange,
+                loading                                           
             }}>
             { children }
         </InvoiceContext.Provider>
