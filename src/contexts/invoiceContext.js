@@ -6,6 +6,7 @@ export const InvoiceContext = createContext();
 export function InvoiceProvider ( {children} ) {
 
         const [ loading , setLoading] = useState(false);
+        const [ allCountries , setAllCountries ] = useState([]);
 
         const [inputFields , setInputFields] = useState(
             {   
@@ -48,15 +49,36 @@ export function InvoiceProvider ( {children} ) {
                 totalValue : 0,      
                 balanceDueValue: "Balance Due",
                 balanceDue: 0,       
-                currencySign : "$",
-                currencyName: "US Dollar",     
+                currencySign : "₵",
+                currencyName: "Ghanaian Cedi",     
                 currencyCountry: "Ghana",     
                 countryFlag : "🇬🇭 ",
-                allCountries: [],
                 fieldDetails :  [{ id: uuidv4(), description : '' , quantity : 1 , rate : 0 , total : 0 }] ,
             }
         )
-        
+
+        function handleCurrency (e) {
+            let val = e.target.value;
+            axios.get(`https://restcountries.com/v3.1/name/${val}`).then((response)=>{
+                const res = response['data'][0]
+                let resCurrency;
+                let reSign;
+                
+                response['data'].map((item , index)=>{
+                    for (let property in item.currencies) {
+                        if (item.currencies.hasOwnProperty(property)) {                        
+                            resCurrency = res['currencies'][property]['name']
+                            reSign = res['currencies'][property]['symbol']
+                        }
+                    }         
+                })           
+
+                setInputFields({...inputFields , countryFlag : res.flag , currencyCountry : res['name']['common'] , currencyName : resCurrency , currencySign : reSign  })
+            }).catch((error)=>{
+                console.log(error)
+            })               
+        }
+
         function addNewLineField () {
             setInputFields({...inputFields , fieldDetails : [ ...inputFields['fieldDetails'] , {  id: uuidv4(), description : '' , quantity : 1 , rate : 0 , total : 0  } ]})
         }
@@ -159,21 +181,30 @@ export function InvoiceProvider ( {children} ) {
         },[ inputFields.totalValue , inputFields.amountPaid ])
 
         function getCurrency () {
-            axios.get(`https://restcountries.com/v3.1/name/${inputFields.currencyCountry}`).then((response)=>{
-                // console.log(response.data);
-            }).catch((error)=>{
-
-            })
-
-            axios.get(`https://restcountries.com/v2/all`).then((response)=>{
-                console.log(response.data);
+            axios.get(`https://restcountries.com/v3.1/all`).then((response)=>{
+                const filterCountry = response.data.sort((a, b) => a.name['common'] > b.name['common'] ? 1 : -1)
                 setLoading(true)
-                setInputFields({...inputFields , allCountries : response.data })
+                setAllCountries(filterCountry)
             }).catch((error)=>{
                 console.log(error)
             })            
         }
 
+        const submit = async (e) => {
+            e.preventDefault();
+            try {
+              await axios.post('http://localhost:1337/api/invoices', 
+                    {
+                        "data": {
+                            "invoice" : inputFields
+                        }
+                    }                        
+              );
+            } catch (err) {
+              console.log(err.response.data);
+            }
+          }          
+          
         useEffect(()=>{
             getCurrency();
         },[])
@@ -189,9 +220,12 @@ export function InvoiceProvider ( {children} ) {
                 StartDate,
                 DueDate,
                 selectChange,
-                loading                                           
+                handleCurrency,
+                loading,
+                submit,
+                allCountries                                                           
             }}>
             { children }
         </InvoiceContext.Provider>
-    )
+    )   
 }
