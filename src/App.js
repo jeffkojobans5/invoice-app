@@ -3,6 +3,7 @@ import { Routes , Route } from 'react-router-dom';
 
 import { Header } from './components/index'
 import  CreateInvoice  from './pages/CreateInvoice'
+import  Login  from './pages/Login'
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   <Header />
   <Routes>
     <Route path="/" element={<CreateInvoice />} />
+    <Route path="/login" element={<Login />} />
   </Routes> 
   </>  
   )
