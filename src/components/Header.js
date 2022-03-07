@@ -1,7 +1,11 @@
-import React from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom'
+import { UserContext } from '../contexts/UserContext';
+
 
 const Header = () => {
+    const { user , logOut } = useContext(UserContext);
+    console.log(user)
     return (
         <nav className="container-fluid ">
             <div className="container w-75">
@@ -13,11 +17,11 @@ const Header = () => {
                         <ul>
                             <li><Link to="/">Invoices</Link></li>
                             <li><Link to="/create_invoice">+ Create Invoice</Link></li>
-                            {/* <li><Link to="/">Upgrade</Link></li> */}
                         </ul>
                     </div>
                     <div className="col-md-3 login-register">
-                        <Link to="/login"> Login / Register </Link>
+                      { user.token ?   null : <Link to="/login"> Login / Register </Link>  }
+                      { user.token ?   <p onClick={ logOut }> Log out </p> : null   }
                     </div>                    
                 </div>
             </div>

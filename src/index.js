@@ -5,13 +5,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './index.css'
 import { BrowserRouter } from "react-router-dom";
 import { InvoiceProvider } from "./contexts/InvoiceContext"
+import { UserProvider } from "./contexts/UserContext";
 
 ReactDOM.render(
-<InvoiceProvider>
-  <BrowserRouter>
-      <App />
-  </BrowserRouter> 
-</InvoiceProvider>    
+<UserProvider>
+  <InvoiceProvider>
+    <BrowserRouter>
+        <App />
+    </BrowserRouter> 
+  </InvoiceProvider>    
+</UserProvider>
 ,
   document.getElementById('root')
 );

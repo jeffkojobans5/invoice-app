@@ -247,14 +247,18 @@ input[type="number"] {
   margin-top: 0.6rem;
 }
 
-.login-register a {
+.login-register a,
+.login-register p {
   display: block;
   text-align: right;
   text-decoration: none;
-  color: white;
+  cursor: pointer;
   color: yellow;
 }
 
+.login-register p {
+  margin: 0;
+}
 /* login */
 
 .card {
