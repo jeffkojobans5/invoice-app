@@ -15,7 +15,7 @@ const Header = () => {
                     </div>
                     <div className="col-md-6">
                         <ul>
-                            <li><Link to="/">Invoices</Link></li>
+                            <li><Link to="/invoices">Invoices</Link></li>
                             <li><Link to="/create_invoice">+ Create Invoice</Link></li>
                         </ul>
                     </div>

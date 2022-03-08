@@ -319,4 +319,16 @@ input[type="number"] {
   margin-top: 20px;
 }
 
-/* nav-link btl */
+/* INVOICES-PAGE */
+.invoices-page-box {
+  text-align: center;
+}
+
+.invoices-page-box h5 {
+  margin-top: 0.5rem;
+  color: #3d4c59;
+}
+.invoices-page-box .icon {
+  font-size: 2.5rem;
+  color: brown;
+}
