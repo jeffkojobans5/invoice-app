@@ -1,15 +1,18 @@
-import { createContext , useEffect, useState  } from 'react';
+import { createContext , useContext , useEffect, useState  } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
+import { UserContext } from './UserContext';
+
 export const InvoiceContext = createContext();
 
 export function InvoiceProvider ( {children} ) {
-
+        const { user } = useContext(UserContext)
         const [ loading , setLoading] = useState(false);
         const [ allCountries , setAllCountries ] = useState([]);
-
+        console.log(user)
         const [inputFields , setInputFields] = useState(
             {   
+                user: user.username ? user.username : "Default",
                 invoiceName: "INVOICE", 
                 sender : "",
                 billTo: "Bill To",

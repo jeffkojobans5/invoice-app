@@ -38,6 +38,8 @@ export function UserProvider ( {children } ) {
 
     function logOut () {
         setUser({ username : null , token : null})
+        localStorage.setItem("user", JSON.stringify({ username : null , token : null} )); 
+        window.location.href = 'http://localhost:3000';
     }
 
 

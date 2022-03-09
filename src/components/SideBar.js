@@ -4,9 +4,6 @@ import { InvoiceContext } from "../contexts/InvoiceContext"
 function SideBar () {
 
     const { inputFields , handleCurrency , loading , submit , allCountries } = useContext(InvoiceContext);
-    // console.log(inputFields.allCountries)
-
-
 
     if(!loading) {
         return (
