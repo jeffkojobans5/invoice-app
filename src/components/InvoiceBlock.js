@@ -87,7 +87,8 @@ const InvoiceBlock = () => {
                             <DayPickerInput
                                 value={inputFields.dateValue}
                                 onDayChange={(e)=>StartDate(e)}
-                                placeholder = ""                                
+                                placeholder = ""  
+                                                              
                             />                          
                         </div>
                     </div>

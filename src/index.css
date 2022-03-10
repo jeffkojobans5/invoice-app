@@ -16,7 +16,7 @@ select:focus {
   outline: none !important;
 }
 
-input {
+input:not([type="checkbox"]) {
   font-weight: 200 !important;
   width: 100%;
 }
@@ -331,4 +331,65 @@ input[type="number"] {
 .invoices-page-box .icon {
   font-size: 2.5rem;
   color: brown;
+}
+
+/* filter */
+.filter {
+  padding-bottom: 3rem;
+}
+
+.filter div label {
+  margin-bottom: 0.5rem;
+}
+
+.filter select {
+  width: 100%;
+  padding: 0.1rem;
+}
+
+.payment-status {
+  text-align: right !important;
+}
+
+.invoice-item {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: 0.2s all;
+}
+
+.invoice-item:hover {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+.invoice-item h5 {
+  font-size: 1rem;
+}
+
+.invoice-item p {
+  font-size: 0.8rem;
+  text-align: justify;
+}
+
+.invoice-item small {
+  font-size: 0.8rem;
+  color: gray;
+}
+
+.invoice-date-edit {
+  display: flex;
+  justify-content: start;
+}
+
+.invoice-date,
+.invoice-edit {
+  flex: 1;
+}
+
+.invoice-edit {
+  justify-content: end;
+  text-align: right;
 }
