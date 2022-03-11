@@ -199,6 +199,7 @@ export function InvoiceProvider ( {children} ) {
               await axios.post('http://localhost:1337/api/invoices', 
                     {
                         "data": {
+                            "USERS_PERMISSIONS_USER" : user.username ? user.username : "Default",
                             "invoice" : inputFields
                         }
                     }                        
