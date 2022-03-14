@@ -11,7 +11,7 @@ export function InvoiceProvider ( {children} ) {
         const [ filterHolder , setFilterHolder] = useState([]);
         const [ allCountries , setAllCountries ] = useState([]);
         const [singleInvoiceLoading , setSingleInvoiceLoading ] = useState(true)
-        
+
         const [inputFields , setInputFields] = useState(
             {   
                 user: user.username ? user.username : "Default",
@@ -174,7 +174,7 @@ export function InvoiceProvider ( {children} ) {
             }
 
             if(inputFields.discountCal === "percentage" && inputFields.taxCal === "fixed"){
-                total = ((inputFields.subTotal - (inputFields.subTotal * (inputFields.discount / 100)))) + (+inputFields.tax)  + (+inputFields.shipping)
+                total = ((inputFields.subTotal - (inputFields.subTotal * (inputFields.discount / 100))))  + (+inputFields.shipping) +  (+inputFields.tax)
                 // total = total.toFixed(2)            
             }
 
@@ -184,7 +184,7 @@ export function InvoiceProvider ( {children} ) {
             }            
 
             if(inputFields.discountCal === "fixed" && inputFields.taxCal === "fixed"){
-                total = (+inputFields.subTotal) + (+inputFields.discount) + (+inputFields.shipping)
+                total = (+inputFields.subTotal) + (+inputFields.discount) + (+inputFields.shipping) + (+inputFields.tax)
                 // total = total.toFixed(2)            
             }                   
 
