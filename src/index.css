@@ -372,6 +372,7 @@ input[type="number"] {
 .invoice-item p {
   font-size: 0.8rem;
   text-align: justify;
+  color: gray;
 }
 
 .invoice-item small {
@@ -397,4 +398,16 @@ input[type="number"] {
 .invoice-edit svg {
   background-color: brown;
   border-radius: 100%;
+}
+
+.invoice-list-receiver {
+  color: brown;
+}
+
+.invoice-list a {
+  text-decoration: none;
+}
+
+hr {
+  color: green;
 }

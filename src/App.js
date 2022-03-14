@@ -5,16 +5,21 @@ import { Header } from './components/index'
 import  CreateInvoice  from './pages/CreateInvoice'
 import  Login  from './pages/Login'
 import  Invoices  from './pages/Invoices'
+import  LandingPage  from './pages/LandingPage'
+import  InvoicePage  from './pages/InvoicePage'
+
 
 
 function App() {
   return (
   <>
-  <Header />
+  {/* <Header /> */}
   <Routes>
-    <Route path="/" element={<CreateInvoice />} />
+    <Route path="/" element={<LandingPage />} />
     <Route path="/invoices" element={<Invoices />} />
+    <Route path="/invoices/:id" element={<InvoicePage />} />
     <Route path="/login" element={<Login />} />
+    <Route path="/createInvoice" element={<CreateInvoice />} />
   </Routes> 
   </>  
   )

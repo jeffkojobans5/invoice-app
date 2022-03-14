@@ -6,13 +6,16 @@ import './index.css'
 import { BrowserRouter } from "react-router-dom";
 import { InvoiceProvider } from "./contexts/InvoiceContext"
 import { UserProvider } from "./contexts/UserContext";
+import { FilterProvider } from "./contexts/FilterContext";
 
 ReactDOM.render(
 <UserProvider>
   <InvoiceProvider>
+  <FilterProvider>
     <BrowserRouter>
         <App />
     </BrowserRouter> 
+    </FilterProvider>
   </InvoiceProvider>    
 </UserProvider>
 ,

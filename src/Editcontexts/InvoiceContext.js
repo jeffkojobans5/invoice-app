@@ -10,8 +10,6 @@ export function InvoiceProvider ( {children} ) {
         const [ loading , setLoading] = useState(false);
         const [ filterHolder , setFilterHolder] = useState([]);
         const [ allCountries , setAllCountries ] = useState([]);
-        const [singleInvoiceLoading , setSingleInvoiceLoading ] = useState(true)
-        
         const [inputFields , setInputFields] = useState(
             {   
                 user: user.username ? user.username : "Default",
@@ -221,7 +219,6 @@ export function InvoiceProvider ( {children} ) {
                         }
                     }                        
               );
-              singleInvoiceLoading(false)
             } catch (err) {
               console.log(err.response.data);
             }
@@ -230,6 +227,8 @@ export function InvoiceProvider ( {children} ) {
         useEffect(()=>{
             getCurrency();
         },[])
+
+
 
 
     return (
@@ -250,7 +249,6 @@ export function InvoiceProvider ( {children} ) {
                 userInvoice,
                 filterHolder,
                 setUserInvoice,
-                singleInvoiceLoading                
             }}>
             { children }
         </InvoiceContext.Provider>
