@@ -411,3 +411,51 @@ input[type="number"] {
 hr {
   color: green;
 }
+
+/* LANDING PAGE */
+.landing {
+  background-color: #1f59f6;
+  font-family: "Poppins", sans-serif !important;
+  padding: 10rem;
+}
+
+.landing .nav ul {
+  width: 100%;
+}
+
+.landing .nav ul li {
+  display: inline-block;
+  padding-right: 1rem;
+}
+
+.landing .nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.landing .logo {
+  position: relative;
+  top: 5px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+}
+
+.landing .signup {
+  box-shadow: 0 1px 50px blueviolet;
+}
+
+.landing .banner {
+  margin-top: 5rem;
+}
+
+.landing .banner h1 {
+  font-size: 5rem;
+  font-weight: 600;
+  color: white;
+}
+
+.landing .banner p {
+  line-height: 1.7rem;
+  color: whitesmoke;
+}

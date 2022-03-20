@@ -6,7 +6,7 @@ import { UserContext } from '../contexts/UserContext';
 const Header = () => {
     const { user , logOut } = useContext(UserContext);
     return (
-        <nav className="container-fluid ">
+        <nav className="container-fluid">
             <div className="container w-75">
                 <div className="row">
                     <div className="col-md-3 logo">
