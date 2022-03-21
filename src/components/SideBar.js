@@ -5,7 +5,7 @@ function SideBar () {
 
     const { inputFields , handleCurrency , loading , submit , allCountries } = useContext(InvoiceContext);
 
-    if(loading) {
+    if(!loading) {
         return (
             <h1> Hello </h1>
         )

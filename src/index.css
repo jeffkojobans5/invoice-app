@@ -417,6 +417,9 @@ hr {
   background-color: #1f59f6;
   font-family: "Poppins", sans-serif !important;
   padding: 10rem;
+  background-image: url("./media/invoice-backdrop.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .landing .nav ul {
@@ -458,4 +461,12 @@ hr {
 .landing .banner p {
   line-height: 1.7rem;
   color: whitesmoke;
+}
+
+.mockup {
+  max-width: 45%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  padding-bottom: 2rem;
 }

@@ -1,3 +1,5 @@
+import Mockup from '../media/mockup.png'
+
 function LandingPage () {
 
     return (
@@ -12,7 +14,7 @@ function LandingPage () {
                         </ul>                         
                     </div>
                     <div className="col-md-4 mt-1 d-flex justify-content-center align-items-center logo">
-                        <p> Invoicing</p>
+                        <p> Invoicing.</p>
                     </div> 
                     <div className="col-md-4 -mt-1 d-flex justify-content-end align-items-center">
                         <a href="#" className="btn text-white"> Login </a>
@@ -21,13 +23,14 @@ function LandingPage () {
                 </div>
             </div>
 
-            <div className="container mx-auto banner ">
-                <h1 className="text-center"> Smart Home <br/> Application </h1>
+            <div className="container mx-auto banner">
+                <h1 className="text-center"> Smart  <br/> Invoicing </h1>
                 <p className="text-center banner-text mt-3">  
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam 
-                nulla provident  <br/>voluptatem eaque iusto, commodi omnis velit voluptas illum ipsum, 
+                All your invoices in one place. Don't stress sending invoices to your clients
+              <br/> Sign Up to enjoy the smart invoice journey.
                </p>
             </div>
+            <img src={Mockup} alt="" className="mockup"/>
         </div>
     )
 } 
