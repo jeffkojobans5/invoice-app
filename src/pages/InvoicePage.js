@@ -1,12 +1,12 @@
-import { InvoiceBlock } from '../EditComponents/index';
-import { SideBar } from '../EditComponents/index';
+// import { InvoiceBlock } from '../EditComponents/index';
+// import { SideBar } from '../EditComponents/index';
 import { Header } from '../EditComponents/index'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
 import { useState , useEffect , useContext} from 'react';
 import { InvoiceContext } from '../contexts/InvoiceContext';
 import { Inputs , Txtarea } from '../props/index'
-import { InvoiceTable }from '../EditComponents/index'
+// import { InvoiceTable }from '../EditComponents/index'
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 import {  FaTrashAlt } from 'react-icons/fa';
