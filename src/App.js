@@ -7,8 +7,6 @@ import  Invoices  from './pages/Invoices'
 import  LandingPage  from './pages/LandingPage'
 import  InvoicePage  from './pages/InvoicePage'
 
-
-
 function App() {
   return (
   <>

@@ -1,7 +1,7 @@
 import { useState , useContext } from 'react';
 import { Inputs , Txtarea } from '../props/index'
 import InvoiceTable from './InvoiceTable'
-import { InvoiceContext } from "../EditContexts/InvoiceContext"
+import { InvoiceContext } from "../Editcontexts/InvoiceContext"
 
 function NotesTotal () {
 

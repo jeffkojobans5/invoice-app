@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { InvoiceContext } from "../EditContexts/InvoiceContext"
+import { InvoiceContext } from "../Editcontexts/InvoiceContext"
 
 function SideBar () {
 

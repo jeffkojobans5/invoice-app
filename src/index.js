@@ -4,14 +4,14 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css'
 import { BrowserRouter } from "react-router-dom";
-import { InvoiceProvider } from "./EditContexts/InvoiceContext"
-import { UserProvider } from "./EditContexts/UserContext";
-import { FilterProvider } from "./EditContexts/FilterContext";
+import { InvoiceProvider } from "./Editcontexts/InvoiceContext"
+import { UserProvider } from "./Editcontexts/UserContext";
+import { FilterProvider } from "./Editcontexts/FilterContext";
 
 ReactDOM.render(
 <UserProvider>
   <InvoiceProvider>
-  <FilterProvider>
+   <FilterProvider>
     <BrowserRouter>
         <App />
     </BrowserRouter> 

@@ -4,7 +4,7 @@ import { BsCashCoin } from 'react-icons/bs'
 import { MdMoneyOff } from 'react-icons/md'
 import { InvoiceList } from '../EditComponents/index'
 import { Header } from '../EditComponents/index'
-import {FilterContext} from '../EditContexts/FilterContext'
+import {FilterContext} from '../Editcontexts/FilterContext'
 
 function Invoices () {
 

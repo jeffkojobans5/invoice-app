@@ -4,7 +4,7 @@ import { Header } from '../EditComponents/index'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
 import { useState , useEffect , useContext} from 'react';
-import { InvoiceContext } from '../EditContexts/InvoiceContext';
+import { InvoiceContext } from '../Editcontexts/InvoiceContext';
 import { Inputs , Txtarea } from '../props/index'
 // import { InvoiceTable }from '../EditComponents/index'
 import DayPickerInput from "react-day-picker/DayPickerInput";

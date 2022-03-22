@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { BsFillPencilFill } from 'react-icons/bs'
-import { InvoiceContext } from '../EditContexts/InvoiceContext'
+import { InvoiceContext } from '../Editcontexts/InvoiceContext'
 import { Link } from 'react-router-dom'
 
 

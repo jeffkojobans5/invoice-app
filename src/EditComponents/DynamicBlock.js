@@ -1,7 +1,7 @@
 import React, { useEffect , useContext } from 'react'
 import {  FaTrashAlt } from 'react-icons/fa';
 import Inputs from '../props/Inputs'
-import { InvoiceContext } from "../EditContexts/InvoiceContext"
+import { InvoiceContext } from "../Editcontexts/InvoiceContext"
 
 function DynamicBlock () {
     const { inputFields , addNewLineField , updateInputs , removeInput } = useContext(InvoiceContext);
