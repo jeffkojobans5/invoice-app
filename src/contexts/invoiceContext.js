@@ -10,7 +10,7 @@ export function InvoiceProvider ( {children} ) {
         const [ loading , setLoading] = useState(false);
         const [ filterHolder , setFilterHolder] = useState([]);
         const [ allCountries , setAllCountries ] = useState([]);
-        const [singleInvoiceLoading , setSingleInvoiceLoading ] = useState(true)
+        const [ singleInvoiceLoading , setSingleInvoiceLoading ] = useState(true)
 
         const [inputFields , setInputFields] = useState(
             {   
