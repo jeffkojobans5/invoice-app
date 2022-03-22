@@ -1,5 +1,6 @@
-import Mockup from '../media/mockup.png'
+import Mockup from '../media/mockup.jpg'
 import invoiceEasy from "../media/invoiceEasy.png"
+import { Link } from "react-router-dom";
 
 function LandingPage () {
 
@@ -10,9 +11,9 @@ function LandingPage () {
                 <div className="row d-flex">
                     <div className="col-md-4 mt-4 nav">                        
                         <ul>
-                            <li> <a href=""> Home </a> </li>
-                            <li> <a href=""> Testimonials </a> </li>
-                            <li> <a href=""> Contact </a> </li>
+                            <li><Link to="/invoices">Home</Link></li>
+                            <li><Link to="/invoices">Testimonials</Link></li>
+                            <li><Link to="/invoices">Contact</Link></li>
                         </ul>                         
                     </div>
                     <div className="col-md-4 mt-1 d-flex justify-content-center align-items-center logo">
@@ -32,7 +33,7 @@ function LandingPage () {
               <br/> Sign Up to enjoy the smart invoice journey.
                </p>
             </div>
-            <img src={Mockup} alt="" className="mockup"/>
+            <img src="https://user-images.githubusercontent.com/67514352/159530606-7e292d0c-f9fa-4404-b70f-bd0e200da548.jpg" alt="" className="mockup"/>
         </div>
 
             <div className="container-fluid pt-5 pb-5 bg-white below-banner">
