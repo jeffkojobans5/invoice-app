@@ -1,8 +1,7 @@
 import React from 'react';
 import { Routes , Route } from 'react-router-dom';
 
-import { Header } from './components/index'
-import  CreateInvoice  from './pages/CreateInvoice'
+import { Header } from './EditComponents/index'
 import  Login  from './pages/Login'
 import  Invoices  from './pages/Invoices'
 import  LandingPage  from './pages/LandingPage'
@@ -19,7 +18,7 @@ function App() {
     <Route path="/invoices" element={<Invoices />} />
     <Route path="/invoices/:id" element={<InvoicePage />} />
     <Route path="/login" element={<Login />} />
-    <Route path="/createInvoice" element={<CreateInvoice />} />
+    {/* <Route path="/createInvoice" element={<CreateInvoice />} /> */}
   </Routes> 
   </>  
   )

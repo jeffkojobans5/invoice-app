@@ -1,7 +1,7 @@
 import { useContext , useState } from 'react';
 import { Inputs , Txtarea } from '../props/index'
 import InvoiceTable from './InvoiceTable'
-import { InvoiceContext } from "../contexts/InvoiceContext"
+import { InvoiceContext } from "../EditContexts/InvoiceContext"
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import { useParams } from 'react-router-dom'
 import "react-day-picker/lib/style.css";

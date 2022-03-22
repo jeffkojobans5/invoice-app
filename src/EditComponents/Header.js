@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom'
-import { UserContext } from '../contexts/UserContext';
+import { UserContext } from '../EditContexts/UserContext';
 
 const Header = () => {
     const { user , logOut } = useContext(UserContext);
