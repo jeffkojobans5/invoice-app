@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useContext , useState , createContext, useEffect} from 'react'
-import { InvoiceContext } from '../contexts/InvoiceContext'
+// import { InvoiceContext } from '../contexts/InvoiceContext'
+import { InvoiceContext } from './InvoiceContext'
 
 export const FilterContext = createContext();
 
