@@ -4,9 +4,9 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css'
 import { BrowserRouter } from "react-router-dom";
-import { InvoiceProvider } from "./Editcontexts/InvoiceContext"
-import { UserProvider } from "./Editcontexts/UserContext";
-import { FilterProvider } from "./Editcontexts/FilterContext";
+import { InvoiceProvider } from "./contexts/InvoiceContext"
+import { UserProvider } from "./contexts/UserContext";
+import { FilterProvider } from "./contexts/FilterContext";
 
 ReactDOM.render(
 <UserProvider>
