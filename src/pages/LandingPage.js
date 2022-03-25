@@ -1,5 +1,11 @@
 import Mockup from '../media/mockup.jpg'
 import invoiceEasy from "../media/invoiceEasy.png"
+import currency from "../media/cash.png"
+import logos from "../media/18383.jpg"
+import discounts from "../media/3937434.jpg"
+import send from "../media/4421964.jpg"
+
+
 import { Link } from "react-router-dom";
 
 function LandingPage () {
@@ -9,11 +15,11 @@ function LandingPage () {
         <div className="container-fluid p-0 h-100 landing">
             <div className="container m-w-100 ">
                 <div className="row d-flex">
-                    <div className="col-md-4 mt-4 nav">                        
+                    <div className="col-md-4 mt-4 nav">    
                         <ul>
-                            <li><Link to="/invoices">Home</Link></li>
-                            <li><Link to="/invoices">Testimonials</Link></li>
-                            <li><Link to="/invoices">Contact</Link></li>
+                            <li><Link to="/invoices">SInvoicing@gmail.com</Link></li>
+                            {/* <li><Link to="/invoices">Testimonials</Link></li> */}
+                            {/* <li><Link to="/invoices">Contact</Link></li> */}
                         </ul>                         
                     </div>
                     <div className="col-md-4 mt-1 d-flex justify-content-center align-items-center logo">
@@ -40,43 +46,56 @@ function LandingPage () {
                 <div className="container">
                     <div className="row ">
                         <div className="col-md-6 text p-5 rounded">
-                            <h3 className="text-justify"> Brand your invoices with <br/>your customized business logo </h3>
-                            <p className="text-justify"> Each invoice created with our online invoice maker can be customized to the 
-                            specific client you’re sending it to. You can choose to add your company or 
-                            business logo, add sender info (or set default sender in the settings), add 
-                            client info, add as many items as you wish such as products with fixed 
-                            prices & services with hourly rates, </p>
+                            <h3 className="text-justify"> Choose from over 100 <br/> currencies for your invoice </h3>
+                            <p className="text-justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
+                            do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
+                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. </p>
                         </div>
                         <div className="col-md-6 image  d-flex justify-content-center align-items-center">
-                            <img src={ invoiceEasy } alt="" />
+                            <img src={ currency } alt="" />
                         </div>
                     </div>
                     <div className="row ">
                         <div className="col-md-6 text  d-flex justify-content-center align-items-center">
-                            <img src={ invoiceEasy } alt="" />
+                            <img src={ logos } alt="" />
                         </div>
-                        <div className="col-md-6 image p-5 rounded">
+                        <div className="col-md-6 image mt-3 p-5 rounded">
                             <h3 className="text-justify"> Brand your invoices with <br/>your customized business logo </h3>
-                            <p className="text-justify"> Each invoice created with our online invoice maker can be customized to the 
-                            specific client you’re sending it to. You can choose to add your company or 
-                            business logo, add sender info (or set default sender in the settings), add 
-                            client info, add as many items as you wish such as products with fixed 
-                            prices & services with hourly rates, </p>
+                            <p className="text-justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
+                            do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
+                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. </p>
                         </div>
                     </div>
                     <div className="row ">
-                        <div className="col-md-6 text p-5 rounded">
-                            <h3 className="text-justify"> Brand your invoices with <br/>your customized business logo </h3>
-                            <p className="text-justify"> Each invoice created with our online invoice maker can be customized to the 
-                            specific client you’re sending it to. You can choose to add your company or 
-                            business logo, add sender info (or set default sender in the settings), add 
-                            client info, add as many items as you wish such as products with fixed 
-                            prices & services with hourly rates, </p>
+                        <div className="col-md-6 mt-3  text p-5 rounded">
+                            <h3 className="text-justify"> Add Tax, Discount , Shipping  <br/>and Payment Details to invoice </h3>
+                            <p className="text-justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
+                            do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
+                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
                         </div>
                         <div className="col-md-6 image  d-flex justify-content-center align-items-center">
-                            <img src={ invoiceEasy } alt="" />
+                            <img src={ send } alt="" />
                         </div>
-                    </div>                    
+                    </div>  
+                    <div className="row ">
+                        <div className="col-md-6 text  d-flex justify-content-center align-items-center">
+                            <img src={ discounts } alt="" />
+                        </div>
+                        <div className="col-md-6  image p-5 rounded">
+                            <h3 className="text-justify"> Email your invoice <br/> to your customer at a go </h3>
+                            <p className="text-justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
+                            do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
+                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                        </div>
+                    </div>                                      
                 </div>
             </div>
 
@@ -87,7 +106,7 @@ function LandingPage () {
                             <p> &#169;	Smart Invoicing 2022</p>
                         </div>                     
                         <div className="col-md-4 p-3">
-                            <p className="text-center"> <a href=""> Developers </a> </p>
+                            <p className="text-center developers"> <a href=""> Developers </a> </p>
                         </div>                     
                         <div className="col-md-4 p-3">
                             <p className="text-end"> Made by <a href="#"> @jeffkojobans </a> at FOCUSPPC. </p>

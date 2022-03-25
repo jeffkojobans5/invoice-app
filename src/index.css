@@ -487,6 +487,11 @@ hr {
   transform: rotate(-1deg);
 }
 
+.below-banner img {
+  max-width: 60%;
+  height: auto;
+}
+
 .below-banner .image {
   transform: rotate(1deg);
 }
@@ -496,8 +501,11 @@ hr {
   letter-spacing: 0.1rem;
 }
 
+.developers a {
+  color: white !important;
+}
+
 .footer_ {
-  /* border-top: 1px solid green; */
   background-color: #1f59f6;
   color: whitesmoke;
 }
