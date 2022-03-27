@@ -15,7 +15,7 @@ import { AuthProvider } from './Editcontexts/AuthContext';
 
 ReactDOM.render(
   <Auth0Provider
-  domain="dev-ddlmt95z.us.auth0.com "
+  domain="dev-ddlmt95z.us.auth0.com"
   clientId="hQjTVLEOeyeek0ZWHxEruYjzkzNCQ9Eu"
   redirectUri={window.location.origin}
   cacheLocation="localstorage"
