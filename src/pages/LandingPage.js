@@ -1,14 +1,17 @@
+import { useContext } from 'react'
 import Mockup from '../media/mockup.jpg'
 import invoiceEasy from "../media/invoiceEasy.png"
 import currency from "../media/cash.png"
 import logos from "../media/18383.jpg"
 import discounts from "../media/3937434.jpg"
 import send from "../media/4421964.jpg"
+import { AuthContext } from '../Editcontexts/AuthContext'
 
 
 import { Link } from "react-router-dom";
 
 function LandingPage () {
+    const { loginWithRedirect , myUser , logout } = useContext(AuthContext);
 
     return (
         <>
@@ -26,7 +29,7 @@ function LandingPage () {
                         <p> S-Invoicing.</p>
                     </div> 
                     <div className="col-md-4 -mt-1 d-flex justify-content-end align-items-center">
-                        <a href="#" className="btn text-white"> Login </a>
+                        <a href="#" className="btn text-white" onClick = { ()=>loginWithRedirect() } > Login </a>
                         <a href="#" className="btn bg-white signup"> Sign Up </a>
                     </div>
                 </div>
