@@ -11,7 +11,7 @@ import { AuthContext } from '../Editcontexts/AuthContext'
 import { Link } from "react-router-dom";
 
 function LandingPage () {
-    const { loginWithRedirect , myUser , logout } = useContext(AuthContext);
+    const { loginWithRedirect , user , logout , isAuthenticated , isLoading} = useContext(AuthContext);
 
     return (
         <>
@@ -21,17 +21,26 @@ function LandingPage () {
                     <div className="col-md-4 mt-4 nav">    
                         <ul>
                             <li><Link to="/invoices">SInvoicing@gmail.com</Link></li>
-                            {/* <li><Link to="/invoices">Testimonials</Link></li> */}
-                            {/* <li><Link to="/invoices">Contact</Link></li> */}
                         </ul>                         
                     </div>
                     <div className="col-md-4 mt-1 d-flex justify-content-center align-items-center logo">
                         <p> S-Invoicing.</p>
                     </div> 
-                    <div className="col-md-4 -mt-1 d-flex justify-content-end align-items-center">
-                        <a href="#" className="btn text-white" onClick = { ()=>loginWithRedirect() } > Login </a>
-                        <a href="#" className="btn bg-white signup"> Sign Up </a>
-                    </div>
+
+                    { isLoading ? "" : 
+                        <div className="col-md-4 -mt-1 d-flex justify-content-end align-items-center">
+                            { isAuthenticated ?  <p className="text-white mt-3 px-5"> Hello, { user.given_name } </p> : ""}
+                            {
+                                !isAuthenticated ? 
+                                <>
+                                    <a href="#" className="btn text-white" onClick = { ()=>loginWithRedirect() } > Login </a>
+                                    <a href="#" className="btn bg-white signup"> Sign Up </a>
+                                </>
+                                    : ""
+                            }
+                            { isAuthenticated ?  <a href="#" className="btn bg-white signup" onClick={ logout }> Logout </a> : ""}
+                        </div>
+                    }
                 </div>
             </div>
 
