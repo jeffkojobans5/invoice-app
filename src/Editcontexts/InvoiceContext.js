@@ -10,9 +10,10 @@ export function InvoiceProvider ( {children} ) {
         const [ loading , setLoading] = useState(false);
         const [ filterHolder , setFilterHolder] = useState([]);
         const [ allCountries , setAllCountries ] = useState([]);
-        const [inputFields , setInputFields] = useState(
+        const [ userInvoices , setuserInvoices] = useState([])
+        const [ totalUserInvoice , setTotalUserInvoice ] = useState([]);
+        const [ inputFields , setInputFields] = useState(
             {   
-                user: user.username ? user.username : "Default",
                 invoiceName: "INVOICE", 
                 sender : "",
                 billTo: "Bill To",
@@ -60,19 +61,19 @@ export function InvoiceProvider ( {children} ) {
             }
         )
         
-        const [ userInvoice , setUserInvoice] = useState([])
 
-        function getUserInvoice () {
-            axios.get(`http://localhost:1337/api/invoices?USERS_PERMISSIONS_USER=jeff`).then((response)=>{
-                setUserInvoice(response.data.data)
+        function getuserInvoices () {
+            axios.get(`http://localhost:1337/api/invoices?filters[user_name][$eq]=jkojo`).then((response)=>{
+                setuserInvoices(response.data.data)
                 setFilterHolder(response.data.data)
+                setTotalUserInvoice(response.data.data)
             }).catch((error)=>{
                 console.log(error.response)
             })
         }
 
         useEffect(()=>{
-            getUserInvoice()
+            getuserInvoices()
         },[])
         
         function handleCurrency (e) {
@@ -246,9 +247,10 @@ export function InvoiceProvider ( {children} ) {
                 loading,
                 submit,
                 allCountries,
-                userInvoice,
+                userInvoices,
                 filterHolder,
-                setUserInvoice,
+                setuserInvoices,
+                totalUserInvoice                
             }}>
             { children }
         </InvoiceContext.Provider>

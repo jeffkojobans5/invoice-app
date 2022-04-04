@@ -7,20 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 import { InvoiceProvider } from "./Editcontexts/InvoiceContext"
 import { UserProvider } from "./Editcontexts/UserContext";
 import { FilterProvider } from "./Editcontexts/FilterContext";
-import { Auth0Provider } from '@auth0/auth0-react';
-import { AuthProvider } from './Editcontexts/AuthContext';
-
-// dev-ddlmt95z.us.auth0.com 
-// hQjTVLEOeyeek0ZWHxEruYjzkzNCQ9Eu
 
 ReactDOM.render(
-  <Auth0Provider
-  domain="dev-ddlmt95z.us.auth0.com"
-  clientId="hQjTVLEOeyeek0ZWHxEruYjzkzNCQ9Eu"
-  redirectUri={window.location.origin}
-  cacheLocation="localstorage"
->
-    <AuthProvider>
     <UserProvider>
       <InvoiceProvider>
       <FilterProvider>
@@ -29,9 +17,7 @@ ReactDOM.render(
         </BrowserRouter> 
         </FilterProvider>
       </InvoiceProvider>    
-    </UserProvider>
-    </AuthProvider>
-</Auth0Provider>,
+    </UserProvider> , 
   document.getElementById('root')
 );
 

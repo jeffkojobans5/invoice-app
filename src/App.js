@@ -6,6 +6,7 @@ import  Login  from './pages/Login'
 import  Invoices  from './pages/Invoices'
 import  LandingPage  from './pages/LandingPage'
 import  InvoicePage  from './pages/InvoicePage'
+import LoginRedirect from './Editcontexts/LoginRedirect';
 
 
 function App() {
@@ -17,11 +18,10 @@ function App() {
     <Route path="/invoices" element={<Invoices />} />
     <Route path="/invoices/:id" element={<InvoicePage />} />
     <Route path="/login" element={<Login />} />
-    {/* <Route path="/createInvoice" element={<CreateInvoice />} /> */}
+    <Route path="/api/connect/auth0/redirect" element={<LoginRedirect />} />
   </Routes> 
   </>  
   )
-}
+} 
 
 export default App;
-

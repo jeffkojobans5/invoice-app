@@ -514,3 +514,22 @@ hr {
   color: yellow;
   text-decoration: none;
 }
+
+.new-invoice {
+}
+
+.new-invoice svg {
+  display: block;
+  margin: 0 auto;
+}
+
+.new-invoice button {
+  margin: 0 auto;
+  display: block;
+}
+
+.clear-filter {
+  border: none;
+  width: 100%;
+  border: 2px solid red;
+}

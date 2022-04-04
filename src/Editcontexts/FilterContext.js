@@ -5,14 +5,23 @@ import { InvoiceContext } from './InvoiceContext'
 export const FilterContext = createContext();
 
 export function FilterProvider ( {children} ) {
-    const { userInvoice , setUserInvoice ,filterHolder } = useContext(InvoiceContext);
+    const { userInvoices , setuserInvoices ,filterHolder } = useContext(InvoiceContext);
     const [ filters , setFilters] = useState({
         search : "",
         date : "asc",
         amount : "low",
-        hasPaid: false
+        paymentStatus: "all"
     });
- 
+    
+    function clearFilter(){
+      setFilters({
+        search : "",
+        date : "asc",
+        amount : "low",
+        paymentStatus : "all"
+      })
+    }
+
     function filterChange (e) {
         const filter = e.target.name
         const value = e.target.value        
@@ -30,17 +39,18 @@ export function FilterProvider ( {children} ) {
             filterValue = value;
             setFilters({...filters , [filter] : filterValue})
         }   
-        if( filter === "hasPaid" ) {
-            filterValue = e.target.checked;
-            setFilters({ ...filters, [filter]: filterValue });
-        }
 
-        console.log( userInvoice )
+        if(filter == "paymentStatus") {
+          filterValue = value;
+          setFilters({...filters , [filter] : filterValue})            
+        }    
+        
+        // console.log( userInvoices )
     }
 
     useEffect(()=>{
         let newInvoice = [...filterHolder]
-        const { search , date , hasPaid , amount } = filters;
+        const { search , date , paymentStatus , amount } = filters;
 
         if (search !== "") {
             newInvoice = newInvoice.filter(item => {
@@ -51,16 +61,16 @@ export function FilterProvider ( {children} ) {
           }
 
           if( date == "asc") {
-              newInvoice = newInvoice.sort(( a , b) => {                  
-                return a.attributes.publishedAt - b.attributes.publishedAt
-              })
+              newInvoice = newInvoice.sort((a , b) => {
+                return a.id - b.id
+            })              
           }
 
           if( date == "desc") {
-            newInvoice = newInvoice.sort(( a , b) => {                  
-              return b.attributes.publishedAt - a.attributes.publishedAt
-            })
-        }          
+            newInvoice = newInvoice.sort((a , b) => {
+              return b.id - a.id
+            })              
+          }          
 
           if( amount == "low") {      
             newInvoice = newInvoice.sort((a , b) => {
@@ -72,28 +82,38 @@ export function FilterProvider ( {children} ) {
             newInvoice = newInvoice.sort((a , b) => {
                 return b.attributes.invoice.subTotal - a.attributes.invoice.subTotal
             })      
-          }         
+          }   
           
-          if( hasPaid == true) {      
+          if( paymentStatus == "all") {
             newInvoice = newInvoice.filter(item => {
-                const { totalValue , amountPaid } = item.attributes.invoice
-                  return totalValue != amountPaid
-                });  
-          }    
+              return item;
+            })
+          }
 
-        setUserInvoice(newInvoice)
+          if( paymentStatus == "paid") {
+            newInvoice = newInvoice.filter(item => {
+              return item.attributes.invoice.balanceDue <= 0 ;
+            })
+          }             
+
+          if( paymentStatus == "unpaid") {
+            newInvoice = newInvoice.filter(item => {
+              return item.attributes.invoice.balanceDue > 0 
+            })
+          }    
+                
+        console.log(newInvoice)
+        setuserInvoices(newInvoice)
     },[filters])
     
     return (
         <FilterContext.Provider 
-        value={ { 
+        value={{ 
             filters ,
             filterChange,
-            filterHolder
-            
-            
-            
-            } }>
+            filterHolder,
+            clearFilter            
+              }}>
             { children }
         </FilterContext.Provider>
     )

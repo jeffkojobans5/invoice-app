@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom'
 
 
 function InvoiceList () {
-    const { userInvoice } = useContext(InvoiceContext);
-
+    const { userInvoices } = useContext(InvoiceContext);
+    console.log(userInvoices)
     return (
         <>
-        { userInvoice.map((item , index)=>{
+        { userInvoices.map((item , index)=>{
             const { dateValue , receiver , currencySign , subTotal} = item.attributes.invoice
             let { id } = item
             id = String(id)
@@ -31,7 +31,7 @@ function InvoiceList () {
                             </div>
                         </div>
                     </Link>                    
-            </div>
+                </div>
             )
         })}
         </>

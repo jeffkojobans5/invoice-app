@@ -5,13 +5,12 @@ import currency from "../media/cash.png"
 import logos from "../media/18383.jpg"
 import discounts from "../media/3937434.jpg"
 import send from "../media/4421964.jpg"
-import { AuthContext } from '../Editcontexts/AuthContext'
-
-
 import { Link } from "react-router-dom";
+import { UserContext } from '../Editcontexts/UserContext'
+
 
 function LandingPage () {
-    const { loginWithRedirect , user , logout , isAuthenticated , isLoading} = useContext(AuthContext);
+    const { logOut , isLogged  } = useContext(UserContext);
 
     return (
         <>
@@ -27,20 +26,17 @@ function LandingPage () {
                         <p> S-Invoicing.</p>
                     </div> 
 
-                    { isLoading ? "" : 
                         <div className="col-md-4 -mt-1 d-flex justify-content-end align-items-center">
-                            { isAuthenticated ?  <p className="text-white mt-3 px-5"> Hello, { user.given_name } </p> : ""}
-                            {
-                                !isAuthenticated ? 
+                        { !isLogged   ? 
                                 <>
-                                    <a href="#" className="btn text-white" onClick = { ()=>loginWithRedirect() } > Login </a>
-                                    <a href="#" className="btn bg-white signup"> Sign Up </a>
+                                    <a href="http://localhost:1337/api/connect/auth0" className="btn text-white" > Login </a>
+                                    <a href="http://localhost:1337/api/connect/auth0" className="btn bg-white signup"> Sign Up </a>
                                 </>
-                                    : ""
-                            }
-                            { isAuthenticated ?  <a href="#" className="btn bg-white signup" onClick={ logout }> Logout </a> : ""}
+                        : "" }
+                        { isLogged ? <a href="#" onClick= {logOut } className="btn bg-white signup"> Log Out </a> : ""}
                         </div>
-                    }
+                        
+
                 </div>
             </div>
 

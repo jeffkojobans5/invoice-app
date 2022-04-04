@@ -28,9 +28,9 @@ const InvoicePage = () => {
     // const [inputFields , setInputFields] = useState([findInvoice.attributes.invoice])
 
     const { id } = useParams();
-    const { userInvoice } = useContext(InvoiceContext);
+    const { userInvoices } = useContext(InvoiceContext);
     
-    console.log(userInvoice.length)
+    console.log(userInvoices.length)
     const [singleInvoiceLoading , setSingleInvoiceLoading ] = useState(true)
     const [allCountries , setAllCountries ] = useState([]);
 
