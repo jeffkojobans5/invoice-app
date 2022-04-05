@@ -6,12 +6,15 @@ import { InvoiceList } from '../EditComponents/index'
 import { Header } from '../EditComponents/index'
 import { FilterContext } from '../Editcontexts/FilterContext'
 import { InvoiceContext } from '../Editcontexts/InvoiceContext'
+import { UserContext } from '../Editcontexts/UserContext'
 import { ReactComponent as MySvg }from '../media/no-msg.svg'
 import { ReactComponent as Search }from '../media/no-search.svg'
 
 
 function Filter () {
     const { filters : { search , date , paymentStatus , amount } , filterChange , clearFilter } = useContext(FilterContext);
+
+    console.log(localStorage.getItem("user"))
 
     return (
         <div className="container mt-2 row mx-auto p-0 filter">
@@ -80,7 +83,10 @@ function Invoices () {
     const { userInvoices , totalUserInvoice } = useContext(InvoiceContext);
     console.log(userInvoices)
 
-    if(!userInvoices) {
+    let fullyPaid = userInvoices.filter((item)=> item.attributes.invoice.balanceDue <= 0);
+    let unPaid = userInvoices.filter((item)=> item.attributes.invoice.balanceDue > 0);
+
+    if(totalUserInvoice.length === 0) {
         return (
             <>
                 <Header />    
@@ -90,24 +96,24 @@ function Invoices () {
                             <div className="invoices-page-box col-md-4 total-amount">
                                 <BsCashCoin className="icon"/>
                                 <h5> Total Invoice </h5>
-                                <p>  </p>
+                                <p> 0 </p>
                             </div>
                             <div className="invoices-page-box box col-md-4 total-paid">
                                 <GiReceiveMoney className="icon"/>
-                                <h5> Total Paid </h5>
-                                <p>  </p>
+                                <h5> Fully Paid </h5>
+                                <p> 0 </p>
                             </div>
                             <div className="invoices-page-box col-md-4 total-unpaid">
                                 <MdMoneyOff className="icon"/>
-                                <h5> Total unpaid </h5>
-                                <p>  </p>
+                                <h5> Unpaid </h5>
+                                <p> 0 </p>
                             </div>
                         </div>
                     </div>
 
                     <div className="new-invoice">
                         <div className="pt-5 pb-5">
-                        <h3> No Invoices here </h3>
+                        <h3 className="text-center text-secondary mb-5"> No Invoices here </h3>
                         <MySvg/><br/>
                         <button type="button" className="btn btn-danger mt-4 inline"> Create One </button>
                             </div>
@@ -133,25 +139,24 @@ function Invoices () {
                     <div className="invoices-page-box box col-md-4 total-paid">
                         <GiReceiveMoney className="icon"/>
                         <h5> Total Paid </h5>
-                        <p>  </p>
+                        <p> { fullyPaid.length }  </p>
                     </div>
                     <div className="invoices-page-box col-md-4 total-unpaid">
                         <MdMoneyOff className="icon"/>
                         <h5> Total unpaid </h5>
-                        <p>  </p>
+                        <p> { unPaid.length }  </p>
                     </div>
                 </div>
             </div>
             <Filter/> 
                 <div className="container mt-2 row mx-auto p-0 ">
                         <div className="row justify-content-start p-0 mt-2">
-                        {/* <p className="px-4 text-secondary"> Count : {  userInvoices.length } </p> */}
                         <InvoiceList /> 
                     </div>
                 </div>                
             </div>
             {
-                userInvoices.length === 0 ?
+            userInvoices.length === 0 ?
             <div className="new-invoice">
                 <div className="pt-5 pb-5">
                     <h3 className="text-center mb-4 text-secondary"> Search couldn’t find any notes </h3>

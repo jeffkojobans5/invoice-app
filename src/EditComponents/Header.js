@@ -12,7 +12,7 @@ const Header = () => {
             <div className="container w-75">
                 <div className="row">
                     <div className="col-md-3 logo">
-                        <h5 className="text-white "> <Link to="/" className="text-white text-decoration-none">Invoice App</Link> </h5>
+                        <h5 className="text-white "> <Link to="/" className="text-white text-decoration-none">S-Invoicing</Link> </h5>
                     </div>
                     <div className="col-md-6">
                         <ul>

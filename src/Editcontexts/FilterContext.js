@@ -20,7 +20,7 @@ export function FilterProvider ( {children} ) {
         amount : "low",
         paymentStatus : "all"
       })
-    }
+    } 
 
     function filterChange (e) {
         const filter = e.target.name
