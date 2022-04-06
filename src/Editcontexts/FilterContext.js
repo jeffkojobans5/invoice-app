@@ -1,11 +1,10 @@
-import axios from 'axios'
 import { useContext , useState , createContext, useEffect} from 'react'
 import { InvoiceContext } from './InvoiceContext'
 
 export const FilterContext = createContext();
 
 export function FilterProvider ( {children} ) {
-    const { userInvoices , setuserInvoices ,filterHolder } = useContext(InvoiceContext);
+    const { setuserInvoices ,filterHolder } = useContext(InvoiceContext);
     const [ filters , setFilters] = useState({
         search : "",
         date : "asc",
@@ -44,8 +43,6 @@ export function FilterProvider ( {children} ) {
           filterValue = value;
           setFilters({...filters , [filter] : filterValue})            
         }    
-        
-        // console.log( userInvoices )
     }
 
     useEffect(()=>{

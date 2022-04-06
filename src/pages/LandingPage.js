@@ -1,13 +1,18 @@
 import { useContext } from 'react'
-import Mockup from '../media/mockup.jpg'
-import invoiceEasy from "../media/invoiceEasy.png"
-import currency from "../media/cash.png"
+import { Link } from "react-router-dom";
+
+// context
+import { UserContext } from '../Editcontexts/UserContext'
+
+// media
+import Currency from "../media/cash.png"
 import logos from "../media/18383.jpg"
 import discounts from "../media/3937434.jpg"
 import send from "../media/4421964.jpg"
-import { Link } from "react-router-dom";
-import { UserContext } from '../Editcontexts/UserContext'
 
+// components
+import { LandingpageBlocksRight } from '../EditComponents/index'
+import { LandingpageBlocksLeft } from '../EditComponents/index'
 
 function LandingPage () {
     const { logOut , isLogged  } = useContext(UserContext);
@@ -34,9 +39,7 @@ function LandingPage () {
                                 </>
                         : "" }
                         { isLogged ? <a href="#" onClick= {logOut } className="btn bg-white signup"> Log Out </a> : ""}
-                        </div>
-                        
-
+                        </div>                
                 </div>
             </div>
 
@@ -52,59 +55,37 @@ function LandingPage () {
 
             <div className="container-fluid pt-5 pb-5 bg-white below-banner">
                 <div className="container">
-                    <div className="row ">
-                        <div className="col-md-6 text p-5 rounded">
-                            <h3 className="text-justify"> Choose from over 100 <br/> currencies for your invoice </h3>
-                            <p className="text-justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
-                            do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
-                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. </p>
-                        </div>
-                        <div className="col-md-6 image  d-flex justify-content-center align-items-center">
-                            <img src={ currency } alt="" />
-                        </div>
-                    </div>
-                    <div className="row ">
-                        <div className="col-md-6 text  d-flex justify-content-center align-items-center">
-                            <img src={ logos } alt="" />
-                        </div>
-                        <div className="col-md-6 image mt-3 p-5 rounded">
-                            <h3 className="text-justify"> Brand your invoices with <br/>your customized business logo </h3>
-                            <p className="text-justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
-                            do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
-                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. </p>
-                        </div>
-                    </div>
-                    <div className="row ">
-                        <div className="col-md-6 mt-3  text p-5 rounded">
-                            <h3 className="text-justify"> Add Tax, Discount , Shipping  <br/>and Payment Details to invoice </h3>
-                            <p className="text-justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
-                            do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
-                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-                        </div>
-                        <div className="col-md-6 image  d-flex justify-content-center align-items-center">
-                            <img src={ send } alt="" />
-                        </div>
-                    </div>  
-                    <div className="row ">
-                        <div className="col-md-6 text  d-flex justify-content-center align-items-center">
-                            <img src={ discounts } alt="" />
-                        </div>
-                        <div className="col-md-6  image p-5 rounded">
-                            <h3 className="text-justify"> Email your invoice <br/> to your customer at a go </h3>
-                            <p className="text-justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
-                            do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
-                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-                        </div>
-                    </div>                                      
+                        <LandingpageBlocksLeft
+                            title = " Brand your invoices with your customized business logo "
+                            textLogo = { logos }
+                            para = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
+                            textclassName = "col-md-6 text p-5 rounded"
+                            logoclassName = "col-md-6 image  d-flex justify-content-center align-items-center"                            
+                        />                                     
+                        <LandingpageBlocksRight 
+                            title = " Choose from over 100 currencies for your invoice "
+                            textLogo = { Currency }
+                            para = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
+                            textclassName = "col-md-6 image p-5 rounded"
+                            logoclassName = "col-md-6 text  d-flex justify-content-center align-items-center"                            
+                        />                                     
                 </div>
+                <div className="container">
+                        <LandingpageBlocksLeft
+                            title = " Brand your invoices with your customized business logo "
+                            textLogo = { discounts }
+                            para = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
+                            textclassName = "col-md-6 text p-5 rounded"
+                            logoclassName = "col-md-6 image  d-flex justify-content-center align-items-center"                            
+                        />                                     
+                        <LandingpageBlocksRight 
+                            title = " Choose from over 100 currencies for your invoice "
+                            textLogo = { send }
+                            para = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
+                            textclassName = "col-md-6 image p-5 rounded"
+                            logoclassName = "col-md-6 text  d-flex justify-content-center align-items-center"                            
+                        />                                     
+                </div>                
             </div>
 
             <div className="container-fluid footer_ bg-">

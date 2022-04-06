@@ -61,12 +61,12 @@ export function InvoiceProvider ( {children} ) {
             }
         )
         
-
         function getuserInvoices () {
             axios.get(`http://localhost:1337/api/invoices?filters[user_name][$eq]=jkojo`).then((response)=>{
                 setuserInvoices(response.data.data)
                 setFilterHolder(response.data.data)
                 setTotalUserInvoice(response.data.data)
+                setLoading(true)
             }).catch((error)=>{
                 console.log(error.response)
             })
@@ -76,6 +76,7 @@ export function InvoiceProvider ( {children} ) {
             getuserInvoices()
         },[])
         
+
         function handleCurrency (e) {
             let val = e.target.value;
             axios.get(`https://restcountries.com/v3.1/name/${val}`).then((response)=>{
