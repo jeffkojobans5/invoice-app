@@ -5,19 +5,22 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './index.css'
 import { BrowserRouter } from "react-router-dom";
 import { InvoiceProvider } from "./Editcontexts/InvoiceContext"
+import { EditInvoiceProvider } from "./Editcontexts/EditInvoiceContext"
 import { UserProvider } from "./Editcontexts/UserContext";
 import { FilterProvider } from "./Editcontexts/FilterContext";
 
 ReactDOM.render(
-    <UserProvider>
+  <UserProvider>
       <InvoiceProvider>
       <FilterProvider>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter> 
+        <EditInvoiceProvider>
+          <BrowserRouter>
+              <App />
+          </BrowserRouter> 
+          </EditInvoiceProvider > 
         </FilterProvider>
       </InvoiceProvider>    
-    </UserProvider> , 
+    </UserProvider> ,
   document.getElementById('root')
 );
 

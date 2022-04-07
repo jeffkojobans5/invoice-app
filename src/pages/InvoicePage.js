@@ -1,21 +1,30 @@
-// import { InvoiceBlock } from '../EditComponents/index';
-// import { SideBar } from '../EditComponents/index';
-import { Header } from '../EditComponents/index'
-import { useParams } from 'react-router-dom'
-import axios from 'axios';
 import { useState , useEffect , useContext} from 'react';
-import { InvoiceContext } from '../Editcontexts/InvoiceContext';
-import { Inputs , Txtarea } from '../props/index'
-// import { InvoiceTable }from '../EditComponents/index'
+import { useParams } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
+
+// components
+import { Header } from '../EditComponents/index'
+
+// context
+import { InvoiceContext } from '../Editcontexts/InvoiceContext';
+import { EditInvoiceContext } from '../Editcontexts/EditInvoiceContext';
+
+// props
+import { Inputs , Txtarea } from '../props/index'
+
+// media
 import {  FaTrashAlt } from 'react-icons/fa';
-import { v4 as uuidv4 } from 'uuid';
+
 
 const InvoicePage = () => {
-
+    const { userInvoices } = useContext(InvoiceContext);
     const [inputFields , setInputFields] = useState([])
     const [loading , setLoading] = useState(true)
+    const { id } = useParams();
+
     function getUserInvoice () {
         axios.get(`http://localhost:1337/api/invoices/${id}`).then((response)=>{
             setInputFields(response.data.data.attributes.invoice)
@@ -25,19 +34,12 @@ const InvoicePage = () => {
         })
     }
     
-    // const [inputFields , setInputFields] = useState([findInvoice.attributes.invoice])
-
-    const { id } = useParams();
-    const { userInvoices } = useContext(InvoiceContext);
-    
-    console.log(userInvoices.length)
-    const [singleInvoiceLoading , setSingleInvoiceLoading ] = useState(true)
     const [allCountries , setAllCountries ] = useState([]);
-
 
     useEffect(()=>{
         getUserInvoice()
     },[])
+    
     const { 
         user,
         invoiceName,
@@ -87,28 +89,29 @@ const InvoicePage = () => {
         notesValue,        
     } = inputFields
 
+    const { updateInputs } = useContext(EditInvoiceContext);
 
 
-    function updateInputs (id , e)  {
-        const newInputFields = fieldDetails.map(i => {
-            if(id === i.id) {
-              i[e.target.name] = e.target.value
+    // function updateInputs (id , e)  {
+    //     const newInputFields = fieldDetails.map(i => {
+    //         if(id === i.id) {
+    //           i[e.target.name] = e.target.value
 
-            //  calculate total for each field
-                if(e.target.name === 'quantity' || e.target.name === 'rate') {
-                    i.total = (i.rate * i.quantity)                        
-                }
-            // end
-            }
-            return i;
-          })
+    //         //  calculate total for each field
+    //             if(e.target.name === 'quantity' || e.target.name === 'rate') {
+    //                 i.total = (i.rate * i.quantity)                        
+    //             }
+    //         // end
+    //         }
+    //         return i;
+    //       })
 
-          let sum = fieldDetails.reduce(function (previousValue, currentValue) {
-            return previousValue + currentValue.total
-          }, 0)     
+    //       let sum = fieldDetails.reduce(function (previousValue, currentValue) {
+    //         return previousValue + currentValue.total
+    //       }, 0)     
 
-          setInputFields({...inputFields , subTotal : sum , fieldDetails : [...newInputFields]   })            
-        }
+    //       setInputFields({...inputFields , subTotal : sum , fieldDetails : [...newInputFields]   })            
+    //     }
 
         function addNewLineField () {
             setInputFields({...inputFields , fieldDetails : [ ...fieldDetails , {  id: uuidv4(), description : '' , quantity : 1 , rate : 0 , total : 0  } ]})
@@ -184,16 +187,6 @@ const InvoicePage = () => {
             console.log(error)
         })                 
     }
-    
-
-    // useEffect(()=>{
-    //     let subTotal = fieldDetails.reduce(function (previousValue, currentValue) {
-    //         return previousValue + currentValue.total
-    //       }, 0)          
-
-    //       setInputFields({...inputFields , subTotal  })            
-    // },[ fieldDetails ])
-
 
     useEffect(()=>{
         let total ;
@@ -438,7 +431,7 @@ const InvoicePage = () => {
                                 name="description"
                                 label="description"
                                 value={ inputField.description}
-                                onChange={(e)=>updateInputs(inputField.id , e)}
+                                onChange={(e)=>updateInputs(inputField.id , e , fieldDetails , setInputFields , inputFields)}
                             />
                         </div> 
                         <div className="col-md-2">
@@ -447,7 +440,7 @@ const InvoicePage = () => {
                                     name="quantity"
                                     label="quantity"
                                     value={inputField.quantity}
-                                    onChange={(e)=>updateInputs(inputField.id , e)}
+                                    onChange={(e)=>updateInputs(inputField.id , e , fieldDetails , setInputFields , inputFields)}
                             />                
                         </div>
                         <div className="col-md-2">
@@ -456,7 +449,7 @@ const InvoicePage = () => {
                                         name="rate"
                                         label="rate"
                                         value={inputField.rate}
-                                        onChange={(e)=>updateInputs(inputField.id , e)}
+                                        onChange={(e)=>updateInputs(inputField.id , e , fieldDetails , setInputFields , inputFields)}
                                 />   
                         </div>
                         <div className="col-md-2 ">
@@ -465,7 +458,7 @@ const InvoicePage = () => {
                                         label="total"
                                         className="removeBorder text-end bg-white"
                                         value={inputField.total}
-                                        onChange={(e)=>updateInputs(inputField.id , e)}
+                                        onChange={(e)=>updateInputs(inputField.id , e , fieldDetails , setInputFields , inputFields)}
                                 />   
                         </div>
                         <div className="col-md-1 d-flex justify-content-center align-items-center">
@@ -567,7 +560,7 @@ const InvoicePage = () => {
                                         className="input-placeholders-small"
                                         name = "taxValue"
                                         value = { taxValue}
-                                        onChange = { (e)=>updateOtherFields(e) }
+                                        onChange = { (e)=>updateOtherFields(e , taxValue) }
                                     />                            
                             </div>
 
