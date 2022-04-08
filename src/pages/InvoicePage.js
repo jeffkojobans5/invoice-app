@@ -25,19 +25,19 @@ const InvoicePage = () => {
     const [loading , setLoading] = useState(true)
     const { id } = useParams();
 
-    function getUserInvoice () {
-        axios.get(`http://localhost:1337/api/invoices/${id}`).then((response)=>{
-            setInputFields(response.data.data.attributes.invoice)
-            setLoading(false)
-        }).catch((error)=>{
-            console.log(error.response)
-        })
-    }
+    // function getUserInvoice () {
+    //     axios.get(`http://localhost:1337/api/invoices/${id}`).then((response)=>{
+    //         setInputFields(response.data.data.attributes.invoice)
+    //         setLoading(false)
+    //     }).catch((error)=>{
+    //         console.log(error.response)
+    //     })
+    // }
     
     const [allCountries , setAllCountries ] = useState([]);
 
     useEffect(()=>{
-        getUserInvoice()
+        getUserInvoice(  setInputFields , setLoading , id  )
     },[])
     
     const { 
@@ -89,126 +89,37 @@ const InvoicePage = () => {
         notesValue,        
     } = inputFields
 
-    const { updateInputs } = useContext(EditInvoiceContext);
+    const { 
+        updateInputs , 
+        addNewLineField , 
+        removeInput , 
+        updateOtherFields , 
+        selectChange , 
+        StartDate , 
+        DueDate , 
+        submit ,
+        handleCurrency,
+        getUserInvoice
+    } = useContext(EditInvoiceContext);
 
-
-    // function updateInputs (id , e)  {
-    //     const newInputFields = fieldDetails.map(i => {
-    //         if(id === i.id) {
-    //           i[e.target.name] = e.target.value
-
-    //         //  calculate total for each field
-    //             if(e.target.name === 'quantity' || e.target.name === 'rate') {
-    //                 i.total = (i.rate * i.quantity)                        
-    //             }
-    //         // end
-    //         }
-    //         return i;
-    //       })
-
-    //       let sum = fieldDetails.reduce(function (previousValue, currentValue) {
-    //         return previousValue + currentValue.total
-    //       }, 0)     
-
-    //       setInputFields({...inputFields , subTotal : sum , fieldDetails : [...newInputFields]   })            
-    //     }
-
-        function addNewLineField () {
-            setInputFields({...inputFields , fieldDetails : [ ...fieldDetails , {  id: uuidv4(), description : '' , quantity : 1 , rate : 0 , total : 0  } ]})
-        }
-
-        function removeInput (id) {
-            const newInputFields = fieldDetails.filter((item)=> item.id !== id)    
-
-            let subTotal = newInputFields.reduce(function (previousValue, currentValue) {
-                return previousValue + currentValue.total
-            }, 0)   
-
-            setInputFields({...inputFields , fieldDetails : [...newInputFields] , subTotal : subTotal  })   
-            console.log(subTotal)         
-        }        
-
-
-    function updateOtherFields(e) {        
-        setInputFields({...inputFields , [e.target.name] : e.target.value   })    
-    }
-
-    function selectChange (e) {
-        setInputFields({...inputFields , [e.target.name] : e.target.value })            
-    }    
-
-    function StartDate (e) {
-        let set = e.toString()
-        let dueDate = set.slice(3,10) + "," + set.slice(10,15)
-        setInputFields({...inputFields , dateValue : dueDate})            
-    }
-
-    function DueDate (e) {
-        let set = e.toString()
-        let dueDate = set.slice(3,10) + "," + set.slice(10,15)
-        setInputFields({...inputFields , dueDateValue : dueDate})            
-    }  
-
-    const submit = async (e) => {
-        e.preventDefault();
-        try {
-          await axios.put(`http://localhost:1337/api/invoices/${id}`, 
-                {
-                    "data": {
-                        // "USERS_PERMISSIONS_USER" : user.username ? user.username : "Default",
-                        "invoice" : inputFields
-                    }
-                }                        
-          );
-        window.location.href = 'http://localhost:3000/invoices';
-        } catch (err) {
-          console.log(err);
-        }
-      }      
-
-      function handleCurrency (e) {
-        let val = e.target.value;
-        axios.put(`https://restcountries.com/v3.1/name/${val}`).then((response)=>{
-            const res = response['data'][0]
-            let resCurrency;
-            let reSign;
-            
-            response['data'].map((item , index)=>{
-                for (let property in item.currencies) {
-                    if (item.currencies.hasOwnProperty(property)) {                        
-                        resCurrency = res['currencies'][property]['name']
-                        reSign = res['currencies'][property]['symbol']
-                    }
-                }         
-            })           
-
-            setInputFields({...inputFields , countryFlag : res.flag , currencyCountry : res['name']['common'] , currencyName : resCurrency , currencySign : reSign  })
-        }).catch((error)=>{
-            console.log(error)
-        })                 
-    }
 
     useEffect(()=>{
         let total ;
 
         if(discountCal === "percentage" && taxCal === "percentage"){
             total = ((subTotal - (subTotal * (discount / 100))) * (((+tax + 100) / 100) ))  + (+shipping)
-            // total = total.toFixed(2)
         }
 
         if(discountCal === "percentage" && taxCal === "fixed"){
-            total = ((subTotal - (subTotal * (discount / 100)))) + (+shipping) + (+tax)
-            // total = total.toFixed(2)            
-        }
+            total = ((subTotal - (subTotal * (discount / 100)))) + (+shipping) + (+tax)            
+        }   
 
         if(discountCal === "fixed" && taxCal === "percentage"){
-            total = ((subTotal - discount) * (((+tax + 100) / 100) ))  + (+shipping)
-            // total = total.toFixed(2)            
+            total = ((subTotal - discount) * (((+tax + 100) / 100) ))  + (+shipping)            
         }            
 
         if(discountCal === "fixed" && taxCal === "fixed"){
-            total = (+subTotal) + (+discount) + (+shipping) + (+tax)
-            // total = total.toFixed(2)            
+            total = (+subTotal) + (+discount) + (+shipping) + (+tax)            
         }                   
 
         setInputFields({...inputFields , totalValue : total}) 
@@ -242,7 +153,7 @@ const InvoicePage = () => {
                             placeholder = "Who is this invoice from? (required)"
                             className = "textarea-visible"
                             value = { sender }
-                            onChange = { (e)=>updateOtherFields(e) }
+                            onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                         ></Txtarea>
                     </div>
                     <div className="col-md-6">
@@ -251,7 +162,7 @@ const InvoicePage = () => {
                             name = "invoiceName"
                             className="h3 input-placeholders text-end"
                             value = { invoiceName }
-                            onChange = { (e)=>updateOtherFields(e) }
+                            onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                         />
                     </div>
                 </div>
@@ -265,14 +176,14 @@ const InvoicePage = () => {
                                     className="input-placeholders-small"
                                     name = "billTo"
                                     value = { billTo}
-                                    onChange = { (e)=>updateOtherFields(e) }
+                                    onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                                 />
                                 <Txtarea 
                                     placeholder = "Who is this invoice to? (required)"
                                     className = "textarea-visible w-100"
                                     name = "receiver"
                                     value = { receiver}
-                                    onChange = { (e)=>updateOtherFields(e) }                                
+                                    onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}                                
                                 ></Txtarea>
                             </div>
                             <div className="col-md-6">
@@ -281,14 +192,14 @@ const InvoicePage = () => {
                                         className="input-placeholders-small "
                                         name = "shipTo"
                                         value = { shipTo}
-                                        onChange = { (e)=>updateOtherFields(e) }
+                                        onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                                     />
                                     <Txtarea 
                                         placeholder = "Optional"
                                         className = "textarea-visible w-100"
                                         name = "optional"
                                         value = { optional}
-                                        onChange = { (e)=>updateOtherFields(e) }                                    
+                                        onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}                                    
                                     ></Txtarea>                            
                             </div>
                         </div>
@@ -302,13 +213,13 @@ const InvoicePage = () => {
                                             className="input-placeholders-small text-end close"
                                             name = "date"
                                             value = { date}
-                                            onChange = { (e)=>updateOtherFields(e) }                                          
+                                            onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}                                          
                                         />                            
                             </div>
                             <div className="col-md-5 justify-content-end d-flex"> 
                                 <DayPickerInput
                                     value={dateValue}
-                                    onDayChange={(e)=>StartDate(e)}
+                                    onDayChange={(e)=>StartDate(e , setInputFields , inputFields )}
                                     placeholder = ""  
                                                                 
                                 />                          
@@ -322,7 +233,7 @@ const InvoicePage = () => {
                                             className="input-placeholders-small text-end close"
                                             name = "paymentTerms"
                                             value = { paymentTerms}
-                                            onChange = { (e)=>updateOtherFields(e) }                                          
+                                            onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}                                          
                                         />                            
                             </div>
                             <div className="col-md-5 justify-content-end d-flex"> 
@@ -331,7 +242,7 @@ const InvoicePage = () => {
                                         className="input-placeholders-small text-end border"
                                         name = "paymentTermsValue"
                                         value = { paymentTermsValue}
-                                        onChange = { (e)=>updateOtherFields(e) }    
+                                        onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}    
                                     />                            
                             </div>
                         </div>
@@ -343,13 +254,13 @@ const InvoicePage = () => {
                                             className="input-placeholders-small text-end close"
                                             name = "dueDate"
                                             value = { dueDate}
-                                            onChange = { (e)=>updateOtherFields(e) }    
+                                            onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}    
                                         />                            
                             </div>
                             <div className="col-md-5 justify-content-end d-flex"> 
                                 <DayPickerInput
                                     value={dueDateValue}
-                                    onDayChange={(e)=>DueDate(e)}
+                                    onDayChange={(e)=>DueDate(e , setInputFields , inputFields)}
                                     placeholder = ""
                                     className="dates"
                                 />                                                         
@@ -363,7 +274,7 @@ const InvoicePage = () => {
                                             className="input-placeholders-small text-end close"
                                             name = "PNumber"
                                             value = { PNumber}
-                                            onChange = { (e)=>updateOtherFields(e) }    
+                                            onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}    
                                         />                            
                             </div>
                             <div className="col-md-5 justify-content-end d-flex"> 
@@ -372,7 +283,7 @@ const InvoicePage = () => {
                                         className="input-placeholders-small text-end border"
                                         name = "PNumberValue"
                                         value = { PNumberValue}
-                                        onChange = { (e)=>updateOtherFields(e) }    
+                                        onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}    
                                     />                            
                             </div>
                         </div>                   
@@ -462,12 +373,12 @@ const InvoicePage = () => {
                                 />   
                         </div>
                         <div className="col-md-1 d-flex justify-content-center align-items-center">
-                            { inputFields.fieldDetails.length > 1 ?  <FaTrashAlt className="trash" onClick={ (e)=>removeInput(inputField.id) }/> : ""  } 
+                            { inputFields.fieldDetails.length > 1 ?  <FaTrashAlt className="trash" onClick={ (e)=>removeInput(inputField.id , fieldDetails , setInputFields , inputFields) }/> : ""  } 
                         </div>                
                     </div>                  
                 
                     )}) }
-                    <button type="button" className="btn btn-primary" name="fieldDetails" onClick={ ()=>addNewLineField() }> + Line Item</button>            
+                    <button type="button" className="btn btn-primary" name="fieldDetails" onClick={ ()=>addNewLineField( setInputFields , inputFields , fieldDetails ) }> + Line Item</button>            
                 {/*  END OF DYNAMIC BLOCK */}
 
                 {/* START OF NOTES TOTAL */}
@@ -479,28 +390,28 @@ const InvoicePage = () => {
                                     className="input-placeholders-small"
                                     name = "notes"
                                     value = { notes}
-                                    onChange = { (e)=>updateOtherFields(e) }
+                                    onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                                 />
                                 <Txtarea 
                                     placeholder = "Notes - any relevant information not already covered"
                                     className = "textarea-visible w-100"
                                     name = "notesValue"
                                     value = { notesValue }
-                                    onChange = { (e)=>updateOtherFields(e) }                                
+                                    onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}                                
                                 ></Txtarea>                       
                                 <Inputs
                                     type="text"
                                     className="input-placeholders-small"
                                     name = "terms"
                                     value = { terms}
-                                    onChange = { (e)=>updateOtherFields(e) }
+                                    onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                                 />
                                 <Txtarea 
                                     placeholder = "Terms and conditions - late fees, payment methods, delivery schedule"
                                     className = "textarea-visible w-100"
                                     name = "termsValue"
                                     value = { termsValue}
-                                    onChange = { (e)=>updateOtherFields(e) }                                
+                                    onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}                                
                                 ></Txtarea>                       
                     </div>
 
@@ -513,7 +424,7 @@ const InvoicePage = () => {
                                         className="input-placeholders-small"
                                         name = "subTotalValue"
                                         value = { subTotalValue}
-                                        onChange = { (e)=>updateOtherFields(e) }
+                                        onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                                     />                            
                             </div>
                             <div className="col-md-6 subtotal">
@@ -529,12 +440,12 @@ const InvoicePage = () => {
                                         className="input-placeholders-small"
                                         name = "discountValue"
                                         value = { discountValue}
-                                        onChange = { (e)=>updateOtherFields(e) }
+                                        onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                                     />                            
                             </div>
 
                             <div className="col-md-3">
-                                <select name="discountCal" id="" value={discountCal} onChange={ (e)=> selectChange(e) }>
+                                <select name="discountCal" id="" value={discountCal} onChange={ (e)=> selectChange( e , setInputFields , inputFields ) }>
                                     <option value="percentage">  Per (%) </option>
                                     <option value="fixed"> Fixed ({ currencySign }) </option>
                                 </select>                        
@@ -547,7 +458,7 @@ const InvoicePage = () => {
                                         className="input-placeholders-small text-end"
                                         name = "discount"
                                         value = { discount}
-                                        onChange = { (e)=>updateOtherFields(e) }
+                                        onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                                     />  
                             </div>                                      
                         </div>   
@@ -565,7 +476,7 @@ const InvoicePage = () => {
                             </div>
 
                             <div className="col-md-3">
-                                <select name="taxCal" id="" value={taxCal} onChange={ (e)=> selectChange(e) }>
+                                <select name="taxCal" id="" value={taxCal} onChange={ (e)=> selectChange(e , setInputFields , inputFields) }>
                                     <option value="percentage">  Per (%) </option>
                                     <option value="fixed"> Fixed ({ currencySign }) </option>
                                 </select>                        
@@ -578,7 +489,7 @@ const InvoicePage = () => {
                                         className="input-placeholders-small text-end"
                                         name = "tax"
                                         value = { tax}
-                                        onChange = { (e)=>updateOtherFields(e) }
+                                        onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                                     />  
                             </div>                                      
                         </div>   
@@ -591,7 +502,7 @@ const InvoicePage = () => {
                                         className="input-placeholders-small"
                                         name = "shippingValue"
                                         value = { shippingValue}
-                                        onChange = { (e)=>updateOtherFields(e) }
+                                        onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                                     />                            
                             </div>
                             <div className="col-md-6 subtotal">
@@ -600,7 +511,7 @@ const InvoicePage = () => {
                                         className="input-placeholders-small text-end"
                                         name = "shipping"
                                         value = { shipping}
-                                        onChange = { (e)=>updateOtherFields(e) }
+                                        onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                                     />                                   
                             </div>                                      
                         </div>               
@@ -614,7 +525,7 @@ const InvoicePage = () => {
                                         className="input-placeholders-small"
                                         name = "total"
                                         value = { total}
-                                        onChange = { (e)=>updateOtherFields(e) }
+                                        onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                                     />                            
                             </div>
                             <div className="col-md-6 subtotal">
@@ -631,7 +542,7 @@ const InvoicePage = () => {
                                         className="input-placeholders-small"
                                         name = "amountPaidValue"
                                         value = { amountPaidValue}
-                                        onChange = { (e)=>updateOtherFields(e) }
+                                        onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                                     />                            
                             </div>
                             <div className="col-md-6 subtotal">
@@ -640,7 +551,7 @@ const InvoicePage = () => {
                                         className="input-placeholders-small text-end"
                                         name = "amountPaid"
                                         value = { amountPaid}
-                                        onChange = { (e)=>updateOtherFields(e) }
+                                        onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                                     />                                   
                             </div>                                      
                         </div>               
@@ -654,7 +565,7 @@ const InvoicePage = () => {
                                         className="input-placeholders-small"
                                         name = "balanceDueValue"
                                         value = { balanceDueValue}
-                                        onChange = { (e)=>updateOtherFields(e) }
+                                        onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}
                                     />                            
                             </div>
                             <div className="col-md-6 subtotal">
@@ -672,8 +583,7 @@ const InvoicePage = () => {
                     <div className="col-md-3 ">
                     {/* START OF SIDE BAR */}
                     <div className="sidebar">
-                        <button type="button" className="btn btn-danger w-100" name="" onClick={ submit } > Update </button> <br/><br/>
-                        {/* <button type="button" className="btn btn-warning w-100" name=""> Download </button> */}
+                        <button type="button" className="btn btn-danger w-100" name="" onClick={ (e)=>submit( e , inputFields , id) } > Update </button> <br/><br/>
                         <p> <span className="text-primary">  { inputFields.currencyName } { inputFields.currencySign } { inputFields.countryFlag }   </span></p>        
                         <select name="" id="" className="form-control" onChange={ (e)=>handleCurrency(e) }>
                             { allCountries.map((item , index)=>{

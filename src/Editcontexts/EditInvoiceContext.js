@@ -11,12 +11,9 @@ export function EditInvoiceProvider ( {children} ) {
         const newInputFields = fieldDetails.map(i => {
             if(id === i.id) {
               i[e.target.name] = e.target.value
-
-            //  calculate total for each field
                 if(e.target.name === 'quantity' || e.target.name === 'rate') {
                     i.total = (i.rate * i.quantity)                        
                 }
-            // end
             }
             return i;
           })
@@ -28,11 +25,116 @@ export function EditInvoiceProvider ( {children} ) {
           setInputFields({...inputFields , subTotal : sum , fieldDetails : [...newInputFields]   })            
         }
 
+        // 
+        function addNewLineField ( setInputFields , inputFields , fieldDetails ) {
+          setInputFields({...inputFields , fieldDetails : [ ...fieldDetails , {  id: uuidv4(), description : '' , quantity : 1 , rate : 0 , total : 0  } ]})
+        }
+
+      // 
+      function removeInput (id , fieldDetails , setInputFields , inputFields) {
+        const newInputFields = fieldDetails.filter((item)=> item.id !== id)    
+
+        let subTotal = newInputFields.reduce(function (previousValue, currentValue) {
+            return previousValue + currentValue.total
+        }, 0)   
+
+        setInputFields({...inputFields , fieldDetails : [...newInputFields] , subTotal : subTotal  })   
+        console.log(subTotal)         
+      }      
+
+      //  
+      function updateOtherFields(e , setInputFields , inputFields) {        
+        setInputFields({...inputFields , [e.target.name] : e.target.value   })    
+      }
+
+    // 
+    function selectChange (e , setInputFields , inputFields) {
+      setInputFields({...inputFields , [e.target.name] : e.target.value })            
+    }   
+
+    // 
+    function StartDate (e , setInputFields , inputFields) {
+      let set = e.toString()
+      let dueDate = set.slice(3,10) + "," + set.slice(10,15)
+      setInputFields({...inputFields , dateValue : dueDate})            
+    }
+
+  // 
+    function DueDate (e , setInputFields , inputFields) {
+        let set = e.toString()
+        let dueDate = set.slice(3,10) + "," + set.slice(10,15)
+        setInputFields({...inputFields , dueDateValue : dueDate})            
+    }  
+
+    // 
+    const submit = async (e , inputFields , id) => {
+      e.preventDefault();
+      try {
+        await axios.put(`http://localhost:1337/api/invoices/${id}`, 
+              {
+                  "data": {
+                      // "USERS_PERMISSIONS_USER" : user.username ? user.username : "Default",
+                      "invoice" : inputFields
+                  }
+              }                        
+        );
+      window.location.href = 'http://localhost:3000/invoices';
+      } catch (err) {
+        console.log(err);
+      }
+    }   
+
+
+    // 
+
+    function handleCurrency (e , setInputFields , inputFields ) {
+      let val = e.target.value;
+      axios.put(`https://restcountries.com/v3.1/name/${val}`).then((response)=>{
+          const res = response['data'][0]
+          let resCurrency;
+          let reSign;
+          
+          response['data'].map((item , index)=>{
+              for (let property in item.currencies) {
+                  if (item.currencies.hasOwnProperty(property)) {                        
+                      resCurrency = res['currencies'][property]['name']
+                      reSign = res['currencies'][property]['symbol']
+                  }
+              }         
+          })           
+
+          setInputFields({...inputFields , countryFlag : res.flag , currencyCountry : res['name']['common'] , currencyName : resCurrency , currencySign : reSign  })
+      }).catch((error)=>{
+          console.log(error)
+      })                 
+    }    
+
+    // 
+    function getUserInvoice ( setInputFields , setLoading , id ) {
+      axios.get(`http://localhost:1337/api/invoices/${id}`).then((response)=>{
+          setInputFields(response.data.data.attributes.invoice)
+          setLoading(false)
+      }).catch((error)=>{
+          console.log(error.response)
+      })
+    }    
+
+
+
 
     return (
         <EditInvoiceContext.Provider         
         value={{ 
-             updateInputs
+             updateInputs,
+             addNewLineField  ,
+             removeInput ,
+             updateOtherFields ,
+             selectChange ,
+             StartDate ,
+             DueDate,
+             submit,
+             handleCurrency,
+             getUserInvoice                                                        
             }}>
             { children }
         </EditInvoiceContext.Provider>
