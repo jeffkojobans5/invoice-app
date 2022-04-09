@@ -7,6 +7,8 @@ export const EditInvoiceContext = createContext();
 
 export function EditInvoiceProvider ( {children} ) {
 
+    const [ current , setCurrent ] = useState([])
+
     function updateInputs (id , e , fieldDetails , setInputFields , inputFields)  {
         const newInputFields = fieldDetails.map(i => {
             if(id === i.id) {
@@ -85,11 +87,25 @@ export function EditInvoiceProvider ( {children} ) {
     }   
 
 
+    // fetchcurrency
+    function fetchCurrency () {
+      axios.get('https://restcountries.com/v3.1/all').then((response)=>{
+        console.log(response.data);
+        let alphabetical = response.data.sort((a, b) => a.name.common.localeCompare(b.name.common))
+        setCurrent(alphabetical);
+      }).catch((error)=>{
+        console.log(error)
+      })
+    }
+
     // 
+    useEffect(()=>{
+        fetchCurrency()
+    },[])
 
     function handleCurrency (e , setInputFields , inputFields ) {
       let val = e.target.value;
-      axios.put(`https://restcountries.com/v3.1/name/${val}`).then((response)=>{
+      axios.get(`https://restcountries.com/v3.1/name/${val}`).then((response)=>{
           const res = response['data'][0]
           let resCurrency;
           let reSign;
@@ -134,7 +150,8 @@ export function EditInvoiceProvider ( {children} ) {
              DueDate,
              submit,
              handleCurrency,
-             getUserInvoice                                                        
+             getUserInvoice,
+             current                                                        
             }}>
             { children }
         </EditInvoiceContext.Provider>

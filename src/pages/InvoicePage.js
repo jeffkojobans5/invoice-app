@@ -20,20 +20,11 @@ import {  FaTrashAlt } from 'react-icons/fa';
 
 
 const InvoicePage = () => {
-    const { userInvoices } = useContext(InvoiceContext);
+    // const { userInvoices } = useContext(InvoiceContext);
     const [inputFields , setInputFields] = useState([])
     const [loading , setLoading] = useState(true)
     const { id } = useParams();
 
-    // function getUserInvoice () {
-    //     axios.get(`http://localhost:1337/api/invoices/${id}`).then((response)=>{
-    //         setInputFields(response.data.data.attributes.invoice)
-    //         setLoading(false)
-    //     }).catch((error)=>{
-    //         console.log(error.response)
-    //     })
-    // }
-    
     const [allCountries , setAllCountries ] = useState([]);
 
     useEffect(()=>{
@@ -99,7 +90,8 @@ const InvoicePage = () => {
         DueDate , 
         submit ,
         handleCurrency,
-        getUserInvoice
+        getUserInvoice,
+        current
     } = useContext(EditInvoiceContext);
 
 
@@ -142,7 +134,7 @@ const InvoicePage = () => {
                 <>
                     <Header/>  
                 <div className="container-fluid w-75">
-                <div className="container mt-3 row mx-auto p-0">
+                <div className="container mt-3 mb-5 row mx-auto p-0">
                     <div className="col-md-9 invoice-block p-2">
                         {/* INVOICE BLOCK START */}
                 <div className="container p-2">
@@ -585,18 +577,20 @@ const InvoicePage = () => {
                     <div className="sidebar">
                         <button type="button" className="btn btn-danger w-100" name="" onClick={ (e)=>submit( e , inputFields , id) } > Update </button> <br/><br/>
                         <p> <span className="text-primary">  { inputFields.currencyName } { inputFields.currencySign } { inputFields.countryFlag }   </span></p>        
-                        <select name="" id="" className="form-control" onChange={ (e)=>handleCurrency(e) }>
-                            { allCountries.map((item , index)=>{
-                                for (let property in item.currencies) {
-                                if (item.currencies.hasOwnProperty(property)) {                        
-                                return (
-                                    <option value={item.name['common']} key={ item.flags['png'] } > 
-                                        { item.name['common'] } ({ item.currencies[property]['symbol']}) 
-                                    </option>
-                                        )
-                                    }
-                                }         
-                            }) }
+                        <select name="" id="" className="form-control" onChange={ (e)=>handleCurrency(e , setInputFields , inputFields) }>
+                            {
+                                current.map((item , index)=>{
+                                    for (let property in item.currencies) {
+                                        if (item.currencies.hasOwnProperty(property)) {                        
+                                        return (
+                                            <option value={item.name['common']} key={ item.flags['png'] } > 
+                                                { item.name['common'] } ({ item.currencies[property]['symbol']}) 
+                                            </option>
+                                                )
+                                            }
+                                    } 
+                                })
+                            }
                         </select>
                     </div>                
                     {/* END OF SIDE BAR */}
