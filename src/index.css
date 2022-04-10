@@ -16,9 +16,24 @@ select:focus {
   outline: none !important;
 }
 
+.main {
+  max-width: 1200px;
+}
+
+.subtotal p {
+  font-size: 14px;
+  color: brown;
+  font-weight: 300;
+}
+
+.discount select {
+  font-size: 14px;
+}
+
 input:not([type="checkbox"]) {
   font-weight: 200 !important;
   width: 100%;
+  font-size: 14px !important;  
 }
 
 .btn:focus {

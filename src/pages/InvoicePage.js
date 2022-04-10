@@ -133,7 +133,7 @@ const InvoicePage = () => {
         return (
                 <>
                     <Header/>  
-                <div className="container-fluid w-75">
+                <div className="container-fluid main">
                 <div className="container mt-3 mb-5 row mx-auto p-0">
                     <div className="col-md-9 invoice-block p-2">
                         {/* INVOICE BLOCK START */}
@@ -420,12 +420,12 @@ const InvoicePage = () => {
                                     />                            
                             </div>
                             <div className="col-md-6 subtotal">
-                                    <p className="text-end m-0 me-1"> { currencySign } { subTotal } </p>
+                                    <p className="text-end m-0 me-1 "> { currencySign } { subTotal } </p>
                             </div>                                      
                         </div>     
 
                     {/* DISCOUNT */}
-                        <div className="row">
+                        <div className="row discount">
                             <div className="col-md-3">
                                 <Inputs
                                         type="text"
@@ -456,7 +456,7 @@ const InvoicePage = () => {
                         </div>   
 
                         {/* TAX */}
-                        <div className="row">
+                        <div className="row discount">
                             <div className="col-md-3">
                                 <Inputs
                                         type="text"

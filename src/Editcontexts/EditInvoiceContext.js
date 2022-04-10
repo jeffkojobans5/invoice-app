@@ -45,7 +45,7 @@ export function EditInvoiceProvider ( {children} ) {
       }      
 
       //  
-      function updateOtherFields(e , setInputFields , inputFields) {        
+      function updateOtherFields(e , inputFields , setInputFields) {        
         setInputFields({...inputFields , [e.target.name] : e.target.value   })    
       }
 
