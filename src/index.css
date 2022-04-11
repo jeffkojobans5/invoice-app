@@ -10,6 +10,11 @@ body {
   border: 0;
 }
 
+.payment {
+  width: 140px !important;
+  text-align: left !important;
+}
+
 input,
 textarea,
 select:focus {
@@ -26,6 +31,10 @@ select:focus {
   font-weight: 300;
 }
 
+.DayPickerInput {
+  background-color: orange !important;
+}
+
 .discount select {
   font-size: 14px;
 }
@@ -33,8 +42,17 @@ select:focus {
 input:not([type="checkbox"]) {
   font-weight: 200 !important;
   width: 100%;
-  font-size: 14px !important;  
 }
+
+.invoice-name {
+  font-size: 3rem !important ;
+}
+
+
+input , select {
+  font-size: 14px;  
+}
+
 
 .btn:focus {
   box-shadow: none;
@@ -94,6 +112,8 @@ nav ul li a:hover {
   color: gray;
   outline: none;
 }
+
+
 
 .invoice-block {
   border: 1px solid #ccc;

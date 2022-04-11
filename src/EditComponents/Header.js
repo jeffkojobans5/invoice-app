@@ -9,7 +9,7 @@ const Header = () => {
     
     return (
         <nav className="container-fluid ">
-            <div className="container w-75">
+            <div className="container main">
                 <div className="row">
                     <div className="col-md-3 logo">
                         <h5 className="text-white "> <Link to="/" className="text-white text-decoration-none">S-Invoicing</Link> </h5>

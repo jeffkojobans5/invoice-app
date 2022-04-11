@@ -212,8 +212,7 @@ const InvoicePage = () => {
                                 <DayPickerInput
                                     value={dateValue}
                                     onDayChange={(e)=>StartDate(e , setInputFields , inputFields )}
-                                    placeholder = ""  
-                                                                
+                                    placeholder = ""                                                                  
                                 />                          
                             </div>
                         </div>
@@ -231,7 +230,7 @@ const InvoicePage = () => {
                             <div className="col-md-5 justify-content-end d-flex"> 
                                     <Inputs
                                         type="text"
-                                        className="input-placeholders-small text-end border"
+                                        className="input-placeholders-small text-end border payment"
                                         name = "paymentTermsValue"
                                         value = { paymentTermsValue}
                                         onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}    
@@ -263,16 +262,16 @@ const InvoicePage = () => {
                             <div className="col-md-7 justify-content-end d-flex">
                                         <Inputs
                                             type="text"
-                                            className="input-placeholders-small text-end close"
+                                            className="input-placeholders-small text-end close "
                                             name = "PNumber"
                                             value = { PNumber}
                                             onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}    
                                         />                            
-                            </div>
+                            </div>                            
                             <div className="col-md-5 justify-content-end d-flex"> 
                                     <Inputs
                                         type="text"
-                                        className="input-placeholders-small text-end border"
+                                        className="input-placeholders-small text-end border payment"
                                         name = "PNumberValue"
                                         value = { PNumberValue}
                                         onChange = { (e)=> updateOtherFields(e , inputFields , setInputFields)}    
@@ -370,7 +369,7 @@ const InvoicePage = () => {
                     </div>                  
                 
                     )}) }
-                    <button type="button" className="btn btn-primary" name="fieldDetails" onClick={ ()=>addNewLineField( setInputFields , inputFields , fieldDetails ) }> + Line Item</button>            
+                    <button type="button" className="btn btn-primary p-1 px-3" name="fieldDetails" onClick={ ()=>addNewLineField( setInputFields , inputFields , fieldDetails ) }> + Line Item</button>            
                 {/*  END OF DYNAMIC BLOCK */}
 
                 {/* START OF NOTES TOTAL */}

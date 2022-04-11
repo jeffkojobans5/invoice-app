@@ -61,7 +61,7 @@ const InvoiceBlock = ( props ) => {
                     <Inputs 
                         type = "text"
                         name = "invoiceName"
-                        className="h3 input-placeholders text-end"
+                        className="h3 input-placeholders text-end invoice-name"
                         value = { invoiceName }
                         onChange = { (e)=>updateOtherFields(e) }
                     />
@@ -122,7 +122,9 @@ const InvoiceBlock = ( props ) => {
                                 value={dateValue}
                                 onDayChange={(e)=>StartDate(e)}
                                 placeholder = ""  
-                                                              
+                                styles={{
+                                    caption: { color: 'red' }
+                                }}                                                           
                             />                          
                         </div>
                     </div>
@@ -152,18 +154,18 @@ const InvoiceBlock = ( props ) => {
                         <div className="col-md-7 justify-content-end d-flex">
                                     <Inputs
                                         type="text"
-                                        className="input-placeholders-small text-end close"
+                                        className="input-placeholders-small text-end close "
                                         name = "dueDate"
                                         value = { dueDate}
                                         onChange = { (e)=>updateOtherFields(e) }    
                                     />                            
                         </div>
-                        <div className="col-md-5 justify-content-end d-flex"> 
+                        <div className="col-md-5 justify-content-end d-flex data"> 
                             <DayPickerInput
                                 value={dueDateValue}
                                 onDayChange={(e)=>DueDate(e)}
                                 placeholder = ""
-                                className="dates"
+                                className=""
                             />                                                         
                         </div>
                     </div>
@@ -172,18 +174,18 @@ const InvoiceBlock = ( props ) => {
                         <div className="col-md-7 justify-content-end d-flex">
                                     <Inputs
                                         type="text"
-                                        className="input-placeholders-small text-end close"
+                                        className="input-placeholders-small text-end close "
                                         name = "PNumber"
                                         value = { PNumber}
                                         onChange = { (e)=>updateOtherFields(e) }    
                                     />                            
                         </div>
-                        <div className="col-md-5 justify-content-end d-flex"> 
+                        <div className="col-md-5 justify-content-end d-flex payment"> 
                                  <Inputs
                                     type="text"
-                                    className="input-placeholders-small text-end border"
+                                    className="input-placeholders-small text-end border "
                                     name = "PNumberValue"
-                                    value = { PNumberValue}
+                                    value = { PNumberValue }
                                     onChange = { (e)=>updateOtherFields(e) }    
                                 />                            
                         </div>

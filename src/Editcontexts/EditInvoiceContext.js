@@ -2,10 +2,13 @@ import { createContext , useContext , useEffect, useState  } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { UserContext } from './UserContext';
+import Swal from 'sweetalert2'
 
 export const EditInvoiceContext = createContext();
 
 export function EditInvoiceProvider ( {children} ) {
+
+    const Swal = require('sweetalert2')
 
     const [ current , setCurrent ] = useState([])
 
@@ -80,7 +83,14 @@ export function EditInvoiceProvider ( {children} ) {
                   }
               }                        
         );
-      window.location.href = 'http://localhost:3000/invoices';
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Invoice has been updated',
+          showConfirmButton: false,
+          timer: 1500
+        })        
+      // window.location.href = 'http://localhost:3000/invoices';
       } catch (err) {
         console.log(err);
       }

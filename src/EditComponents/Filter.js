@@ -59,7 +59,7 @@ function Filter () {
         <div className="col-md-3">
             <label htmlFor="payment-status" className="payment-status text-end"> </label> <br/>
             <div className="d-flex justify-content-end">                        
-                <button type="button" className="b-0 clear-filter rounded mt-2 btn-danger inline" onClick = { ()=>clearFilter()} > Clear Filter </button>
+                <button type="button" className="b-0 clear-filter rounded mt-1 btn-danger inline" onClick = { ()=>clearFilter()} > Clear Filter </button>
             </div>
         </div>        
     </div>
