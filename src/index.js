@@ -4,10 +4,10 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css'
 import { BrowserRouter } from "react-router-dom";
-import { InvoiceProvider } from "./Editcontexts/InvoiceContext"
-import { EditInvoiceProvider } from "./Editcontexts/EditInvoiceContext"
-import { UserProvider } from "./Editcontexts/UserContext";
-import { FilterProvider } from "./Editcontexts/FilterContext";
+import { InvoiceProvider } from "./Contexts/InvoiceContext"
+import { EditInvoiceProvider } from "./Contexts/EditInvoiceContext"
+import { UserProvider } from "./Contexts/UserContext";
+import { FilterProvider } from "./Contexts/FilterContext";
 
 ReactDOM.render(
   <UserProvider>

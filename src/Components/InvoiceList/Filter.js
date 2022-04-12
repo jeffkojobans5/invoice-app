@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 // contexts
-import { FilterContext } from '../Editcontexts/FilterContext'
+import { FilterContext } from '../../Contexts/FilterContext'
 
 function Filter () {
     const { filters : { search , date , paymentStatus , amount } , filterChange , clearFilter } = useContext(FilterContext);

@@ -6,11 +6,11 @@ import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 
 // components
-import { Header } from '../EditComponents/index'
+import { Header } from '../Components/index'
 
 // context
-import { InvoiceContext } from '../Editcontexts/InvoiceContext';
-import { EditInvoiceContext } from '../Editcontexts/EditInvoiceContext';
+import { InvoiceContext } from '../Contexts/InvoiceContext';
+import { EditInvoiceContext } from '../Contexts/EditInvoiceContext';
 
 // props
 import { Inputs , Txtarea } from '../props/index'
@@ -20,7 +20,6 @@ import {  FaTrashAlt } from 'react-icons/fa';
 
 
 const InvoicePage = () => {
-    // const { userInvoices } = useContext(InvoiceContext);
     const [inputFields , setInputFields] = useState([])
     const [loading , setLoading] = useState(true)
     const { id } = useParams();

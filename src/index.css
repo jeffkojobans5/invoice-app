@@ -10,9 +10,14 @@ body {
   border: 0;
 }
 
+input , select {
+  -webkit-appearance: none !important; /* add this */
+}
+
 .payment {
   width: 140px !important;
   text-align: left !important;
+  border: none;
 }
 
 input,

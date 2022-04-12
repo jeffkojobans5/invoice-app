@@ -1,12 +1,11 @@
 import { useContext } from 'react'
-import { BsFillPencilFill } from 'react-icons/bs'
-import { InvoiceContext } from '../Editcontexts/InvoiceContext'
+import { InvoiceContext } from '../Contexts/InvoiceContext'
 import { Link } from 'react-router-dom'
 
 
 function InvoiceList () {
     const { userInvoices } = useContext(InvoiceContext);
-    console.log(userInvoices)
+    
     return (
         <>
         { userInvoices.map((item , index)=>{

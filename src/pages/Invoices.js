@@ -8,10 +8,10 @@ import { ReactComponent as MySvg }from '../media/no-msg.svg'
 import { ReactComponent as Search }from '../media/no-search.svg'
 
 // components
-import { InvoiceList , Header , Filter } from '../EditComponents/index'
+import { InvoiceList , Header , Filter } from '../Components/index'
 
 // contexts
-import { InvoiceContext } from '../Editcontexts/InvoiceContext'
+import { InvoiceContext } from '../Contexts/InvoiceContext'
 
 
 function Invoices () {
@@ -30,7 +30,7 @@ function Invoices () {
         return (
             <>
                 <Header />    
-                <div className="container-fluid w-75">
+                <div className="container-fluid main">
                     <div className="container mt-2 row mx-auto p-0 ">
                         <div className="row invoice-block pt-3">
                             <div className="invoices-page-box col-md-4 total-amount">
@@ -68,7 +68,7 @@ function Invoices () {
     return (
     <>
         <Header />    
-        <div className="container-fluid w-75">
+        <div className="container-fluid main">
             <div className="container mt-2 row mx-auto p-0 ">
                 <div className="row invoice-block pt-3">
                     <div className="invoices-page-box col-md-4 total-amount">

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import DynamicBlock from './DynamicBlock';
 import NotesTotal from './NotesTotal';
-import { InvoiceContext } from "../Editcontexts/InvoiceContext"
+import { InvoiceContext } from "../../Contexts/InvoiceContext"
 
 function InvoiceTable () {
     const { inputFields , updateOtherFields } = useContext(InvoiceContext);

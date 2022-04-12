@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { Link } from "react-router-dom";
 
 // context
-import { UserContext } from '../Editcontexts/UserContext'
+import { UserContext } from '../Contexts/UserContext'
 
 // media
 import Currency from "../media/cash.png"
@@ -11,8 +11,8 @@ import discounts from "../media/3937434.jpg"
 import send from "../media/4421964.jpg"
 
 // components
-import { LandingpageBlocksRight } from '../EditComponents/index'
-import { LandingpageBlocksLeft } from '../EditComponents/index'
+import { LandingpageBlocksRight } from '../Components/index'
+import { LandingpageBlocksLeft } from '../Components/index'
 
 function LandingPage () {
     const { logOut , isLogged  } = useContext(UserContext);
