@@ -11,13 +11,18 @@ body {
 }
 
 input , select {
-  -webkit-appearance: none !important; /* add this */
+  /* -webkit-appearance: none !important;  */
 }
 
 .payment {
   width: 140px !important;
   text-align: left !important;
   border: none;
+}
+
+.select-tax-discount {
+  padding: 3px;
+  border-radius: 5px;
 }
 
 input,

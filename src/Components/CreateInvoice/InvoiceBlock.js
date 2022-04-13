@@ -1,33 +1,27 @@
-import { useContext , useState } from 'react';
+import { useContext } from 'react';
+
+// props
 import { Inputs , Txtarea } from '../../props/index'
+
+// components
 import InvoiceTable from './InvoiceTable'
+
+// context
 import { InvoiceContext } from "../../Contexts/InvoiceContext"
 import DayPickerInput from "react-day-picker/DayPickerInput";
-import { useParams } from 'react-router-dom'
+
+// styles
 import "react-day-picker/lib/style.css";
 
 
-const InvoiceBlock = ( props ) => {
-    const { userInvoice } = useContext(InvoiceContext);
-    const { id } = useParams();
-    const findInvoice = [...userInvoice].find(item => item.id === parseInt(id))
-    const [inputFields , setInputFields] = useState(findInvoice.attributes.invoice)
+const InvoiceBlock = ( ) => {
 
-    function updateOtherFields(e) {        
-        setInputFields({...inputFields , [e.target.name] : e.target.value   })    
-    }
-
-    function StartDate (e) {
-        let set = e.toString()
-        let dueDate = set.slice(3,10) + "," + set.slice(10,15)
-        setInputFields({...inputFields , dateValue : dueDate})            
-    }
-
-    function DueDate (e) {
-        let set = e.toString()
-        let dueDate = set.slice(3,10) + "," + set.slice(10,15)
-        setInputFields({...inputFields , dueDateValue : dueDate})            
-    }  
+    const { 
+        inputFields ,  
+        updateOtherFields,
+        StartDate,
+        DueDate,        
+     } = useContext(InvoiceContext);
 
     const { sender , 
             invoiceName , 
@@ -61,7 +55,7 @@ const InvoiceBlock = ( props ) => {
                     <Inputs 
                         type = "text"
                         name = "invoiceName"
-                        className="h3 input-placeholders text-end invoice-name"
+                        className="h3 input-placeholders text-end "
                         value = { invoiceName }
                         onChange = { (e)=>updateOtherFields(e) }
                     />

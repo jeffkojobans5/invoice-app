@@ -5,16 +5,15 @@ function SideBar () {
 
     const { inputFields , handleCurrency , loading , submit , allCountries } = useContext(InvoiceContext);
 
-    if(loading) {
-        return (
-            <h1> Hello </h1>
-        )
-    }
+    // if(loading) {
+    //     return (
+    //         <h1> Hello </h1>
+    //     )
+    // }
     
     return (
     <div className="sidebar">
-        <button type="button" className="btn btn-primary w-100" name="" onClick={ submit } > Save </button> <br/><br/>
-        {/* <button type="button" className="btn btn-warning w-100" name=""> Download </button> */}
+        <button type="button" className="btn btn-primary w-100" name="" onClick={ (e)=>submit(e) } > Save </button> <br/><br/>
         <p> <span className="text-primary">  { inputFields.currencyName } { inputFields.currencySign } { inputFields.countryFlag }   </span></p>        
         <select name="" id="" className="form-control" onChange={ (e)=>handleCurrency(e) }>
             { allCountries.map((item , index)=>{

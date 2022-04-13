@@ -9,7 +9,6 @@ import "react-day-picker/lib/style.css";
 import { Header } from '../Components/index'
 
 // context
-import { InvoiceContext } from '../Contexts/InvoiceContext';
 import { EditInvoiceContext } from '../Contexts/EditInvoiceContext';
 
 // props
@@ -19,19 +18,16 @@ import { Inputs , Txtarea } from '../props/index'
 import {  FaTrashAlt } from 'react-icons/fa';
 
 
-const InvoicePage = () => {
+const EditInvoice = () => {
     const [inputFields , setInputFields] = useState([])
     const [loading , setLoading] = useState(true)
     const { id } = useParams();
-
-    const [allCountries , setAllCountries ] = useState([]);
 
     useEffect(()=>{
         getUserInvoice(  setInputFields , setLoading , id  )
     },[])
     
-    const { 
-        user,
+     const { 
         invoiceName,
         sender ,
         billTo ,
@@ -124,11 +120,14 @@ const InvoicePage = () => {
     },[ totalValue , amountPaid ])          
     
 
+    
+
     if(loading) {
         return (
             <h1></h1> 
         )
     }
+    
         return (
                 <>
                     <Header/>  
@@ -358,7 +357,7 @@ const InvoicePage = () => {
                                         name="number"
                                         label="total"
                                         className="removeBorder text-end bg-white"
-                                        value={inputField.total}
+                                        value={inputField.total.toLocaleString('en-US', {minimumFractionDigits: 2})}
                                         onChange={(e)=>updateInputs(inputField.id , e , fieldDetails , setInputFields , inputFields)}
                                 />   
                         </div>
@@ -418,7 +417,7 @@ const InvoicePage = () => {
                                     />                            
                             </div>
                             <div className="col-md-6 subtotal">
-                                    <p className="text-end m-0 me-1 "> { currencySign } { subTotal } </p>
+                                    <p className="text-end m-0 me-1 "> { currencySign } { subTotal.toLocaleString('en-US', {minimumFractionDigits: 2}) } </p>
                             </div>                                      
                         </div>     
 
@@ -435,7 +434,7 @@ const InvoicePage = () => {
                             </div>
 
                             <div className="col-md-3">
-                                <select name="discountCal" id="" value={discountCal} onChange={ (e)=> selectChange( e , setInputFields , inputFields ) }>
+                                <select name="discountCal" id="" className="select-tax-discount" value={discountCal} onChange={ (e)=> selectChange( e , setInputFields , inputFields ) }>
                                     <option value="percentage">  Per (%) </option>
                                     <option value="fixed"> Fixed ({ currencySign }) </option>
                                 </select>                        
@@ -466,7 +465,7 @@ const InvoicePage = () => {
                             </div>
 
                             <div className="col-md-3">
-                                <select name="taxCal" id="" value={taxCal} onChange={ (e)=> selectChange(e , setInputFields , inputFields) }>
+                                <select name="taxCal" id="" value={taxCal} className="select-tax-discount" onChange={ (e)=> selectChange(e , setInputFields , inputFields) }>
                                     <option value="percentage">  Per (%) </option>
                                     <option value="fixed"> Fixed ({ currencySign }) </option>
                                 </select>                        
@@ -519,7 +518,7 @@ const InvoicePage = () => {
                                     />                            
                             </div>
                             <div className="col-md-6 subtotal">
-                                <p className="text-end m-0 me-1"> { currencySign } { totalValue } </p>                                 
+                                <p className="text-end m-0 me-1"> { currencySign } { totalValue.toLocaleString('en-US', {minimumFractionDigits: 2}) } </p>                                 
                             </div>                                      
                         </div>               
                             
@@ -559,7 +558,7 @@ const InvoicePage = () => {
                                     />                            
                             </div>
                             <div className="col-md-6 subtotal">
-                                <p className="text-end h6 me-1"> { currencySign } { balanceDue } </p>                          
+                                <p className="text-end h6 me-1"> { currencySign } { balanceDue.toLocaleString('en-US', {minimumFractionDigits: 2}) } </p>                          
                             </div>                                      
                         </div>                                       
                     </div>
@@ -575,7 +574,7 @@ const InvoicePage = () => {
                     <div className="sidebar">
                         <button type="button" className="btn btn-danger w-100" name="" onClick={ (e)=>submit( e , inputFields , id) } > Update </button> <br/><br/>
                         <p> <span className="text-primary">  { inputFields.currencyName } { inputFields.currencySign } { inputFields.countryFlag }   </span></p>        
-                        <select name="" id="" className="form-control" onChange={ (e)=>handleCurrency(e , setInputFields , inputFields) }>
+                        <select name="" id="" value = { currencyName } className="form-control" onChange={ (e)=>handleCurrency(e , setInputFields , inputFields) }>
                             {
                                 current.map((item , index)=>{
                                     for (let property in item.currencies) {
@@ -600,4 +599,4 @@ const InvoicePage = () => {
     }  
 
 
-export default InvoicePage
+export default EditInvoice

@@ -11,7 +11,7 @@ function getUserFromLocalStorage() {
 
 export function UserProvider ( {children } ) {
   const [isLogged, setIsLogged] = useState(!!localStorage.getItem('jwt'));
-  console.log(isLogged)
+
 
     function logOut () {
             localStorage.removeItem('username');

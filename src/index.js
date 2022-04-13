@@ -11,15 +11,15 @@ import { FilterProvider } from "./Contexts/FilterContext";
 
 ReactDOM.render(
   <UserProvider>
+      <EditInvoiceProvider>
       <InvoiceProvider>
       <FilterProvider>
-        <EditInvoiceProvider>
           <BrowserRouter>
               <App />
           </BrowserRouter> 
-          </EditInvoiceProvider > 
         </FilterProvider>
       </InvoiceProvider>    
+      </EditInvoiceProvider > 
     </UserProvider> ,
   document.getElementById('root')
 );

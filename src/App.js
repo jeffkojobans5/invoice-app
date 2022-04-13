@@ -6,7 +6,7 @@ import  { Header } from './Components/index'
 // pages
 import  Invoices  from './pages/Invoices'
 import  LandingPage  from './pages/LandingPage'
-import  InvoicePage  from './pages/InvoicePage'
+import  EditInvoice  from './pages/EditInvoice'
 import  CreateInvoice  from './pages/CreateInvoice'
 
 // contexts
@@ -21,7 +21,8 @@ function App() {
     <Route path="/" element={<LandingPage />} />
     <Route path="/invoices" element={<Invoices />} />
     <Route path="/create" element={<Invoices />} />
-    <Route path="/invoices/:id" element={<InvoicePage />} />
+    <Route path="/invoices/:id" element={<EditInvoice />} />
+    <Route path="/createInvoice/" element={<CreateInvoice />} />
     <Route path="/api/connect/auth0/redirect" element={<LoginRedirect />} />
   </Routes> 
   </>  

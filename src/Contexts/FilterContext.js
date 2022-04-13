@@ -5,6 +5,9 @@ export const FilterContext = createContext();
 
 export function FilterProvider ( {children} ) {
     const { setuserInvoices ,filterHolder } = useContext(InvoiceContext);
+    const jeff = "name"
+    
+    
     const [ filters , setFilters] = useState({
         search : "",
         date : "asc",
@@ -15,7 +18,7 @@ export function FilterProvider ( {children} ) {
     function clearFilter(){
       setFilters({
         search : "",
-        date : "asc",
+        date : "desc",
         amount : "low",
         paymentStatus : "all"
       })
@@ -99,7 +102,6 @@ export function FilterProvider ( {children} ) {
             })
           }    
                 
-        console.log(newInvoice)
         setuserInvoices(newInvoice)
     },[filters])
     
@@ -109,7 +111,8 @@ export function FilterProvider ( {children} ) {
             filters ,
             filterChange,
             filterHolder,
-            clearFilter            
+            clearFilter,
+            jeff          
               }}>
             { children }
         </FilterContext.Provider>

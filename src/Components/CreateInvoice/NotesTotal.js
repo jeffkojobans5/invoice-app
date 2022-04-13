@@ -71,8 +71,8 @@ function NotesTotal () {
                         </div>
 
                         <div className="col-md-3">
-                            <select name="discountCal" id="" value={inputFields.discountCal} onChange={ (e)=> selectChange(e) }>
-                                <option value="percentage">  Per (%) </option>
+                            <select name="discountCal" className="select-tax-discount" value={inputFields.discountCal} onChange={ (e)=> selectChange(e) }>
+                                <option value="percentage" >  Per (%) </option>
                                 <option value="fixed"> Fixed ({ inputFields.currencySign }) </option>
                             </select>                        
                         </div>
@@ -102,7 +102,7 @@ function NotesTotal () {
                         </div>
 
                         <div className="col-md-3">
-                            <select name="taxCal" id="" value={inputFields.taxCal} onChange={ (e)=> selectChange(e) }>
+                            <select name="taxCal" className="select-tax-discount" value={inputFields.taxCal} onChange={ (e)=> selectChange(e) }>
                                 <option value="percentage">  Per (%) </option>
                                 <option value="fixed"> Fixed ({ inputFields.currencySign }) </option>
                             </select>                        

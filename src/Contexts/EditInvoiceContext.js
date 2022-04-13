@@ -11,6 +11,7 @@ export function EditInvoiceProvider ( {children} ) {
     const Swal = require('sweetalert2')
 
     const [ current , setCurrent ] = useState([])
+    const [ holder , setHolder ] = useState(1)
 
     function updateInputs (id , e , fieldDetails , setInputFields , inputFields)  {
         const newInputFields = fieldDetails.map(i => {
@@ -44,7 +45,6 @@ export function EditInvoiceProvider ( {children} ) {
         }, 0)   
 
         setInputFields({...inputFields , fieldDetails : [...newInputFields] , subTotal : subTotal  })   
-        console.log(subTotal)         
       }      
 
       //  
@@ -74,6 +74,7 @@ export function EditInvoiceProvider ( {children} ) {
     // 
     const submit = async (e , inputFields , id) => {
       e.preventDefault();
+      setHolder(holder + 1)
       try {
         await axios.put(`http://localhost:1337/api/invoices/${id}`, 
               {
@@ -100,7 +101,7 @@ export function EditInvoiceProvider ( {children} ) {
     // fetchcurrency
     function fetchCurrency () {
       axios.get('https://restcountries.com/v3.1/all').then((response)=>{
-        console.log(response.data);
+        // console.log(response.data);
         let alphabetical = response.data.sort((a, b) => a.name.common.localeCompare(b.name.common))
         setCurrent(alphabetical);
       }).catch((error)=>{
@@ -108,10 +109,7 @@ export function EditInvoiceProvider ( {children} ) {
       })
     }
 
-    // 
-    useEffect(()=>{
-        fetchCurrency()
-    },[])
+    //
 
     function handleCurrency (e , setInputFields , inputFields ) {
       let val = e.target.value;
@@ -161,7 +159,8 @@ export function EditInvoiceProvider ( {children} ) {
              submit,
              handleCurrency,
              getUserInvoice,
-             current                                                        
+             current,
+             holder                                                        
             }}>
             { children }
         </EditInvoiceContext.Provider>

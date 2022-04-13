@@ -17,8 +17,8 @@ import { InvoiceContext } from '../Contexts/InvoiceContext'
 function Invoices () {
 
     const { userInvoices , totalUserInvoice , loading } = useContext(InvoiceContext)
-    let fullyPaid = userInvoices.filter((item)=> item.attributes.invoice.balanceDue <= 0);
-    let unPaid = userInvoices.filter((item)=> item.attributes.invoice.balanceDue > 0);
+    let fullyPaid = totalUserInvoice.filter((item)=> item.attributes.invoice.balanceDue <= 0);
+    let unPaid = totalUserInvoice.filter((item)=> item.attributes.invoice.balanceDue > 0);
 
     if(!loading) {
         return (

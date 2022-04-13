@@ -1,12 +1,13 @@
 import { createContext , useContext , useEffect, useState  } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
-import { UserContext } from './UserContext';
+import { EditInvoiceContext } from './EditInvoiceContext';
 
 export const InvoiceContext = createContext();
 
 export function InvoiceProvider ( {children} ) {
-        const { user } = useContext(UserContext)
+        const { holder } = useContext(EditInvoiceContext);
+        const Swal = require('sweetalert2')
         const [ loading , setLoading] = useState(false);
         const [ filterHolder , setFilterHolder] = useState([]);
         const [ allCountries , setAllCountries ] = useState([]);
@@ -63,7 +64,8 @@ export function InvoiceProvider ( {children} ) {
         
         function getuserInvoices () {
             axios.get(`http://localhost:1337/api/invoices?filters[user_name][$eq]=jkojo`).then((response)=>{
-                setuserInvoices(response.data.data)
+                const invoiceAscending = response.data.data.sort((a, b) => b.id  -  a.id  )              
+                setuserInvoices(invoiceAscending)
                 setFilterHolder(response.data.data)
                 setTotalUserInvoice(response.data.data)
                 setLoading(true)
@@ -74,7 +76,7 @@ export function InvoiceProvider ( {children} ) {
 
         useEffect(()=>{
             getuserInvoices()
-        },[])
+        },[ holder ])
         
 
         function handleCurrency (e) {
@@ -94,8 +96,7 @@ export function InvoiceProvider ( {children} ) {
                 })           
 
                 setInputFields({...inputFields , countryFlag : res.flag , currencyCountry : res['name']['common'] , currencyName : resCurrency , currencySign : reSign  })
-            }).catch((error)=>{
-                console.log(error)
+            }).catch((error)=>{ console.log(error)
             })               
         }
 
@@ -216,11 +217,23 @@ export function InvoiceProvider ( {children} ) {
               await axios.post('http://localhost:1337/api/invoices', 
                     {
                         "data": {
-                            "USERS_PERMISSIONS_USER" : user.username ? user.username : "Default",
-                            "invoice" : inputFields
+                            // "USERS_PERMISSIONS_USER" : user.username ? user.username : "Default",
+                            "invoice" : inputFields ,
+                            "user_name" : 'jkojo'
                         }
-                    }                        
-              );
+                    }
+                    );
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Invoice has been Created',
+                        showConfirmButton: false,
+                        timer: 1000
+                      })  
+                      setTimeout(() => {
+                          window.location.href = 'http://localhost:3000/invoices';                          
+                      }, 1500);
+
             } catch (err) {
               console.log(err.response.data);
             }
@@ -229,9 +242,6 @@ export function InvoiceProvider ( {children} ) {
         useEffect(()=>{
             getCurrency();
         },[])
-
-
-
 
     return (
         <InvoiceContext.Provider         
