@@ -1,9 +1,8 @@
 import { useState , useEffect , useContext} from 'react';
 import { useParams } from 'react-router-dom'
-import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios';
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
+import axios from 'axios'
 
 // components
 import { Header } from '../Components/index'
@@ -16,17 +15,20 @@ import { Inputs , Txtarea } from '../props/index'
 
 // media
 import {  FaTrashAlt } from 'react-icons/fa';
-
+import  Loader  from '../media/giphy.gif'
 
 const EditInvoice = () => {
     const [inputFields , setInputFields] = useState([])
     const [loading , setLoading] = useState(true)
     const { id } = useParams();
+    const [ allCountries , setAllCountries ] = useState([]);
+    const [ currencyLoading , setCurrencyLoading ] = useState(false) 
+
 
     useEffect(()=>{
         getUserInvoice(  setInputFields , setLoading , id  )
     },[])
-    
+        
      const { 
         invoiceName,
         sender ,
@@ -86,7 +88,8 @@ const EditInvoice = () => {
         submit ,
         handleCurrency,
         getUserInvoice,
-        current
+        current,
+        currencyChange
     } = useContext(EditInvoiceContext);
 
 
@@ -119,8 +122,19 @@ const EditInvoice = () => {
         setInputFields({...inputFields , balanceDue : total})       
     },[ totalValue , amountPaid ])          
     
+    function getCurrency () {
+        axios.get(`https://restcountries.com/v3.1/all`).then((response)=>{
+            const filterCountry = response.data.sort((a, b) => a.name['common'] > b.name['common'] ? 1 : -1)
+            setAllCountries(filterCountry)
+            setCurrencyLoading(true)
+        }).catch((error)=>{
+            console.log(error)
+        })            
+    }    
 
-    
+    useEffect(()=>{
+        getCurrency();
+    },[])
 
     if(loading) {
         return (
@@ -564,6 +578,7 @@ const EditInvoice = () => {
                     </div>
                 </div>
                 </div>
+                
                 {/* END OF NOTES TOTAL */}            
                 {/* END OF INVOICE TABLE */}
                 </div>
@@ -572,23 +587,25 @@ const EditInvoice = () => {
                     <div className="col-md-3 ">
                     {/* START OF SIDE BAR */}
                     <div className="sidebar">
+                    { currencyLoading ? 
+                        <>
                         <button type="button" className="btn btn-danger w-100" name="" onClick={ (e)=>submit( e , inputFields , id) } > Update </button> <br/><br/>
-                        <p> <span className="text-primary">  { inputFields.currencyName } { inputFields.currencySign } { inputFields.countryFlag }   </span></p>        
-                        <select name="" id="" value = { currencyName } className="form-control" onChange={ (e)=>handleCurrency(e , setInputFields , inputFields) }>
-                            {
-                                current.map((item , index)=>{
+                        <p> <span className="text-primary">  { currencyName } { currencySign } { countryFlag }   </span></p>        
+                        <select name="currency-select" id="" value = { currencyCountry } className="form-control" onChange={ (e)=>currencyChange(e , setInputFields , inputFields) }>
+                            { allCountries.map((item , index)=>{
                                     for (let property in item.currencies) {
-                                        if (item.currencies.hasOwnProperty(property)) {                        
-                                        return (
-                                            <option value={item.name['common']} key={ item.flags['png'] } > 
-                                                { item.name['common'] } ({ item.currencies[property]['symbol']}) 
-                                            </option>
-                                                )
-                                            }
-                                    } 
-                                })
-                            }
+                                    if (item.currencies.hasOwnProperty(property)) {                                                                
+                                    return (
+                                        <option value={item.name['common']} key={ item.flags['png'] } > 
+                                            { item.name['common'] } ({ item.currencies[property]['symbol']}) 
+                                        </option>
+                                            )
+                                        }
+                                    }         
+                            }) }
                         </select>
+                        </>
+                        : <img src={Loader} /> }
                     </div>                
                     {/* END OF SIDE BAR */}
                     </div>
@@ -600,3 +617,5 @@ const EditInvoice = () => {
 
 
 export default EditInvoice
+
+

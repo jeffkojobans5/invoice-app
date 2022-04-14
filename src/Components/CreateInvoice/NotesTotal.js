@@ -54,7 +54,7 @@ function NotesTotal () {
                                 />                            
                         </div>
                         <div className="col-md-6 subtotal">
-                                <p className="text-end m-0 me-1"> { inputFields.currencySign } { inputFields.subTotal } </p>
+                                <p className="text-end m-0 me-1"> { inputFields.currencySign } { inputFields.subTotal.toLocaleString('en-US', {minimumFractionDigits: 2}) } </p>
                         </div>                                      
                     </div>     
 
@@ -136,13 +136,12 @@ function NotesTotal () {
                                     type="number"
                                     className="input-placeholders-small text-end"
                                     name = "shipping"
-                                    value = { inputFields.shipping}
+                                    value = { inputFields.shipping }
                                     onChange = { (e)=>updateOtherFields(e) }
                                 />                                   
                         </div>                                      
                     </div>               
                           
-
                 {/* SHIP */}
                 <div className="row">
                         <div className="col-md-6">
@@ -155,7 +154,7 @@ function NotesTotal () {
                                 />                            
                         </div>
                         <div className="col-md-6 subtotal">
-                            <p className="text-end m-0 me-1"> { inputFields.currencySign } { inputFields.totalValue } </p>                                 
+                            <p className="text-end m-0 me-1"> { inputFields.currencySign } { inputFields.totalValue.toLocaleString('en-US', {minimumFractionDigits: 2}) } </p>                                 
                         </div>                                      
                     </div>               
                           
@@ -195,7 +194,7 @@ function NotesTotal () {
                                 />                            
                         </div>
                         <div className="col-md-6 subtotal">
-                            <p className="text-end h6 me-1"> { inputFields.currencySign } { inputFields.balanceDue } </p>                          
+                            <p className="text-end h6 me-1"> { inputFields.currencySign } { inputFields.balanceDue.toLocaleString('en-US', {minimumFractionDigits: 2}) } </p>                          
                         </div>                                      
                     </div>                                       
                             {/* <p className="text-end "> <span className="badge bg-primary">Total</span>  { inputFields.currencySign } { inputFields.subTotal }</p>

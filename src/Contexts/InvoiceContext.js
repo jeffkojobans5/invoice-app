@@ -9,6 +9,7 @@ export function InvoiceProvider ( {children} ) {
         const { holder } = useContext(EditInvoiceContext);
         const Swal = require('sweetalert2')
         const [ loading , setLoading] = useState(false);
+        const [ currencyLoading , setCurrencyLoading ] = useState(false) 
         const [ filterHolder , setFilterHolder] = useState([]);
         const [ allCountries , setAllCountries ] = useState([]);
         const [ userInvoices , setuserInvoices] = useState([])
@@ -61,6 +62,11 @@ export function InvoiceProvider ( {children} ) {
                 fieldDetails :  [{ id: uuidv4(), description : '' , quantity : 1 , rate : 0 , total : 0 }] ,
             }
         )
+
+        function currencyChange (e) {
+            setInputFields({...inputFields , countryCurrency: e.target.value});
+            handleCurrency (e )
+          }        
         
         function getuserInvoices () {
             axios.get(`http://localhost:1337/api/invoices?filters[user_name][$eq]=jkojo`).then((response)=>{
@@ -86,6 +92,7 @@ export function InvoiceProvider ( {children} ) {
                 let resCurrency;
                 let reSign;
                 
+                console.log('loading-done')
                 response['data'].map((item , index)=>{
                     for (let property in item.currencies) {
                         if (item.currencies.hasOwnProperty(property)) {                        
@@ -204,8 +211,9 @@ export function InvoiceProvider ( {children} ) {
         function getCurrency () {
             axios.get(`https://restcountries.com/v3.1/all`).then((response)=>{
                 const filterCountry = response.data.sort((a, b) => a.name['common'] > b.name['common'] ? 1 : -1)
-                setLoading(true)
+                // setLoading(true)
                 setAllCountries(filterCountry)
+                setCurrencyLoading(true);
             }).catch((error)=>{
                 console.log(error)
             })            
@@ -261,7 +269,9 @@ export function InvoiceProvider ( {children} ) {
                 userInvoices,
                 filterHolder,
                 setuserInvoices,
-                totalUserInvoice                
+                totalUserInvoice,
+                currencyChange,
+                currencyLoading                
             }}>
             { children }
         </InvoiceContext.Provider>

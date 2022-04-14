@@ -10,9 +10,11 @@ body {
   border: 0;
 }
 
-input , select {
-  /* -webkit-appearance: none !important;  */
+.sideBar img {
+  height: 100px;
+  width: 100px;
 }
+
 
 .payment {
   width: 140px !important;

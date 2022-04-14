@@ -99,17 +99,22 @@ export function EditInvoiceProvider ( {children} ) {
 
 
     // fetchcurrency
-    function fetchCurrency () {
-      axios.get('https://restcountries.com/v3.1/all').then((response)=>{
-        // console.log(response.data);
-        let alphabetical = response.data.sort((a, b) => a.name.common.localeCompare(b.name.common))
-        setCurrent(alphabetical);
-      }).catch((error)=>{
-        console.log(error)
-      })
-    }
+    // function fetchCurrency () {
+    //   axios.get('https://restcountries.com/v3.1/all').then((response)=>{
+    //     // console.log(response.data);
+    //     let alphabetical = response.data.sort((a, b) => a.name.common.localeCompare(b.name.common))
+    //     setCurrent(alphabetical);
+    //   }).catch((error)=>{
+    //     console.log(error)
+    //   })
+    // }
 
     //
+
+    function currencyChange (e , setInputFields , inputFields) {
+      setInputFields({...inputFields , countryCurrency: e.target.value});
+      handleCurrency (e , setInputFields , inputFields )
+    }
 
     function handleCurrency (e , setInputFields , inputFields ) {
       let val = e.target.value;
@@ -117,7 +122,7 @@ export function EditInvoiceProvider ( {children} ) {
           const res = response['data'][0]
           let resCurrency;
           let reSign;
-          
+
           response['data'].map((item , index)=>{
               for (let property in item.currencies) {
                   if (item.currencies.hasOwnProperty(property)) {                        
@@ -160,7 +165,8 @@ export function EditInvoiceProvider ( {children} ) {
              handleCurrency,
              getUserInvoice,
              current,
-             holder                                                        
+             holder,
+             currencyChange                                                                     
             }}>
             { children }
         </EditInvoiceContext.Provider>

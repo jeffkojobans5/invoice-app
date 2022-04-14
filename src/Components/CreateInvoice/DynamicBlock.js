@@ -46,7 +46,7 @@ function DynamicBlock () {
                                 name="number"
                                 label="total"
                                 className="removeBorder text-end bg-white"
-                                value={inputField['total']}
+                                value={inputField['total'].toLocaleString('en-US', {minimumFractionDigits: 2})}
                                 onChange={(e)=>updateInputs(inputField.id , e)}
                         />   
                 </div>
