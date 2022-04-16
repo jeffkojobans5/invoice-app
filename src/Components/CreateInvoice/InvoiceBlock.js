@@ -124,25 +124,25 @@ const InvoiceBlock = ( ) => {
                     </div>
 
                     <div className="row p-0 mt-1 justify-content-end d-flex">
-                        <div className="col-md-7 justify-content-end d-flex">
+                            <div className="col-md-7 justify-content-end d-flex">
+                                        <Inputs
+                                            type="text"
+                                            className="input-placeholders-small text-end close"
+                                            name = "paymentTerms"
+                                            value = { paymentTerms}
+                                            onChange = { (e)=>updateOtherFields(e) }                                          
+                                        />                            
+                            </div>
+                            <div className="col-md-5 justify-content-end d-flex"> 
                                     <Inputs
                                         type="text"
-                                        className="input-placeholders-small text-end close"
-                                        name = "paymentTerms"
-                                        value = { paymentTerms}
-                                        onChange = { (e)=>updateOtherFields(e) }                                          
+                                        className="input-placeholders-small text-end border payment"
+                                        name = "paymentTermsValue"
+                                        value = { paymentTermsValue}
+                                        onChange = { (e)=>updateOtherFields(e) }    
                                     />                            
+                            </div>
                         </div>
-                        <div className="col-md-5 justify-content-end d-flex"> 
-                                 <Inputs
-                                    type="text"
-                                    className="input-placeholders-small text-end border"
-                                    name = "paymentTermsValue"
-                                    value = { paymentTermsValue}
-                                    onChange = { (e)=>updateOtherFields(e) }    
-                                />                            
-                        </div>
-                    </div>
 
                     <div className="row p-0 mt-1 justify-content-end d-flex">
                         <div className="col-md-7 justify-content-end d-flex">
@@ -164,26 +164,26 @@ const InvoiceBlock = ( ) => {
                         </div>
                     </div>
 
-                    <div className="row p-0 mt-1 justify-content-end d-flex">
-                        <div className="col-md-7 justify-content-end d-flex">
+                        <div className="row p-0 mt-1 justify-content-end d-flex">
+                            <div className="col-md-7 justify-content-end d-flex">
+                                        <Inputs
+                                            type="text"
+                                            className="input-placeholders-small text-end close "
+                                            name = "PNumber"
+                                            value = { PNumber}
+                                            onChange = { (e)=>updateOtherFields(e) }    
+                                        />                            
+                            </div>                            
+                            <div className="col-md-5 justify-content-end d-flex"> 
                                     <Inputs
                                         type="text"
-                                        className="input-placeholders-small text-end close "
-                                        name = "PNumber"
-                                        value = { PNumber}
+                                        className="input-placeholders-small text-end border payment"
+                                        name = "PNumberValue"
+                                        value = { PNumberValue}
                                         onChange = { (e)=>updateOtherFields(e) }    
                                     />                            
-                        </div>
-                        <div className="col-md-5 justify-content-end d-flex payment"> 
-                                 <Inputs
-                                    type="text"
-                                    className="input-placeholders-small text-end border "
-                                    name = "PNumberValue"
-                                    value = { PNumberValue }
-                                    onChange = { (e)=>updateOtherFields(e) }    
-                                />                            
-                        </div>
-                    </div>                   
+                            </div>
+                        </div>                                     
                 </div>
             </div>            
                     <InvoiceTable />
