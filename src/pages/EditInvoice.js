@@ -300,7 +300,7 @@ const EditInvoice = () => {
                             name="description"
                             className="text-white"
                             value={description}
-                            onChange={(e)=>updateOtherFields(e)}                                        
+                            onChange={(e)=>updateOtherFields(e , inputFields , setInputFields)}                                        
                         />
                     </div>
                     <div className="col-md-2 ">
@@ -309,7 +309,7 @@ const EditInvoice = () => {
                             name="quantity"
                             className="text-white"
                             value={quantity}
-                            onChange={(e)=>updateOtherFields(e)}                
+                            onChange={(e)=>updateOtherFields(e , inputFields , setInputFields)}                
                         />
                     </div>
                     <div className="col-md-2 ">
@@ -318,7 +318,7 @@ const EditInvoice = () => {
                             name="rate"
                             className="text-white"
                             value={rate}
-                            onChange={(e)=>updateOtherFields(e)}                
+                            onChange={(e)=>updateOtherFields(e , inputFields , setInputFields)}                
                         />
                     </div>
                     <div className="col-md-2 ">
@@ -327,7 +327,7 @@ const EditInvoice = () => {
                             name="amount"
                             className="text-white text-end"
                             value={amount}
-                            onChange={(e)=>updateOtherFields(e)}                
+                            onChange={(e)=>updateOtherFields(e , inputFields , setInputFields)}                
                         />
                     </div>
                     <div className="col-md-1">
