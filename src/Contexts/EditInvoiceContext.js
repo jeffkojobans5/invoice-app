@@ -116,7 +116,7 @@ export function EditInvoiceProvider ( {children} ) {
               Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Saved',
+                title: 'Deleted Successfully',
                 showConfirmButton: false,
                 timer: 1500
               })    
