@@ -4,11 +4,14 @@ import axios from 'axios';
 import { UserContext } from './UserContext';
 import Swal from 'sweetalert2'
 
+// import { InvoiceContext } from './InvoiceContext';
+
 export const EditInvoiceContext = createContext();
 
 export function EditInvoiceProvider ( {children} ) {
+  let user = localStorage.getItem("username")
 
-    const Swal = require('sweetalert2')
+  const Swal = require('sweetalert2')
 
     const [ current , setCurrent ] = useState([])
     const [ holder , setHolder ] = useState(1)
@@ -72,31 +75,75 @@ export function EditInvoiceProvider ( {children} ) {
     }  
 
     // 
-    const submit = async (e , inputFields , id) => {
+    const submit = async (e , inputFields , id , uniqkey ) => {
       e.preventDefault();
       setHolder(holder + 1)
+      
       try {
-        await axios.put(`http://localhost:1337/api/invoices/${id}`, 
+        await axios.put(`http://localhost:1337/api/${user}/invoices/${uniqkey}/${id}`, 
               {
                   "data": {
-                      // "USERS_PERMISSIONS_USER" : user.username ? user.username : "Default",
-                      "invoice" : inputFields
+                      "invoice" : inputFields,
+                      "user_name": user,
+                      "uniqkey": uniqkey
                   }
               }                        
         );
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Invoice has been updated',
+          title: 'Invoice updated successfully',
           showConfirmButton: false,
           timer: 1500
         })        
-      // window.location.href = 'http://localhost:3000/invoices';
+
       } catch (err) {
         console.log(err);
       }
     }   
 
+    function deleteInvoice  ( uniqkey , id) {
+      Swal.fire({
+        title: 'Are you sure?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire('Saved!', '', 'success')
+            axios.delete(`http://localhost:1337/api/${user}/invoices/${uniqkey}/${id}`);
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Saved',
+                showConfirmButton: false,
+                timer: 1500
+              })    
+
+            setTimeout(() => {
+              window.location.href = `http://localhost:3000/${user}/invoices`
+            }, 1500);
+
+        } else if (result.isDenied) {
+          Swal.fire('Invoice not deleted', '', 'info')
+        }
+      })
+
+      // try {
+      //   await axios.delete(`http://localhost:1337/api/${user}/invoices/${uniqkey}/${id}`);
+      //   Swal.fire({
+      //     position: 'center',
+      //     icon: 'success',
+      //     title: 'Invoice has been updated',
+      //     showConfirmButton: false,
+      //     timer: 1500
+      //   })        
+      // window.location.href = `http://localhost:3000/${user}/invoices`;
+      // } catch (err) {
+      //   console.log(err);
+      // }        
+    }
 
     // fetchcurrency
     // function fetchCurrency () {
@@ -138,17 +185,17 @@ export function EditInvoiceProvider ( {children} ) {
       })                 
     }    
 
-    // 
-    function getUserInvoice ( setInputFields , setLoading , id ) {
-      axios.get(`http://localhost:1337/api/invoices/${id}`).then((response)=>{
-          setInputFields(response.data.data.attributes.invoice)
+    const [loading , setLoading] = useState(true)
+
+    function getUserInvoice ( setInputFields , id , uniqkey , user ) {
+      axios.get(`http://localhost:1337/api/${user}/invoices/${uniqkey}/${id}`).then((response)=>{
+          console.log(response)
+          setInputFields(response.data.user_data[0].attributes.invoice)
           setLoading(false)
       }).catch((error)=>{
           console.log(error.response)
       })
     }    
-
-
 
 
     return (
@@ -166,7 +213,9 @@ export function EditInvoiceProvider ( {children} ) {
              getUserInvoice,
              current,
              holder,
-             currencyChange                                                                     
+             currencyChange,
+             loading,
+             deleteInvoice                                                                     
             }}>
             { children }
         </EditInvoiceContext.Provider>

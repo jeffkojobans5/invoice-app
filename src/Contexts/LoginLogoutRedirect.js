@@ -11,11 +11,10 @@ const LoginRedirect = (props) => {
   const navigate = useNavigate();
   const parsed = queryString.parse(location.search);
 
-  console.log(parsed);
-
+  
   useEffect(() => {
     // Successfully logged with the provider
-  console.log(location.search)
+  
     // Now logging with strapi by using the access_token (given by the provider) in props.location.search
     fetch(`${backendUrl}/api/auth/auth0/callback?access_token=${parsed.access_token}`)
       .then(res => {
@@ -32,11 +31,11 @@ const LoginRedirect = (props) => {
         localStorage.setItem('username', res.user.username);
         // setText('You have been successfully logged in. You will be redirected in a few seconds...');
         setText('');
-        setTimeout(() => window.location.href = 'http://localhost:3000' , 3000); // Redirect to homepage after 3 sec
+        setTimeout(() => window.location.href = `http://localhost:3000/${res.user.username}/invoices` , 3000); // Redirect to homepage after 3 sec
       })
-
+      
       .catch(err => {
-        console.log(err);
+        
         setText('An error occurred, please see the developer console.')
       });
   }, [ navigate , location , location.search, params.providerName]);

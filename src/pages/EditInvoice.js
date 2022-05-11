@@ -15,18 +15,18 @@ import { Inputs , Txtarea } from '../props/index'
 
 // media
 import {  FaTrashAlt } from 'react-icons/fa';
+
 import  Loader  from '../media/giphy.gif'
 
 const EditInvoice = () => {
     const [inputFields , setInputFields] = useState([])
-    const [loading , setLoading] = useState(true)
-    const { id } = useParams();
+    const { id , uniqkey } = useParams();
     const [ allCountries , setAllCountries ] = useState([]);
     const [ currencyLoading , setCurrencyLoading ] = useState(false) 
-
-
+    let user = localStorage.getItem("username")
+    
     useEffect(()=>{
-        getUserInvoice(  setInputFields , setLoading , id  )
+        getUserInvoice(  setInputFields , id , uniqkey , user)
     },[])
         
      const { 
@@ -89,7 +89,9 @@ const EditInvoice = () => {
         handleCurrency,
         getUserInvoice,
         current,
-        currencyChange
+        currencyChange,
+        loading,
+        deleteInvoice
     } = useContext(EditInvoiceContext);
 
 
@@ -136,12 +138,13 @@ const EditInvoice = () => {
         getCurrency();
     },[])
 
-    if(loading) {
+    if(!currencySign) {
         return (
             <h1></h1> 
         )
     }
     
+
         return (
                 <>
                     <Header/>  
@@ -589,7 +592,7 @@ const EditInvoice = () => {
                     <div className="sidebar">
                     { currencyLoading ? 
                         <>
-                        <button type="button" className="btn btn-danger w-100" name="" onClick={ (e)=>submit( e , inputFields , id) } > Update </button> <br/><br/>
+                        <button type="button" className="btn btn-danger w-100" name="" onClick={ (e)=>submit( e , inputFields , id  , uniqkey ) } > Update </button> <br/><br/>
                         <p> <span className="text-primary">  { currencyName } { currencySign } { countryFlag }   </span></p>        
                         <select name="currency-select" id="" value = { currencyCountry } className="form-control" onChange={ (e)=>currencyChange(e , setInputFields , inputFields) }>
                             { allCountries.map((item , index)=>{
@@ -604,6 +607,7 @@ const EditInvoice = () => {
                                     }         
                             }) }
                         </select>
+                        <button type="button" className="btn btn-secondary w-50 mt-5 delete-button" name="" onClick={ ()=>deleteInvoice( uniqkey , id) } > <FaTrashAlt className="mr-2"/> &nbsp; Delete </button> <br/><br/>
                         </>
                         : <img src={Loader} /> }
                     </div>                

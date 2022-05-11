@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes , Route } from 'react-router-dom';
+import { Routes , Route , Navigate} from 'react-router-dom';
 
 import  { Header } from './Components/index'
 
@@ -14,16 +14,25 @@ import  LoginRedirect from './Contexts/LoginLogoutRedirect';
 
 
 function App() {
+  let user = localStorage.getItem("username")
   return (
   <>
   {/* <Header /> */}
   <Routes>
-    <Route path="/" element={<LandingPage />} />
-    <Route path="/invoices" element={<Invoices />} />
-    <Route path="/create" element={<Invoices />} />
-    <Route path="/invoices/:id" element={<EditInvoice />} />
-    <Route path="/createInvoice/" element={<CreateInvoice />} />
-    <Route path="/api/connect/auth0/redirect" element={<LoginRedirect />} />
+  
+  <Route path = "/api/connect/auth0/redirect" element={<LoginRedirect />} />
+  <Route path = "/" element={<LandingPage />} />
+  { user && (
+    <>
+        <Route path = { `/${user}/invoices` } element={<Invoices />} />
+        <Route path = { `/${user}/invoices/:uniqkey/:id` } element={<EditInvoice />} />
+        <Route path = { `/${user}/create-invoice` }  element={<CreateInvoice />} />
+      </>
+    )
+  }
+
+  <Route path="*" element={ <Navigate to={user ? "/" : `/${user}/invoices`} />} />
+
   </Routes> 
   </>  
   )

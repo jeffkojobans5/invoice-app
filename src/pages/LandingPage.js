@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { Link } from "react-router-dom";
+import { useAuth0 } from '@auth0/auth0-react'
 
 // context
 import { UserContext } from '../Contexts/UserContext'
@@ -15,8 +16,11 @@ import { LandingpageBlocksRight } from '../Components/index'
 import { LandingpageBlocksLeft } from '../Components/index'
 
 function LandingPage () {
-    const { logOut , isLogged  } = useContext(UserContext);
+    const {  isLogged  } = useContext(UserContext);
+    const { logout } = useAuth0();
+    let user = localStorage.getItem("username")
 
+    
     return (
         <>
         <div className="container-fluid p-0 h-100 landing">
@@ -24,7 +28,7 @@ function LandingPage () {
                 <div className="row d-flex">
                     <div className="col-md-4 mt-4 nav">    
                         <ul>
-                            <li><Link to="/invoices">SInvoicing@gmail.com</Link></li>
+                            {/* <li><Link to= { `${user}/invoices` } >Invoice the Smart way</Link></li> */}
                         </ul>                         
                     </div>
                     <div className="col-md-4 mt-1 d-flex justify-content-center align-items-center logo">
@@ -38,7 +42,7 @@ function LandingPage () {
                                     <a href="http://localhost:1337/api/connect/auth0" className="btn bg-white signup"> Sign Up </a>
                                 </>
                         : "" }
-                        { isLogged ? <a href="#" onClick= {logOut } className="btn bg-white signup"> Log Out </a> : ""}
+                        { isLogged ? <a href="#" onClick={()=>{logout({returnTo:window.location.origin}) ; localStorage.removeItem('username') ; localStorage.removeItem('jwt');}  } className="btn bg-white signup"> Log Out </a> : ""}
                         </div>                
                 </div>
             </div>

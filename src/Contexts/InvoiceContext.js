@@ -6,7 +6,7 @@ import { EditInvoiceContext } from './EditInvoiceContext';
 export const InvoiceContext = createContext();
 
 export function InvoiceProvider ( {children} ) {
-        const { holder } = useContext(EditInvoiceContext);
+        const { holder } = useContext(EditInvoiceContext); 
         const Swal = require('sweetalert2')
         const [ loading , setLoading] = useState(false);
         const [ currencyLoading , setCurrencyLoading ] = useState(false) 
@@ -14,6 +14,8 @@ export function InvoiceProvider ( {children} ) {
         const [ allCountries , setAllCountries ] = useState([]);
         const [ userInvoices , setuserInvoices] = useState([])
         const [ totalUserInvoice , setTotalUserInvoice ] = useState([]);
+        const user = localStorage.getItem("username")
+
         const [ inputFields , setInputFields] = useState(
             {   
                 invoiceName: "INVOICE", 
@@ -65,15 +67,15 @@ export function InvoiceProvider ( {children} ) {
 
         function currencyChange (e) {
             setInputFields({...inputFields , countryCurrency: e.target.value});
-            handleCurrency (e )
+            handleCurrency (e)
           }        
         
         function getuserInvoices () {
-            axios.get(`http://localhost:1337/api/invoices?filters[user_name][$eq]=jkojo`).then((response)=>{
-                const invoiceAscending = response.data.data.sort((a, b) => b.id  -  a.id  )              
+            axios.get(`http://localhost:1337/api/${user}/invoices`).then((response)=>{
+                const invoiceAscending = response.data.sort((a, b) => b.id  -  a.id  )                         
                 setuserInvoices(invoiceAscending)
-                setFilterHolder(response.data.data)
-                setTotalUserInvoice(response.data.data)
+                setFilterHolder(response.data)
+                setTotalUserInvoice(response.data)
                 setLoading(true)
             }).catch((error)=>{
                 console.log(error.response)
@@ -92,7 +94,6 @@ export function InvoiceProvider ( {children} ) {
                 let resCurrency;
                 let reSign;
                 
-                console.log('loading-done')
                 response['data'].map((item , index)=>{
                     for (let property in item.currencies) {
                         if (item.currencies.hasOwnProperty(property)) {                        
@@ -215,21 +216,23 @@ export function InvoiceProvider ( {children} ) {
                 setAllCountries(filterCountry)
                 setCurrencyLoading(true);
             }).catch((error)=>{
-                console.log(error)
+                // console.log(error)
             })            
         }
 
         const submit = async (e) => {
             e.preventDefault();
+            let user = localStorage.getItem("username")
             try {
               await axios.post('http://localhost:1337/api/invoices', 
                     {
-                        "data": {
-                            // "USERS_PERMISSIONS_USER" : user.username ? user.username : "Default",
-                            "invoice" : inputFields ,
-                            "user_name" : 'jkojo'
-                        }
-                    }
+                            "data": {
+                              "invoice": inputFields,
+                              "uniqkey" : uuidv4(),
+                              "user_name" : user,
+                              "publishedAt": "2022-05-05T07:20:12.165Z"
+                                }
+                            }
                     );
                     Swal.fire({
                         position: 'center',
@@ -239,11 +242,11 @@ export function InvoiceProvider ( {children} ) {
                         timer: 1000
                       })  
                       setTimeout(() => {
-                          window.location.href = 'http://localhost:3000/invoices';                          
+                          window.location.href = `http://localhost:3000/${user}/invoices`;                           
                       }, 1500);
 
             } catch (err) {
-              console.log(err.response.data);
+            //   console.log(err.response.data);
             }
           }          
           

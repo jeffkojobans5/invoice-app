@@ -1,5 +1,8 @@
 import { useContext } from 'react'
 
+// react router
+import { Link } from "react-router-dom";
+
 // media
 import { GiReceiveMoney } from 'react-icons/gi'
 import { BsCashCoin } from 'react-icons/bs'
@@ -27,6 +30,8 @@ function Invoices () {
     }
 
     if(totalUserInvoice.length === 0) {
+        let user = localStorage.getItem("username")
+
         return (
             <>
                 <Header />    
@@ -53,9 +58,9 @@ function Invoices () {
 
                     <div className="new-invoice">
                         <div className="pt-5 pb-5">
-                        <h3 className="text-center text-secondary mb-5"> No Invoices here </h3>
+                        <h3 className="text-center text-secondary mb-5 display-6"> No Invoices yet ?</h3>
                         <MySvg/><br/>
-                        <button type="button" className="btn btn-danger mt-4 inline"> Create One </button>
+                        <Link to= { `/${user}/create-invoice` }  className="create-one"> <button type="button" className="btn btn-danger mt-4 inline text-white">    Create One </button>  </Link>
                             </div>
                         </div> 
                     </div> 

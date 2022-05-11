@@ -562,7 +562,9 @@ hr {
   text-decoration: none;
 }
 
-.new-invoice {
+.create-one {
+  text-decoration: none;
+  background-color: green;
 }
 
 .new-invoice svg {
@@ -579,4 +581,12 @@ hr {
   border: none;
   width: 100%;
   border: 2px solid red;
+}
+
+.delete-button {
+  float: right
+}
+
+.link-list {
+  margin-top: .7rem;
 }
