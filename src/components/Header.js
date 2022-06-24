@@ -24,6 +24,7 @@ const Header = () => {
                         {/* { user.token ?   null : <Link to="/login"> Login / Register </Link>  } */}
                         {/* { user.token ?   <p onClick={ logOut }> Log out </p> : null   } */}
                         {/* <a href="#"  className="btn bg-white signup"> Log Out </a>                       */}
+                        {/* <a href="#"  className="btn bg-white signup"> Log Out </a>                       */}
                     </div>                    
                 </div>
             </div>
