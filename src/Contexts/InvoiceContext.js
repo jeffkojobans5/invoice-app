@@ -14,6 +14,7 @@ export function InvoiceProvider ( {children} ) {
         const [ allCountries , setAllCountries ] = useState([]);
         const [ userInvoices , setuserInvoices] = useState([])
         const [ totalUserInvoice , setTotalUserInvoice ] = useState([]);
+        const [ invoices , setInvoices ] = useState([]);
         const user = localStorage.getItem("username")
 
         const [ inputFields , setInputFields] = useState(
@@ -70,14 +71,29 @@ export function InvoiceProvider ( {children} ) {
             handleCurrency (e)
           }        
         
+        function getuserInvoicesFilter () {
+            setLoading(false)
+            axios.get(`http://localhost:1337/api/invoices`).then((response)=>{
+                setInvoices(response.data.data)
+                setFilterHolder(response.data.data)
+
+                // setTotalUserInvoice(response.data.data)
+                // setLoading(true)
+            }).catch((error)=>{
+                // console.log(error)
+                setLoading(true)
+            })
+        }   
+
         function getuserInvoices () {
-            axios.get(`http://localhost:1337/api/${user}/invoices`).then((response)=>{
-                const invoiceAscending = response.data.sort((a, b) => b.id  -  a.id  )                         
+            axios.get(`http://localhost:1337/api/invoices`).then((response)=>{
+                const invoiceAscending = response.data.data.sort((a, b) => b.id  -  a.id  )       
                 setuserInvoices(invoiceAscending)
-                setFilterHolder(response.data)
-                setTotalUserInvoice(response.data)
+                setFilterHolder(response.data.data)
+                setTotalUserInvoice(response.data.data)
                 setLoading(true)
             }).catch((error)=>{
+                setLoading(true)
                 console.log(error.response)
             })
         }
@@ -229,7 +245,7 @@ export function InvoiceProvider ( {children} ) {
                             "data": {
                               "invoice": inputFields,
                               "uniqkey" : uuidv4(),
-                              "user_name" : user,
+                              "user_name" : "user",
                               "publishedAt": "2022-05-05T07:20:12.165Z"
                                 }
                             }
@@ -242,11 +258,11 @@ export function InvoiceProvider ( {children} ) {
                         timer: 1000
                       })  
                       setTimeout(() => {
-                          window.location.href = `http://localhost:3000/${user}/invoices`;                           
+                          // window.location.href = `http://localhost:3000/${user}/invoices`;                           
                       }, 1500);
 
             } catch (err) {
-            //   console.log(err.response.data);
+              console.log(err.response.data);
             }
           }          
           
@@ -274,7 +290,7 @@ export function InvoiceProvider ( {children} ) {
                 setuserInvoices,
                 totalUserInvoice,
                 currencyChange,
-                currencyLoading                
+                currencyLoading,
             }}>
             { children }
         </InvoiceContext.Provider>

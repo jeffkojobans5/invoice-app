@@ -30,8 +30,12 @@ function App() {
       </>
     )
   }
+  
+  <Route path = { `/new` }  element={<CreateInvoice />} />
+  <Route path = { `/invoices` }  element={<Invoices />} />
+  <Route path = { `/invoice/:id` }  element={<EditInvoice />} />
 
-  <Route path="*" element={ <Navigate to={user ? "/" : `/${user}/invoices`} />} />
+  <Route path="" element={ <Navigate to={user ? "/" : `/${user}/invoices`} />} />
 
   </Routes> 
   </>  

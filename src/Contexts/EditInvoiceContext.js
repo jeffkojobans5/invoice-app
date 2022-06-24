@@ -80,7 +80,7 @@ export function EditInvoiceProvider ( {children} ) {
       setHolder(holder + 1)
       
       try {
-        await axios.put(`http://localhost:1337/api/${user}/invoices/${uniqkey}/${id}`, 
+        await axios.put(`http://localhost:1337/api/invoices/${id}`, 
               {
                   "data": {
                       "invoice" : inputFields,
@@ -112,7 +112,7 @@ export function EditInvoiceProvider ( {children} ) {
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire('Saved!', '', 'success')
-            axios.delete(`http://localhost:1337/api/${user}/invoices/${uniqkey}/${id}`);
+            axios.delete(`http://localhost:1337/api/invoices/${id}`);
               Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -122,7 +122,7 @@ export function EditInvoiceProvider ( {children} ) {
               })    
 
             setTimeout(() => {
-              window.location.href = `http://localhost:3000/${user}/invoices`
+              window.location.href = `http://localhost:3000/invoices`
             }, 1500);
 
         } else if (result.isDenied) {
@@ -188,9 +188,9 @@ export function EditInvoiceProvider ( {children} ) {
     const [loading , setLoading] = useState(true)
 
     function getUserInvoice ( setInputFields , id , uniqkey , user ) {
-      axios.get(`http://localhost:1337/api/${user}/invoices/${uniqkey}/${id}`).then((response)=>{
+      axios.get(`http://localhost:1337/api/invoices/${id}`).then((response)=>{
           console.log(response)
-          setInputFields(response.data.user_data[0].attributes.invoice)
+          setInputFields(response.data.data.attributes.invoice)
           setLoading(false)
       }).catch((error)=>{
           console.log(error.response)

@@ -28,6 +28,19 @@ const EditInvoice = () => {
     useEffect(()=>{
         getUserInvoice(  setInputFields , id , uniqkey , user)
     },[])
+
+    
+    // function getuserInvoices () {
+    //         setLoading(false)
+    //         axios.get(`http://localhost:1337/api/invoices`).then((response)=>{
+    //             setInvoices(response.data.data)
+    //             setTotalUserInvoice(response.data.data)
+    //             setLoading(true)
+    //         }).catch((error)=>{
+    //             console.log(error)
+    //             setLoading(true)
+    //         })
+    //     }   
         
      const { 
         invoiceName,

@@ -1,10 +1,35 @@
 import { useContext , useState , createContext, useEffect} from 'react'
 import { InvoiceContext } from './InvoiceContext'
+import axios from "axios"
 
 export const FilterContext = createContext();
 
 export function FilterProvider ( {children} ) {
     const { setuserInvoices ,filterHolder } = useContext(InvoiceContext);
+        // const [ userInvoices , setuserInvoices ] = useState([]);
+        // const [ filterHolder , setFilterHolder ] = useState([]);
+        // const [ loading , setLoading ] = useState(false);
+
+        // function getuserInvoicesFilter () {
+        //     setLoading(false)
+        //     axios.get(`http://localhost:1337/api/invoices`).then((response)=>{
+        //         userInvoices(response.data.data)
+        //         setFilterHolder(response.data.data)                
+        //         // setTotalUserInvoice(response.data.data)
+        //         setLoading(true)
+        //     }).catch((error)=>{
+        //         // console.log(error)
+        //         setLoading(true)
+        //     })
+        // }  
+
+
+          
+        // useEffect(()=>{
+        //     getuserInvoicesFilter();
+        // },[])
+
+
     const jeff = "name"
     
     
@@ -28,7 +53,6 @@ export function FilterProvider ( {children} ) {
         const filter = e.target.name
         const value = e.target.value        
         let filterValue;
-
         if(filter == "search"){
             filterValue = value;
             setFilters({...filters , [filter] : filterValue})

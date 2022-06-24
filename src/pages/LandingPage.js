@@ -36,13 +36,7 @@ function LandingPage () {
                     </div> 
 
                         <div className="col-md-4 -mt-1 d-flex justify-content-end align-items-center">
-                        { !isLogged   ? 
-                                <>
-                                    <a href="http://localhost:1337/api/connect/auth0" className="btn text-white" > Login </a>
-                                    <a href="http://localhost:1337/api/connect/auth0" className="btn bg-white signup"> Sign Up </a>
-                                </>
-                        : "" }
-                        { isLogged ? <a href="#" onClick={()=>{logout({returnTo:window.location.origin}) ; localStorage.removeItem('username') ; localStorage.removeItem('jwt');}  } className="btn bg-white signup"> Log Out </a> : ""}
+                            <Link to="/invoices" className="btn bg-white signup"> View Invoices </Link>
                         </div>                
                 </div>
             </div>

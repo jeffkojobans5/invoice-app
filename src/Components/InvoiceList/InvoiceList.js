@@ -1,11 +1,31 @@
-import { useContext } from 'react'
+import { useContext , useState , useEffect } from 'react'
 import { InvoiceContext } from '../../Contexts/InvoiceContext'
 import { Link } from 'react-router-dom'
-
+import axios from "axios"
 
 function InvoiceList () {
     const { userInvoices } = useContext(InvoiceContext);
     
+        const [ invoices , setInvoices ] = useState([])
+        const [ loading , setLoading ] = useState(true)
+        const [ totalUserInvoice , setTotalUserInvoice ] = useState([]);
+
+        function getuserInvoices () {
+            setLoading(false)
+            axios.get(`http://localhost:1337/api/invoices`).then((response)=>{
+                setInvoices(response.data.data)
+                setTotalUserInvoice(response.data.data)
+                setLoading(true)
+            }).catch((error)=>{
+                console.log(error)
+                setLoading(true)
+            })
+        }    
+
+        useEffect(()=>{
+            getuserInvoices()
+        },[])
+
     return (
         <>
         { userInvoices.map((item , index)=>{
@@ -17,7 +37,7 @@ function InvoiceList () {
 
             return (
                 <div className="col-md-4 mt-4 invoice-list" key={ index }>
-                    <Link to={`/${user}/invoices/${uniqkey}/${id}`}>
+                    <Link to={`/invoice/${id}`}>
                         <div className="col-md-12 invoice-item">
                             <h5 className="invoice-list-receiver">  { receiver }   </h5>
                             <p> Probabo, inquit, sic agam, ut labore et voluptatem sequi nesciunt, neque porro quisquam est, quid malum, sensu iudicari, sed ut alterum. </p>
