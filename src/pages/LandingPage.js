@@ -15,6 +15,9 @@ import send from "../media/4421964.jpg"
 import { LandingpageBlocksRight } from '../Components/index'
 import { LandingpageBlocksLeft } from '../Components/index'
 
+// 
+import { Footer } from "../Components/index"
+
 function LandingPage () {
     const {  isLogged  } = useContext(UserContext);
     const { logout } = useAuth0();
@@ -86,21 +89,7 @@ function LandingPage () {
                 </div>                
             </div>
 
-            <div className="container-fluid footer_ bg-">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-4 p-3">
-                            <p> &#169;	Smart Invoicing 2022</p>
-                        </div>                     
-                        <div className="col-md-4 p-3">
-                            <p className="text-center developers"> <a href=""> Developers </a> </p>
-                        </div>                     
-                        <div className="col-md-4 p-3">
-                            <p className="text-end"> Made by <a href="#"> @jeffkojobans </a> at FOCUSPPC. </p>
-                        </div>                     
-                    </div>
-                </div>
-            </div>
+            <Footer />
         </>            
     )
 } 

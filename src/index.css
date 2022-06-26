@@ -17,7 +17,7 @@ body {
 
 
 .payment {
-  width: 140px !important;
+  width: 125px !important;
   text-align: left !important;
   border: none;
 }
@@ -553,8 +553,9 @@ hr {
 }
 
 .footer_ {
-  background-color: #1f59f6;
+  background-color: #3D4D59;
   color: whitesmoke;
+  margin-top: 5rem;
 }
 
 .footer_ a {

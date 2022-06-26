@@ -17,19 +17,8 @@ function Filter () {
                 onChange={ (e)=>filterChange(e) }                 
             />
         </div>
-        <div className="col-md-2 ">
-            <label htmlFor="date"> Date </label> <br/>
-            <select 
-                name="date" 
-                id="" 
-                value={date}
-                onChange={ (e)=>filterChange(e) }                                         
-                >
-                <option value="asc"> Ascending Dates</option>
-                <option value="desc"> Descending Dates</option>
-            </select>
-        </div>
-        <div className="col-md-2 ">
+
+        <div className="col-md-3">
             <label htmlFor="amount"> Amount </label> <br/>
             <select 
                 name="amount" 
@@ -41,7 +30,7 @@ function Filter () {
                 <option value="high"> Highest Amount </option>
             </select>
         </div>
-        <div className="col-md-2 ">
+        <div className="col-md-3">
             <label htmlFor="payment-status" className="payment-status"> Payment Status </label> <br/>
             <div className="d-flex justify-content-start">                        
                 <select 

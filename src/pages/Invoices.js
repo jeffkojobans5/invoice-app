@@ -11,10 +11,13 @@ import { ReactComponent as MySvg }from '../media/no-msg.svg'
 import { ReactComponent as Search }from '../media/no-search.svg'
 
 // components
-import { InvoiceList , Header , Filter } from '../Components/index'
+import { InvoiceList , Header , Filter , Footer } from '../Components/index'
 
 // contexts
 import { InvoiceContext } from '../Contexts/InvoiceContext'
+
+// api
+import { api } from "../api"
 
 
 function Invoices () {
@@ -26,12 +29,12 @@ function Invoices () {
 
         function getuserInvoices () {
             setLoading(false)
-            axios.get(`http://localhost:1337/api/invoices`).then((response)=>{
-                // setInvoices(response.data.data)
-                setTotalUserInvoice(response.data.data)
+            axios.get(`${api}/invoices`).then((response)=>{
                 setLoading(true)
+                setTotalUserInvoice(response.data)
+
             }).catch((error)=>{
-                console.log(error)
+                console.log(error.response)
                 setLoading(true)
 
             })
@@ -43,35 +46,33 @@ function Invoices () {
         },[])
 
 
-    let fullyPaid = totalUserInvoice.filter((item)=> item.attributes.invoice.balanceDue <= 0);
-    let unPaid = totalUserInvoice.filter((item)=> item.attributes.invoice.balanceDue > 0);
+    let fullyPaid = totalUserInvoice.filter((item)=> item.invoice[0].balanceDue <= 0);
+    let unPaid = totalUserInvoice.filter((item)=> item.invoice[0].balanceDue > 0);
 
 
 
 
     if(!loading) {
         return (
-            <p> </p>
+            <>
+                <Header />
+            </>
         )
     }
 
-
-
-
-
-    if(totalUserInvoice.length === 0) {
+    if(loading) {
+        if(!totalUserInvoice){
         let user = localStorage.getItem("username")
 
         return (
             <>
                 <Header />    
-                <div className="container-fluid main">
+                <div className="container-fluid main mb-5">
                     <div className="container mt-2 row mx-auto p-0 ">
                         <div className="row invoice-block pt-3">
                             <div className="invoices-page-box col-md-4 total-amount">
                                 <BsCashCoin className="icon"/>
                                 <h5> Total Invoice </h5>
-                                <p> { userInvoices.length } </p>
                             </div>
                             <div className="invoices-page-box box col-md-4 total-paid">
                                 <GiReceiveMoney className="icon"/>
@@ -97,13 +98,13 @@ function Invoices () {
             </>
         )
     }
-
+}
 
 
     return (
     <>
         <Header />    
-        <div className="container-fluid main">
+        <div className="container-fluid main mb-5">
             <div className="container mt-2 row mx-auto p-0 ">
                 <div className="row invoice-block pt-3">
                     <div className="invoices-page-box col-md-4 total-amount">
@@ -129,19 +130,49 @@ function Invoices () {
                         <InvoiceList /> 
                     </div>
                 </div>                
-            </div>
-            {
-            userInvoices.length === 0 ?
-            <div className="new-invoice">
-                <div className="pt-5 pb-5">
-                    <h3 className="text-center mb-4 text-secondary"> Search couldn’t find any notes </h3>
-                    <Search/><br/>
                 </div>
-            </div> 
-            : ""
-            }
+                                
     </>
     )
+
+
+    if(loading){
+        if(!userInvoices) {
+            return(
+    <>
+        <Header />    
+        <div className="container-fluid main mb-5">
+            <div className="container mt-2 row mx-auto p-0 ">
+                <div className="row invoice-block pt-3">
+                    <div className="invoices-page-box col-md-4 total-amount">
+                        <BsCashCoin className="icon"/>
+                        <h5> Total Invoice </h5>
+                        <p> { totalUserInvoice.length } </p>
+                    </div>
+                    <div className="invoices-page-box box col-md-4 total-paid">
+                        <GiReceiveMoney className="icon"/>
+                        <h5> Total Paid </h5>
+                        <p> { fullyPaid.length }  </p>
+                    </div>
+                    <div className="invoices-page-box col-md-4 total-unpaid">
+                        <MdMoneyOff className="icon"/>
+                        <h5> Total unpaid </h5>
+                        <p> { unPaid.length }  </p>
+                    </div>
+                </div>
+            </div>
+            <Filter/> 
+                <div className="container mt-2 row mx-auto p-0 ">
+                        <div className="row justify-content-start p-0 mt-2">
+                        <InvoiceList /> 
+                    </div>
+                </div>                
+                </div>
+    </>
+            )
+        }
+    }
+
 }
 
 export default Invoices;

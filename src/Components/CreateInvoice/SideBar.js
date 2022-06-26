@@ -4,7 +4,7 @@ import  Loader  from '../../media/giphy.gif'
 
 function SideBar () {
 
-    const { inputFields , handleCurrency , currencyChange , currencyLoading , submit , allCountries } = useContext(InvoiceContext);
+    const { inputFields , handleCurrency , currencyChange , currencyLoading , submit , allCountries , comingSoon} = useContext(InvoiceContext);
 
     if(!currencyLoading) {
         return (
@@ -15,6 +15,7 @@ function SideBar () {
     return (
     <div className="sidebar">
         <button type="button" className="btn btn-primary w-100" name="" onClick={ (e)=>submit(e) } > Save </button> <br/><br/>
+        <button type="button" className="btn btn-warning w-100" name="" onClick={ (e)=>comingSoon(e) } > Download </button> <br/><br/>
         <p> <span className="text-primary">  { inputFields.currencyName } { inputFields.currencySign } { inputFields.countryFlag }   </span></p>        
             <select name="currency-select" id="" className="form-control" onChange={ (e)=>currencyChange(e) } value={ inputFields.currencyCountry }>
                 { allCountries.map((item , index)=>{

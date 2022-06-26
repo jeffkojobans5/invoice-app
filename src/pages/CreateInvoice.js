@@ -1,6 +1,6 @@
 import { InvoiceBlock } from '../Components/index';
 import { SideBar } from '../Components/index';
-import { Header } from '../Components/index'
+import { Header , Footer } from '../Components/index'
 
 const CreateInvoice = () => {
     return (
@@ -16,6 +16,7 @@ const CreateInvoice = () => {
                 </div>
             </div>
         </div>
+        <Footer />
     </>
     )    
 }

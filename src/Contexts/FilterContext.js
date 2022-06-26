@@ -6,29 +6,6 @@ export const FilterContext = createContext();
 
 export function FilterProvider ( {children} ) {
     const { setuserInvoices ,filterHolder } = useContext(InvoiceContext);
-        // const [ userInvoices , setuserInvoices ] = useState([]);
-        // const [ filterHolder , setFilterHolder ] = useState([]);
-        // const [ loading , setLoading ] = useState(false);
-
-        // function getuserInvoicesFilter () {
-        //     setLoading(false)
-        //     axios.get(`http://localhost:1337/api/invoices`).then((response)=>{
-        //         userInvoices(response.data.data)
-        //         setFilterHolder(response.data.data)                
-        //         // setTotalUserInvoice(response.data.data)
-        //         setLoading(true)
-        //     }).catch((error)=>{
-        //         // console.log(error)
-        //         setLoading(true)
-        //     })
-        // }  
-
-
-          
-        // useEffect(()=>{
-        //     getuserInvoicesFilter();
-        // },[])
-
 
     const jeff = "name"
     
@@ -43,7 +20,7 @@ export function FilterProvider ( {children} ) {
     function clearFilter(){
       setFilters({
         search : "",
-        date : "desc",
+        date : "asc",
         amount : "low",
         paymentStatus : "all"
       })
@@ -78,33 +55,35 @@ export function FilterProvider ( {children} ) {
 
         if (search !== "") {
             newInvoice = newInvoice.filter(item => {
-            const { receiver } = item.attributes.invoice
+            const { receiver } = item.invoice[0]
               let name = receiver.toLowerCase().trim();
               return name.includes(search) ? item : null;
             });
           }
 
-          if( date == "asc") {
-              newInvoice = newInvoice.sort((a , b) => {
-                return a.id - b.id
-            })              
+
+          if( date == "asc") {      
+            newInvoice = newInvoice.sort((a , b) => {
+                return Date.parse(a.createdAt) - Date.parse(b.createdAt)
+            })      
           }
 
           if( date == "desc") {
             newInvoice = newInvoice.sort((a , b) => {
-              return b.id - a.id
-            })              
+                console.log(typeof Date.parse(b.createdAt))
+                return Date.parse(b.createdAt) - Date.parse(a.createdAt)
+            })      
           }          
 
           if( amount == "low") {      
             newInvoice = newInvoice.sort((a , b) => {
-                return a.attributes.invoice.subTotal - b.attributes.invoice.subTotal
+                return a.invoice[0].subTotal - b.invoice[0].subTotal
             })      
           }
 
           if( amount == "high") {      
             newInvoice = newInvoice.sort((a , b) => {
-                return b.attributes.invoice.subTotal - a.attributes.invoice.subTotal
+                return b.invoice[0].subTotal - a.invoice[0].subTotal
             })      
           }   
           
@@ -116,15 +95,18 @@ export function FilterProvider ( {children} ) {
 
           if( paymentStatus == "paid") {
             newInvoice = newInvoice.filter(item => {
-              return item.attributes.invoice.balanceDue <= 0 ;
+              return item.invoice[0].balanceDue <= 0 ;
             })
           }             
 
           if( paymentStatus == "unpaid") {
             newInvoice = newInvoice.filter(item => {
-              return item.attributes.invoice.balanceDue > 0 
+              return item.invoice[0].balanceDue > 0 
             })
-          }    
+
+          }   
+
+           
                 
         setuserInvoices(newInvoice)
     },[filters])
@@ -136,7 +118,6 @@ export function FilterProvider ( {children} ) {
             filterChange,
             filterHolder,
             clearFilter,
-            jeff          
               }}>
             { children }
         </FilterContext.Provider>

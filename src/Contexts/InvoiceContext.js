@@ -2,6 +2,7 @@ import { createContext , useContext , useEffect, useState  } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { EditInvoiceContext } from './EditInvoiceContext';
+import { api } from "../api"
 
 export const InvoiceContext = createContext();
 
@@ -62,6 +63,7 @@ export function InvoiceProvider ( {children} ) {
                 currencyName: "Ghanaian Cedi",     
                 currencyCountry: "Ghana",     
                 countryFlag : "🇬🇭 ",
+                time: Math.round(Date.now() / 1000),
                 fieldDetails :  [{ id: uuidv4(), description : '' , quantity : 1 , rate : 0 , total : 0 }] ,
             }
         )
@@ -73,24 +75,24 @@ export function InvoiceProvider ( {children} ) {
         
         function getuserInvoicesFilter () {
             setLoading(false)
-            axios.get(`http://localhost:1337/api/invoices`).then((response)=>{
-                setInvoices(response.data.data)
-                setFilterHolder(response.data.data)
+            axios.get(`${api}/invoices`).then((response)=>{
+                setInvoices(response.data)
+                setFilterHolder(response.data)
 
-                // setTotalUserInvoice(response.data.data)
-                // setLoading(true)
+                setTotalUserInvoice(response.data)
+                setLoading(true)
             }).catch((error)=>{
-                // console.log(error)
+                console.log(error)
                 setLoading(true)
             })
         }   
 
         function getuserInvoices () {
-            axios.get(`http://localhost:1337/api/invoices`).then((response)=>{
-                const invoiceAscending = response.data.data.sort((a, b) => b.id  -  a.id  )       
-                setuserInvoices(invoiceAscending)
-                setFilterHolder(response.data.data)
-                setTotalUserInvoice(response.data.data)
+            axios.get(`${api}/invoices`).then((response)=>{
+                const invoiceAscending = response.data.sort((a, b) => b.invoice[0].time  -  a.invoice[0].time  )       
+                setuserInvoices(response.data)
+                setFilterHolder(response.data)
+                setTotalUserInvoice(response.data)
                 setLoading(true)
             }).catch((error)=>{
                 setLoading(true)
@@ -238,33 +240,49 @@ export function InvoiceProvider ( {children} ) {
 
         const submit = async (e) => {
             e.preventDefault();
-            let user = localStorage.getItem("username")
-            try {
-              await axios.post('http://localhost:1337/api/invoices', 
-                    {
-                            "data": {
-                              "invoice": inputFields,
-                              "uniqkey" : uuidv4(),
-                              "user_name" : "user",
-                              "publishedAt": "2022-05-05T07:20:12.165Z"
-                                }
-                            }
-                    );
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'Invoice has been Created',
-                        showConfirmButton: false,
-                        timer: 1000
-                      })  
-                      setTimeout(() => {
-                          // window.location.href = `http://localhost:3000/${user}/invoices`;                           
-                      }, 1500);
-
-            } catch (err) {
-              console.log(err.response.data);
+            if(!inputFields.receiver && !inputFields.dateValue){
+                      Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: "'Invoice to' and 'Date' can't be empty",
+                            showConfirmButton: false,
+                            timer: 2000
+                          })  
+                          setTimeout(() => {
+                              // window.location.href = `http://localhost:3000/${user}/invoices`;                           
+                          }, 1500);
             }
-          }          
+
+            if(inputFields.receiver && inputFields.dateValue ) {
+                try {
+                  await axios.post(`${api}/invoices`,  { "invoice" : inputFields } );
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Invoice has been Created',
+                            showConfirmButton: false,
+                            timer: 1000
+                          })  
+                          setTimeout(() => {
+                              window.location.href = `http://localhost:3000/invoices`;                           
+                          }, 1500);
+
+                } catch (err) {
+                  console.log(err);
+                }                
+            }
+
+          }    
+
+        function comingSoon () {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'This feature together with Authentication is coming soon',
+                            showConfirmButton: false,
+                            timer: 3000
+                          })              
+        } 
           
         useEffect(()=>{
             getCurrency();
@@ -291,6 +309,7 @@ export function InvoiceProvider ( {children} ) {
                 totalUserInvoice,
                 currencyChange,
                 currencyLoading,
+                comingSoon
             }}>
             { children }
         </InvoiceContext.Provider>

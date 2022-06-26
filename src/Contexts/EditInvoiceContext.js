@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { UserContext } from './UserContext';
 import Swal from 'sweetalert2'
-
+import { api } from "../api"
 // import { InvoiceContext } from './InvoiceContext';
 
 export const EditInvoiceContext = createContext();
@@ -79,28 +79,33 @@ export function EditInvoiceProvider ( {children} ) {
       e.preventDefault();
       setHolder(holder + 1)
       
-      try {
-        await axios.put(`http://localhost:1337/api/invoices/${id}`, 
-              {
-                  "data": {
-                      "invoice" : inputFields,
-                      "user_name": user,
-                      "uniqkey": uniqkey
-                  }
-              }                        
-        );
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Invoice updated successfully',
-          showConfirmButton: false,
-          timer: 1500
-        })        
 
-      } catch (err) {
-        console.log(err);
-      }
-    }   
+
+          try {
+            await axios.put(`${api}/invoices/${id}` , { "invoice" : inputFields } );
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Invoice updated successfully',
+              showConfirmButton: false,
+              timer: 1500
+            })        
+
+          } catch (err) {
+            console.log(err);
+          }          
+        } 
+
+
+        function comingSoon () {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'This feature together with Authentication is coming soon',
+                            showConfirmButton: false,
+                            timer: 3000
+                          })              
+        }     
 
     function deleteInvoice  ( uniqkey , id) {
       Swal.fire({
@@ -112,7 +117,7 @@ export function EditInvoiceProvider ( {children} ) {
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire('Saved!', '', 'success')
-            axios.delete(`http://localhost:1337/api/invoices/${id}`);
+            axios.delete(`${api}/invoices/${id}`);
               Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -129,34 +134,9 @@ export function EditInvoiceProvider ( {children} ) {
           Swal.fire('Invoice not deleted', '', 'info')
         }
       })
-
-      // try {
-      //   await axios.delete(`http://localhost:1337/api/${user}/invoices/${uniqkey}/${id}`);
-      //   Swal.fire({
-      //     position: 'center',
-      //     icon: 'success',
-      //     title: 'Invoice has been updated',
-      //     showConfirmButton: false,
-      //     timer: 1500
-      //   })        
-      // window.location.href = `http://localhost:3000/${user}/invoices`;
-      // } catch (err) {
-      //   console.log(err);
-      // }        
     }
 
-    // fetchcurrency
-    // function fetchCurrency () {
-    //   axios.get('https://restcountries.com/v3.1/all').then((response)=>{
-    //     // console.log(response.data);
-    //     let alphabetical = response.data.sort((a, b) => a.name.common.localeCompare(b.name.common))
-    //     setCurrent(alphabetical);
-    //   }).catch((error)=>{
-    //     console.log(error)
-    //   })
-    // }
 
-    //
 
     function currencyChange (e , setInputFields , inputFields) {
       setInputFields({...inputFields , countryCurrency: e.target.value});
@@ -188,9 +168,9 @@ export function EditInvoiceProvider ( {children} ) {
     const [loading , setLoading] = useState(true)
 
     function getUserInvoice ( setInputFields , id , uniqkey , user ) {
-      axios.get(`http://localhost:1337/api/invoices/${id}`).then((response)=>{
+      axios.get(`${api}/invoices/find/${id}`).then((response)=>{
           console.log(response)
-          setInputFields(response.data.data.attributes.invoice)
+          setInputFields(response.data.invoice[0])
           setLoading(false)
       }).catch((error)=>{
           console.log(error.response)
@@ -215,7 +195,8 @@ export function EditInvoiceProvider ( {children} ) {
              holder,
              currencyChange,
              loading,
-             deleteInvoice                                                                     
+             deleteInvoice ,
+             comingSoon                                                                    
             }}>
             { children }
         </EditInvoiceContext.Provider>

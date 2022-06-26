@@ -169,7 +169,7 @@ const InvoiceBlock = ( ) => {
                                         <Inputs
                                             type="text"
                                             className="input-placeholders-small text-end close "
-                                            name = "PNumber"
+                                            name = "PNumber "
                                             value = { PNumber}
                                             onChange = { (e)=>updateOtherFields(e) }    
                                         />                            
@@ -177,7 +177,7 @@ const InvoiceBlock = ( ) => {
                             <div className="col-md-5 justify-content-end d-flex"> 
                                     <Inputs
                                         type="text"
-                                        className="input-placeholders-small text-end border payment"
+                                        className="input-placeholders-small text-end border payment "
                                         name = "PNumberValue"
                                         value = { PNumberValue}
                                         onChange = { (e)=>updateOtherFields(e) }    

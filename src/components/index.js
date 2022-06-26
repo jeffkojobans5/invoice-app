@@ -1,4 +1,5 @@
 import Header from './Header';
+import Footer from './Footer';
 
 // Invoice List
 import InvoiceList from './InvoiceList/InvoiceList';
@@ -25,5 +26,6 @@ export {
     InvoiceBlock , 
     NotesTotal , 
     InvoiceTable , 
-    SideBar
+    SideBar,
+    Footer
 }

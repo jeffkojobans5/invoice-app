@@ -5,7 +5,7 @@ import "react-day-picker/lib/style.css";
 import axios from 'axios'
 
 // components
-import { Header } from '../Components/index'
+import { Header , Footer } from '../Components/index'
 
 // context
 import { EditInvoiceContext } from '../Contexts/EditInvoiceContext';
@@ -30,17 +30,6 @@ const EditInvoice = () => {
     },[])
 
     
-    // function getuserInvoices () {
-    //         setLoading(false)
-    //         axios.get(`http://localhost:1337/api/invoices`).then((response)=>{
-    //             setInvoices(response.data.data)
-    //             setTotalUserInvoice(response.data.data)
-    //             setLoading(true)
-    //         }).catch((error)=>{
-    //             console.log(error)
-    //             setLoading(true)
-    //         })
-    //     }   
         
      const { 
         invoiceName,
@@ -87,7 +76,7 @@ const EditInvoice = () => {
         currencyCountry ,
         countryFlag ,
         fieldDetails ,
-        notesValue,        
+        notesValue,  
     } = inputFields
 
     const { 
@@ -104,7 +93,9 @@ const EditInvoice = () => {
         current,
         currencyChange,
         loading,
-        deleteInvoice
+        deleteInvoice,
+        comingSoon      
+
     } = useContext(EditInvoiceContext);
 
 
@@ -606,6 +597,8 @@ const EditInvoice = () => {
                     { currencyLoading ? 
                         <>
                         <button type="button" className="btn btn-danger w-100" name="" onClick={ (e)=>submit( e , inputFields , id  , uniqkey ) } > Update </button> <br/><br/>
+                        <button type="button" className="btn btn-primary w-100" name="" onClick={ (e)=>comingSoon(e) } > Download </button> <br/><br/>
+                        
                         <p> <span className="text-primary">  { currencyName } { currencySign } { countryFlag }   </span></p>        
                         <select name="currency-select" id="" value = { currencyCountry } className="form-control" onChange={ (e)=>currencyChange(e , setInputFields , inputFields) }>
                             { allCountries.map((item , index)=>{
@@ -627,7 +620,8 @@ const EditInvoice = () => {
                     {/* END OF SIDE BAR */}
                     </div>
                 </div>
-                </div>                              
+                </div> 
+                <Footer />                             
                 </>  
         )
     }  
