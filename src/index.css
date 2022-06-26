@@ -17,7 +17,7 @@ body {
 
 
 .payment {
-  width: 125px !important;
+  width: 100% !important;
   text-align: left !important;
   border: none;
 }
