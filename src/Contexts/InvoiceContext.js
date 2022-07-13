@@ -264,7 +264,7 @@ export function InvoiceProvider ( {children} ) {
                             timer: 1000
                           })  
                           setTimeout(() => {
-                              window.location.href = `http://localhost:3000/invoices`;                           
+                              window.location.href = `https://smart-invoicings.vercel.app/invoices`;                           
                           }, 1500);
 
                 } catch (err) {
