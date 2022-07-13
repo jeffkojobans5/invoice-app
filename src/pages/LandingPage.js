@@ -74,13 +74,14 @@ function LandingPage () {
                 <div className="container">
                         <LandingpageBlocksLeft
                             title = " Brand your invoices with your customized business logo "
+                            title = " Add discounts, tax, shipping rates to your invoice  "
                             textLogo = { discounts }
                             para = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
                             textclassName = "col-md-6 text p-5 rounded"
                             logoclassName = "col-md-6 image  d-flex justify-content-center align-items-center"                            
                         />                                     
                         <LandingpageBlocksRight 
-                            title = " Choose from over 100 currencies for your invoice "
+                            title = "Save your invoice and come back in future to make updates to them"
                             textLogo = { send }
                             para = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
                             textclassName = "col-md-6 image p-5 rounded"
